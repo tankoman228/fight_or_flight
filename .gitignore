@@ -1,0 +1,11 @@
+# Unity generated files
+/Unity/FightOrFlight/[Ll]ibrary/
+/Unity/FightOrFlight/[Tt]emp/
+/Unity/FightOrFlight/[Oo]bj/
+/Unity/FightOrFlight/[Bb]uild/
+/Unity/FightOrFlight/[Bb]uilds/
+/Unity/FightOrFlight/[Ll]ogs/
+/Unity/FightOrFlight/[Uu]ser[Ss]ettings/
+
+# Visual Studio files
+/Unity/FightOrFlight.vs/
