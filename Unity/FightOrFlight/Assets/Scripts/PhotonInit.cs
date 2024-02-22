@@ -12,11 +12,13 @@ public class PhotonInit : MonoBehaviourPunCallbacks
 {
     void Start()
     {
+        Debug.Log("Starting Loading");
         PhotonNetwork.ConnectUsingSettings();
     }
 
     public override void OnConnectedToMaster()
     {
+        Debug.Log("Starting Connected!");
         SceneManager.LoadScene("SceneMenu");
     }
 }
