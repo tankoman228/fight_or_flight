@@ -4,13 +4,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Скрипт игрока (именно логика)
+/// </summary>
 public class PlayerScript : MonoBehaviour
 {
-    PhotonView view;
+    //Из getcomponent
+    internal PhotonView view;
     FloatingJoystick joystick;
 
+    //Поля самого игрока
     public float current_health = 100;
-    internal PlayerStats playerStats;
+    internal PlayerStats playerStats = new PlayerStats { };
 
     void Start()
     {
@@ -18,6 +23,12 @@ public class PlayerScript : MonoBehaviour
         joystick = FindFirstObjectByType<FloatingJoystick>();
 
         updateForCurrentPlayerClass = new UpdateForCurrentPlayerClass(empty_void);
+
+        if (view.IsMine)
+        {
+            EventsManager.currentPlayer = this;
+            CameraFollow.target = this.transform;
+        }
     }
 
     void Update()
@@ -26,7 +37,8 @@ public class PlayerScript : MonoBehaviour
             return;
 
         this.transform.position += new Vector3
-            (joystick.Horizontal, joystick.Vertical, 0) * Time.deltaTime;
+            (joystick.Horizontal, joystick.Vertical, 0) * Time.deltaTime * 
+            playerStats.speed;
 
         updateForCurrentPlayerClass.Invoke();
     }

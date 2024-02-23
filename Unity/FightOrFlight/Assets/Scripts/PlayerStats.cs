@@ -15,7 +15,7 @@ namespace Assets.Scripts
 
         public float max_health = 100;
 
-        public float speed = 1;
+        public float speed = 8;
         public Dictionary<DamageManager.DamageTypes, float> damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
         {
             { DamageManager.DamageTypes.firearms, 1},

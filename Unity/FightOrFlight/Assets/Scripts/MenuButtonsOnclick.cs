@@ -19,7 +19,7 @@ public class MenuButtonsOnclick : MonoBehaviourPunCallbacks
     //Настройки игры для каждой комнаты
     private RoomOptions roomOptions = new RoomOptions
     {
-        MaxPlayers = 2,
+        MaxPlayers = 8,
         IsVisible = true,
         IsOpen = true
     };
