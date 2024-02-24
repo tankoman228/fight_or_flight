@@ -140,7 +140,7 @@ public class EventsManager : MonoBehaviour
                 PlayerStats.PlayerStatsType.enginier,
                 PlayerStats.PlayerStatsType.black_goo
             };
-            int position_id_start = (int)seed / 29;
+            int position_id_start = (int)seed / 29 - 300;
             foreach (var player in allPlayers)
             {
                 player.InitMatchStarted(roles[i], 
@@ -148,7 +148,23 @@ public class EventsManager : MonoBehaviour
                 i++;
             }
 
-            GameObject.Find("tHealth").GetComponent<Text>().text = seed.ToString();
+            //GameObject.Find("tHealth").GetComponent<Text>().text = seed.ToString();
+
+            var allItems = GameObject.FindGameObjectsWithTag("Item");
+            var allItemsSpawnpoints = new List<GameObject> 
+                (GameObject.FindGameObjectsWithTag("ItemSpawnpoint"));
+
+            System.Random rand = new System.Random(seed);
+            int j = 0;
+
+            while(j < allItems.Length)
+            {
+                i = rand.Next() % allItemsSpawnpoints.Count;
+                allItems[j].transform.position = allItemsSpawnpoints[i].transform.position;      
+                allItemsSpawnpoints.RemoveAt(i);
+                j++;
+            }
+            
         }
     }
 

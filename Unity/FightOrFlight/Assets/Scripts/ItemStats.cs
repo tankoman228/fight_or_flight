@@ -28,6 +28,7 @@ namespace Assets.Scripts
 
         
 
+
         public enum ItemTypes
         {
             pick,

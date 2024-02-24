@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerSpawnpoint
+  - Item
+  - ItemSpawnpoint
   layers:
   - Default
   - TransparentFX
