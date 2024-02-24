@@ -16,6 +16,7 @@ using Assets.Scripts;
 public class EventsManager : MonoBehaviour
 {
     public static PlayerScript currentPlayer; //Задавать в OnCreate игрока для view.isMine
+    public static EventsManager THIS;
     float timer = float.MaxValue;
     bool game_awaiting;
 
@@ -32,6 +33,7 @@ public class EventsManager : MonoBehaviour
     //Задание интерфейчу начального положения
     void Start()
     {
+        THIS = this;
         btnInteract.SetActive(false);
 
         try
@@ -124,12 +126,14 @@ public class EventsManager : MonoBehaviour
         playersSend++;
         if (playersSend >= PhotonNetwork.CurrentRoom.Players.Count)
         {
+            //Инициализация карты согласно выбранному ключу seed
+
+
             var allPlayers = FindObjectsOfType<PlayerScript>();
             Array.Sort(allPlayers, (x, y) => x.view.ViewID - y.view.ViewID);
 
             var allSpawnpoints = GameObject.FindGameObjectsWithTag("PlayerSpawnpoint");
 
-            int i = 0;
             PlayerStats.PlayerStatsType[] roles = { 
                 PlayerStats.PlayerStatsType.miner,
                 PlayerStats.PlayerStatsType.hypnotoad,
@@ -140,15 +144,16 @@ public class EventsManager : MonoBehaviour
                 PlayerStats.PlayerStatsType.enginier,
                 PlayerStats.PlayerStatsType.black_goo
             };
+            int i = 0;
             int position_id_start = (int)seed / 29 - 300;
             foreach (var player in allPlayers)
             {
                 player.InitMatchStarted(roles[i], 
-                    allSpawnpoints[(position_id_start + i) % allSpawnpoints.Length].transform.position);
-                i++;
+                    allSpawnpoints[(position_id_start) % allSpawnpoints.Length].transform.position);
             }
 
-            //GameObject.Find("tHealth").GetComponent<Text>().text = seed.ToString();
+            GameObject.Find("tHealth").GetComponent<Text>().text = 
+                PhotonNetwork.CurrentRoom.Name;
 
             var allItems = GameObject.FindGameObjectsWithTag("Item");
             var allItemsSpawnpoints = new List<GameObject> 

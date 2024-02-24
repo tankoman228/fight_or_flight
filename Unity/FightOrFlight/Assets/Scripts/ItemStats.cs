@@ -10,23 +10,22 @@ namespace Assets.Scripts
     /// <summary>
     /// Характеристики предметов для инвентаря. НЕ ЛОГИКА
     /// </summary>
-    internal class ItemStats
+    public class ItemStats
     {
         #region характеристики
 
-        int start_ammo = 1;
+        public bool isWeapon = false;
 
-        float regarge_seconds = 1;
-        float healt_add_after_used = 0;
+        public int start_ammo = 1;
+        public float regarge_seconds = 1;
+        public float healt_add_after_used = 0;
 
-        DamageManager.DamageTypes damage_type = DamageManager.DamageTypes.steel;
-        float damage = 10;
+        public DamageManager.DamageTypes damage_type = DamageManager.DamageTypes.steel;
+        public float damage = 10;
 
         GameObject instantinatesAfterUsing = null;
 
         #endregion
-
-        
 
 
         public enum ItemTypes
@@ -57,5 +56,10 @@ namespace Assets.Scripts
             claws,
             jump
         }
+
+        public static Dictionary<ItemTypes, ItemStats> ItemsStats = new Dictionary<ItemTypes, ItemStats>() {
+            {ItemTypes.pick,  new ItemStats { }  },
+            {ItemTypes.dynamite,  new ItemStats { }  }
+        };
     }
 }

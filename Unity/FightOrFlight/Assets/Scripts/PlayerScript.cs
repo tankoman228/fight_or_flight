@@ -12,15 +12,20 @@ public class PlayerScript : MonoBehaviour
     //Из getcomponent
     internal PhotonView view;
     FloatingJoystick joystick;
+    Rigidbody2D rigidbody;
 
     //Поля самого игрока
     public float current_health = 100;
     internal PlayerStats playerStats = new PlayerStats { };
 
+
+    #region Методы Юнити
+
     void Start()
     {
         view = GetComponent<PhotonView>();
         joystick = FindFirstObjectByType<FloatingJoystick>();
+        rigidbody = GetComponent<Rigidbody2D>();
 
         updateForCurrentPlayerClass = new UpdateForCurrentPlayerClass(empty_void);
 
@@ -36,12 +41,33 @@ public class PlayerScript : MonoBehaviour
         if (!view.IsMine)
             return;
 
-        this.transform.position += new Vector3
-            (joystick.Horizontal, joystick.Vertical, 0) * Time.deltaTime * 
-            playerStats.speed;
+        var v = new Vector2(joystick.Horizontal, joystick.Vertical);
+        rigidbody.velocity = v * playerStats.speed;
+
+        if (v != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
 
         updateForCurrentPlayerClass.Invoke();
     }
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Item"))
+            EventsManager.THIS.btnInteract.SetActive(true);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Item"))
+            EventsManager.THIS.btnInteract.SetActive(false);
+    }
+
+    #endregion
+
 
     #region Отличия логики игры для каждого класса
 

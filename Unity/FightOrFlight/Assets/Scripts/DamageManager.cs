@@ -9,7 +9,7 @@ namespace Assets.Scripts
     /// <summary>
     /// Реализует механикку, связанную с нанесением урона и устойчивости к самому урону
     /// </summary>
-    internal class DamageManager
+    public class DamageManager
     {
         /// <summary>
         /// Уменьшает здоровье игрока соответственно размеру урона, 
