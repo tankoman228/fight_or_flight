@@ -49,11 +49,27 @@ public class EventsManager : MonoBehaviour
         }
     }
 
+    #region Onclick Listeners
+
     //Нажатие на кнопку начала или отмены запуска таймера перед началом игры
     public void Onclick_btnStartGame()
     {
         SendPhotonEvent(0, timer >= 5);
     }
+
+    //Кнопка взаимодействия (синяя)
+    public void Onclick_btnInteract()
+    {
+        if (PlayerScript.selectedItem != null)
+        {
+            var item = PlayerScript.selectedItem.GetComponent<Item>();
+            int itemID = item.itemID;
+
+            SendPhotonEvent(2, itemID);
+        }
+    }
+
+    #endregion
 
     //Обновление таймера
     private void Update()
@@ -66,6 +82,7 @@ public class EventsManager : MonoBehaviour
             {
                 btnStartGame.SetActive(false);
                 btnStartGame.transform.position = new Vector3(9999,99999,999999);
+                Destroy(btnStartGame);
                 
                 game_awaiting = false;
                 SendPhotonEvent(1, new System.Random().Next(0, int.MaxValue - 1));
@@ -117,6 +134,42 @@ public class EventsManager : MonoBehaviour
             seed = (int)photonEvent.CustomData;
             gameStartRolCall();
             PhotonNetwork.CurrentRoom.IsOpen = false;
+        }
+        else if (photonEvent.Code == 2) //Item found
+        {
+            int id_item = (int)photonEvent.CustomData;
+      
+            //Поиск предмета с карты
+            Item item = null;
+            foreach (Item i in FindObjectsOfType<Item>())
+            {
+                //Debug.Log($"{item.itemID} == {id}");
+                if (i.itemID == id_item)
+                {
+                    item = i;
+                    break;
+                }
+            }
+
+            //Поиск игрока, который поднял предмет
+            foreach (var player in FindObjectsOfType<PlayerScript>())
+            {
+                if (player.view.Owner.ActorNumber == photonEvent.Sender)
+                {
+                    Debug.Log($"Player {photonEvent.Sender} picked {item.itemType}");
+
+                    if (item.itemStats.isWeapon)
+                        player.inventoryWeapon = item.itemStats;
+                    else
+                        player.inventoryTool = item.itemStats;
+
+                    Destroy(item.gameObject);
+
+                    return;
+                }
+            }
+
+            throw new Exception("Player not found");
         }
     }
 

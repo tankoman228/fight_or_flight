@@ -17,7 +17,24 @@ public class PlayerScript : MonoBehaviour
     //Поля самого игрока
     public float current_health = 100;
     internal PlayerStats playerStats = new PlayerStats { };
+    internal static GameObject selectedItem = null;
+    internal static PlayerScript THIS;
 
+    # region Инвентарь
+    internal ItemStats inventoryTool { get; set; }  
+    internal ItemStats inventoryWeapon {
+        get { return inventoryTool; }
+        set
+        {
+            //Обработка для изменения спрайта оружия у игрока
+            //...
+            Debug.Log($"player {view.Owner.ActorNumber} has picked {inventoryTool.damage}");
+            inventoryTool = value;
+        }
+    } 
+    internal int inventoryToolCount = 0;
+    internal int inventoryWeaponCount = 0;
+    #endregion
 
     #region Методы Юнити
 
@@ -31,6 +48,7 @@ public class PlayerScript : MonoBehaviour
 
         if (view.IsMine)
         {
+            THIS = this; //продубрировал для удобства
             EventsManager.currentPlayer = this;
             CameraFollow.target = this.transform;
         }
@@ -56,14 +74,20 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Item"))
+        if (view.IsMine && other.CompareTag("Item"))
+        {
             EventsManager.THIS.btnInteract.SetActive(true);
+            selectedItem = other.gameObject;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Item"))
+        if (view.IsMine && other.CompareTag("Item"))
+        {
             EventsManager.THIS.btnInteract.SetActive(false);
+            selectedItem = null;
+        }
     }
 
     #endregion
