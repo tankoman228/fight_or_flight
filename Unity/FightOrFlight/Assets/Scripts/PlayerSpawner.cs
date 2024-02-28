@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Когда игрок заходит в комнату, этот объект должен спавнить игрока в комнате для ожидания начала матча
+/// </summary>
 public class PlayerSpawner : MonoBehaviour
 {
     public GameObject playerPrefab;

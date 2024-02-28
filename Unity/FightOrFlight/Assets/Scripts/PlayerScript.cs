@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Скрипт игрока (именно логика)
+/// Скрипт игрока (именно логика), поведение объекта игрока
 /// </summary>
 public class PlayerScript : MonoBehaviour
 {
@@ -14,27 +14,31 @@ public class PlayerScript : MonoBehaviour
     internal PhotonView view;
     FloatingJoystick joystick;
     Rigidbody2D rigidbody;
+    Text textHealth;
 
-    //Поля самого игрока
+    #region Поля и свйоства
+
+    //Здоровье игрока. Обновляет шкалу здоровья при изменении
     public float Current_health { 
         
         get { return current_health; } 
         set {
             if (view.IsMine)
-                GameObject.Find("tHealth").GetComponent<Text>().text = ((int)value).ToString();  
+                textHealth.text = ((int)value).ToString();  
             
             current_health = value;
         } 
     }
-    private float current_health;
+    private float current_health; //Текущее здоровье
 
-    internal PlayerStats playerStats = new PlayerStats { };
-    internal static GameObject selectedItem = null;
-    internal static PlayerScript THIS;
+    internal PlayerStats playerStats = PlayerStats.Stats[PlayerStats.PlayerStatsType.basic];
+    internal static GameObject selectedItem = null; //Предмет, являющийся триггером, с которым возможно вз-вие
+    internal static PlayerScript THIS; //Текущий игрок
+    #endregion
 
-    # region Инвентарь
-    internal ItemStats InventoryTool { get; set; }  
-    internal ItemStats InventoryWeapon {
+    #region Инвентарь
+    internal ItemStats InventoryTool { get; set; }  //Ячейка с инструментом
+    internal ItemStats InventoryWeapon { //Ячейка с оружием
         get { return inventoryWeapon; }
         set
         {
@@ -45,18 +49,20 @@ public class PlayerScript : MonoBehaviour
             inventoryWeapon = value;
         }
     }
-    private ItemStats inventoryWeapon;
-    internal int inventoryToolCount = 0;
+    private ItemStats inventoryWeapon; //Тип оружия
+    internal int inventoryToolCount = 0; 
     internal int inventoryWeaponCount = 0;
     #endregion
 
     #region Методы Юнити Start() Update() OnTrigger()
 
+    //Инициализация полей
     void Start()
     {
         view = GetComponent<PhotonView>();
         joystick = FindFirstObjectByType<FloatingJoystick>();
         rigidbody = GetComponent<Rigidbody2D>();
+        textHealth = GameObject.Find("tHealth").GetComponent<Text>();
 
         updateForCurrentPlayerClass = new UpdateForCurrentPlayerClass(empty_void);
 
@@ -70,6 +76,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    //Управление, вращение спрайтом
     void Update()
     {
         if (!view.IsMine)
@@ -84,27 +91,27 @@ public class PlayerScript : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
-        updateForCurrentPlayerClass.Invoke();
+        updateForCurrentPlayerClass.Invoke(); //Поведение и логика конкретного игрока
     }
 
-
+    #region Триггеры
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (view.IsMine && other.CompareTag("Item"))
         {
             EventsManager.THIS.btnInteract.SetActive(true);
-            selectedItem = other.gameObject;
+            selectedItem = other.gameObject; //Теперь можно подобрать предмет
         }
     }
-
     private void OnTriggerExit2D(Collider2D other)
     {
         if (view.IsMine && other.CompareTag("Item"))
         {
             EventsManager.THIS.btnInteract.SetActive(false);
-            selectedItem = null;
+            selectedItem = null; //А теперь нельзя, отошли уже от него
         }
     }
+    #endregion
 
     #endregion
 
@@ -112,8 +119,8 @@ public class PlayerScript : MonoBehaviour
     #region Логика самой игры. Отличия логики игры для каждого класса
 
     /// <summary>
-    /// Вызывается когда начался матч для каждого игрока. Игроку задаётся роль,
-    /// команда, позиция на точке спавна, стартовый инвентарь.
+    /// Вызывается, когда начался матч, у каждого игрока. Игроку задаётся роль,
+    /// команда, позиция на точке спавна, стартовый инвентарь, спрайт и т.п.
     /// </summary>
     /// <param name="role">Тип игрока</param>
     /// <param name="new_position">Точка спавна</param>
@@ -155,7 +162,7 @@ public class PlayerScript : MonoBehaviour
     delegate void UpdateForCurrentPlayerClass();
     UpdateForCurrentPlayerClass updateForCurrentPlayerClass;
 
-
+    //Не удалять, это костыль для инициализации updateForCurrentPlayerClas
     void empty_void() {}
 
 
@@ -164,6 +171,7 @@ public class PlayerScript : MonoBehaviour
 
     #region вспомогательные функции
 
+    //Анимация с текстом, где игроку пишет, кто он и что ему нужно делать
     IEnumerator FadeOutText(float fadeTime)
     {
         Text tbGuide = GameObject.Find("tbExplainWhatToDo").GetComponent<Text>();

@@ -7,28 +7,29 @@ using Photon.Pun;
 using ExitGames.Client.Photon;
 using Photon.Realtime;
 using Assets.Scripts;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Накинут на пустышку (сцена с игрой). Использован для реализации связи игроков друг 
-/// между другом, пользовательского интерфейса и глобальных событий
+/// между другом, пользовательского интерфейса (UI) и глобальных событий Photon
 /// 
 /// </summary>
-public class EventsManager : MonoBehaviour
+public class EventsManager : MonoBehaviourPunCallbacks
 {
     public static PlayerScript currentPlayer; //Задавать в OnCreate игрока для view.isMine
-    public static EventsManager THIS;
-    float timer = float.MaxValue;
-    bool game_awaiting;
+    public static EventsManager THIS; //Он всё равно 1 на карте
+    float timerStartGameWaiter = float.MaxValue; //Таймер до старта игры
+    bool game_awaiting = false; //Запущен ли таймер?
 
     //Прикрепить в редакторе
-    public GameObject btnAtack, btnUse, btnInteract, btnStartGame;
+    public GameObject btnAtack, btnUse, btnInteract, btnStartGame, btnLeaveRoom;
     public Image imageInv1, imageInv2;
-    public Text textStartOrCancel;
+    public Text textStartOrCancel; //Из кнопки
 
     //Глобальные переменные
     public static int seed = -1;
 
-    #region Интерфейс
+    #region Пользовательский Интерфейс (UI)
 
     //Задание интерфейчу начального положения
     void Start()
@@ -38,7 +39,7 @@ public class EventsManager : MonoBehaviour
 
         try
         {
-            Sprite sprite = Resources.Load<Sprite>("otval");
+            Sprite sprite = Resources.Load<Sprite>("otval"); //Загрузка еткстуры из папки Resources
 
             imageInv1.sprite = sprite;
             imageInv2.sprite = sprite;
@@ -54,8 +55,24 @@ public class EventsManager : MonoBehaviour
     //Нажатие на кнопку начала или отмены запуска таймера перед началом игры
     public void Onclick_btnStartGame()
     {
-        SendPhotonEvent(0, timer >= 5);
+        SendPhotonEvent(0, timerStartGameWaiter >= 5);
     }
+
+    // Кнопка выхода из комнаты
+    public void Onckick_btnLeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    } 
+    public override void OnLeftRoom()
+    {
+        PhotonNetwork.Disconnect();
+    }
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        base.OnDisconnected(cause);
+        PhotonNetwork.LoadLevel(0);
+    }
+
 
     //Кнопка взаимодействия (синяя)
     public void Onclick_btnInteract()
@@ -69,48 +86,64 @@ public class EventsManager : MonoBehaviour
         }
     }
 
+    
+
     #endregion
 
-    //Обновление таймера
+    //Обновление таймера ожидания старта игры
     private void Update()
     {
-        if (game_awaiting && timer < 5)
+        if (game_awaiting && timerStartGameWaiter <= 5)
         {
-            textStartOrCancel.text = $"Cancel ({(int)(timer * 5)})";
+            textStartOrCancel.text = $"Cancel ({(int)(timerStartGameWaiter * 5)})";
 
-            if (timer < 0)
+            if (timerStartGameWaiter < 0)
             {
-                btnStartGame.SetActive(false);
-                btnStartGame.transform.position = new Vector3(9999,99999,999999);
                 Destroy(btnStartGame);
+                Destroy(btnLeaveRoom);
                 
                 game_awaiting = false;
                 SendPhotonEvent(1, new System.Random().Next(0, int.MaxValue - 1));
             }
+            timerStartGameWaiter -= Time.deltaTime;
         }
-        timer -= Time.deltaTime;
     }
 
     #endregion
+
 
     #region PhotonEventsHandler (работа с СОБЫТИЯМИ)
 
     void OnEnable()
     {
-        PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
+        PhotonNetwork.NetworkingClient.EventReceived += OnEvent; //Простая работа с делегатами
+        PhotonNetwork.AddCallbackTarget(this);
     }
 
     void OnDisable()
     {
-        PhotonNetwork.NetworkingClient.EventReceived -= OnEvent;
+        PhotonNetwork.NetworkingClient.EventReceived -= OnEvent; //Простая работа с делегатами
+        PhotonNetwork.RemoveCallbackTarget(this);
     }
 
+    /// <summary>
+    /// Отправка и создание глобального события всем игрокам с соответствующим кодом и содержанием
+    /// </summary>
+    /// <param name="code"> Код события </param>
+    /// <param name="put"> Содержание события (тело запроса) </param>
     public void SendPhotonEvent(byte code, object put)
     {
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
         PhotonNetwork.RaiseEvent(code, put, raiseEventOptions, SendOptions.SendReliable);
     }
 
+    /// <summary>
+    /// Вызывается, когда произошло глобальное событие. 
+    /// Появится у каждого клиента после вызова SendPhotonEvent
+    /// Обработка глобальных событий соответстсвенно их коду
+    /// </summary>
+    /// <param name="photonEvent"> объект события </param>
+    /// <exception cref="Exception"> произойдёт, если игрок на сцене не найден </exception>
     void OnEvent(EventData photonEvent)
     {
         if (photonEvent.Code == 0) //Timer reset
@@ -119,13 +152,13 @@ public class EventsManager : MonoBehaviour
             if (activate_timer)
             {
                 textStartOrCancel.text = "Cancel";
-                timer = 5;
+                timerStartGameWaiter = 5;
                 game_awaiting = true;
             }
             else
             {
                 textStartOrCancel.text = "Start match";
-                timer = float.MaxValue;
+                timerStartGameWaiter = float.MaxValue;
                 game_awaiting = false;
             }
         }
@@ -173,7 +206,12 @@ public class EventsManager : MonoBehaviour
         }
     }
 
-    int playersSend = 0;
+    int playersSend = 0; //Игроки, отправившие уведомление о том, что у них остановился таймер
+    /// <summary>
+    /// Используется в обработке события начала игры (код 1)
+    /// Перепроверяется число игроков и последний отправивший определяет seed
+    /// З.Ы. Отдалённо похоже на перекличку
+    /// </summary>
     void gameStartRolCall()
     {
         playersSend++;
@@ -188,16 +226,19 @@ public class EventsManager : MonoBehaviour
             var allSpawnpoints = GameObject.FindGameObjectsWithTag("PlayerSpawnpoint");
             var allEnemySpawnpoints = GameObject.FindGameObjectsWithTag("EnemySpawnpoint");
 
+            //Приоритеты ролей, если игроков меньше 8
             PlayerStats.PlayerStatsType[] roles = { 
-                PlayerStats.PlayerStatsType.miner,
+                PlayerStats.PlayerStatsType.miner,      //Если человек 1, он всегда шахтёр
                 PlayerStats.PlayerStatsType.hypnotoad,
                 PlayerStats.PlayerStatsType.guard,
                 PlayerStats.PlayerStatsType.slither,
                 PlayerStats.PlayerStatsType.scientist,
                 PlayerStats.PlayerStatsType.megarat,
                 PlayerStats.PlayerStatsType.enginier,
-                PlayerStats.PlayerStatsType.black_goo
+                PlayerStats.PlayerStatsType.black_goo   //Черная слизь появится только при полном наборе игроков
             };
+
+            //Выбор ролей игрокам, инициализация игроков, выбор стартовых позиций
             int i = 0;
             int position_id_start = ((int)seed / 29 - 300) % allSpawnpoints.Length;
             foreach (var player in allPlayers)
@@ -216,21 +257,21 @@ public class EventsManager : MonoBehaviour
                 i++;
             }
 
+            //Выбор предметов с карты, их перераспределение по возможным точкам появления
             var allItems = GameObject.FindGameObjectsWithTag("Item");
             var allItemsSpawnpoints = new List<GameObject> 
                 (GameObject.FindGameObjectsWithTag("ItemSpawnpoint"));
-
             System.Random rand = new System.Random(seed);
             int j = 0;
-
-            while(j < allItems.Length)
+            while(j < allItems.Length) 
             {
+                //Пока список предметов не опустеет, кидаем на рандомную позицию,
+                //Вычёркиваем из списка возможных использованную позицию
                 i = rand.Next() % allItemsSpawnpoints.Count;
                 allItems[j].transform.position = allItemsSpawnpoints[i].transform.position;      
                 allItemsSpawnpoints.RemoveAt(i);
                 j++;
-            }
-            
+            }        
         }
     }
 

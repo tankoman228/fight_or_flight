@@ -13,8 +13,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class MenuButtonsOnclick : MonoBehaviourPunCallbacks
 {
 
-    public InputField inputField;
-
+    public InputField inputField; //Поле с именем комнаты
 
     //Настройки игры для каждой комнаты
     private RoomOptions roomOptions = new RoomOptions
@@ -24,6 +23,14 @@ public class MenuButtonsOnclick : MonoBehaviourPunCallbacks
         IsOpen = true
     };
 
+    //
+    public void Start()
+    {
+        roomNumber = 0;
+        needRetryCreating = false;
+        isJoinedRoom = false;
+    }
+
     /// <summary>
     /// Создание или переход в новую комнату (автоматчмейкинг)
     /// </summary>
@@ -31,15 +38,16 @@ public class MenuButtonsOnclick : MonoBehaviourPunCallbacks
     {
         Debug.Log("btnOnclick");
         roomNumber = 0;
-        TryJoinOrCreateRoom();
+        TryJoinOrCreateRoom(); //Запуск попыток подключения
     }
 
 
     #region MatchMaking
 
-    private int roomNumber = 0;  //Номер комнаты, к которой игрок пытается подключиться в данный момент
-    private bool needRetryCreating = false;
+    private int roomNumber;  //Номер комнаты, к которой игрок пытается подключиться в данный момент
+    private bool needRetryCreating;
 
+    //Попытка подключиться к комнате с планами попытаться снова, но для другой комнаты
     private void TryJoinOrCreateRoom()
     {
         needRetryCreating = true;
@@ -49,9 +57,10 @@ public class MenuButtonsOnclick : MonoBehaviourPunCallbacks
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        if (!needRetryCreating)
+        if (!needRetryCreating) //Не планируем искать другую конату? Увы, не вышло(
             return;
 
+        //Пытемся подключиться к другой комнате
         Debug.Log("OnCreateRoomFailed");
         if (roomNumber < 5)
         {
@@ -72,19 +81,23 @@ public class MenuButtonsOnclick : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinOrCreateRoom(inputField.text, roomOptions, TypedLobby.Default, null);
     }
 
-
+    //Подключились к комнате? Идём на сцену с игрой! Но осторожно, чтобы не перейти дважды - синхронизируем потоки!
     private static bool isJoinedRoom = false;
     private static object lockObject = new object();
     public override void OnJoinedRoom()
     {
+        Debug.Log("OnJoinedRoom(): " + PhotonNetwork.CurrentRoom.Name);
         lock (lockObject)
         {
             if (!isJoinedRoom)
             {
-                isJoinedRoom = true;
-                Debug.Log("OnJoinedRoom(): " + PhotonNetwork.CurrentRoom.Name);
+                isJoinedRoom = true;             
                 PhotonNetwork.LoadLevel("SceneGame");
             }
         }
+    }
+    public override void OnJoinedLobby()
+    {
+        OnJoinedRoom();
     }
 }

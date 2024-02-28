@@ -57,6 +57,7 @@ namespace Assets.Scripts
             jump
         }
 
+        //Характеристики предметов различного типа
         public static Dictionary<ItemTypes, ItemStats> ItemsStats = new Dictionary<ItemTypes, ItemStats>() {
             {ItemTypes.pick,  new ItemStats { }  },
             {ItemTypes.dynamite,  new ItemStats { }  }

@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Скрипт предмета с карты, который можно подобрать и использовать
+/// </summary>
 public class Item : MonoBehaviour
 {
     public ItemStats itemStats;
@@ -28,11 +31,5 @@ public class Item : MonoBehaviour
                 itemStats.damage * itemStats.regarge_seconds * itemStats.start_ammo + 
                 transform.position.x * transform.position.y + transform.position.x + transform.position.y);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

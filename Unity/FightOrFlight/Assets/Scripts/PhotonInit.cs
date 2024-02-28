@@ -13,6 +13,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     void Start()
     {
         Debug.Log("Starting Loading");
+        PhotonNetwork.OfflineMode = false;
         PhotonNetwork.ConnectUsingSettings();
     }
 
