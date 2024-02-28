@@ -159,9 +159,9 @@ public class EventsManager : MonoBehaviour
                     Debug.Log($"Player {photonEvent.Sender} picked {item.itemType}");
 
                     if (item.itemStats.isWeapon)
-                        player.inventoryWeapon = item.itemStats;
+                        player.InventoryWeapon = item.itemStats;
                     else
-                        player.inventoryTool = item.itemStats;
+                        player.InventoryTool = item.itemStats;
 
                     Destroy(item.gameObject);
 
@@ -186,6 +186,7 @@ public class EventsManager : MonoBehaviour
             Array.Sort(allPlayers, (x, y) => x.view.ViewID - y.view.ViewID);
 
             var allSpawnpoints = GameObject.FindGameObjectsWithTag("PlayerSpawnpoint");
+            var allEnemySpawnpoints = GameObject.FindGameObjectsWithTag("EnemySpawnpoint");
 
             PlayerStats.PlayerStatsType[] roles = { 
                 PlayerStats.PlayerStatsType.miner,
@@ -198,15 +199,22 @@ public class EventsManager : MonoBehaviour
                 PlayerStats.PlayerStatsType.black_goo
             };
             int i = 0;
-            int position_id_start = (int)seed / 29 - 300;
+            int position_id_start = ((int)seed / 29 - 300) % allSpawnpoints.Length;
             foreach (var player in allPlayers)
             {
-                player.InitMatchStarted(roles[i], 
-                    allSpawnpoints[(position_id_start) % allSpawnpoints.Length].transform.position);
+                if (i % 2 == 0)
+                {
+                    player.InitMatchStarted(roles[i],
+                        allSpawnpoints[position_id_start].transform.position);
+                }
+                else
+                {
+                    player.InitMatchStarted(roles[i],
+                        allEnemySpawnpoints[((seed / 22 - 255) + i) %
+                        allEnemySpawnpoints.Length].transform.position);
+                }
+                i++;
             }
-
-            GameObject.Find("tHealth").GetComponent<Text>().text = 
-                PhotonNetwork.CurrentRoom.Name;
 
             var allItems = GameObject.FindGameObjectsWithTag("Item");
             var allItemsSpawnpoints = new List<GameObject> 

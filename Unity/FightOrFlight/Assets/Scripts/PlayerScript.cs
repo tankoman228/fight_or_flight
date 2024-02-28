@@ -3,6 +3,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Скрипт игрока (именно логика)
@@ -15,28 +16,41 @@ public class PlayerScript : MonoBehaviour
     Rigidbody2D rigidbody;
 
     //Поля самого игрока
-    public float current_health = 100;
+    public float Current_health { 
+        
+        get { return current_health; } 
+        set {
+            if (view.IsMine)
+                GameObject.Find("tHealth").GetComponent<Text>().text = ((int)value).ToString();  
+            
+            current_health = value;
+        } 
+    }
+    private float current_health;
+
     internal PlayerStats playerStats = new PlayerStats { };
     internal static GameObject selectedItem = null;
     internal static PlayerScript THIS;
 
     # region Инвентарь
-    internal ItemStats inventoryTool { get; set; }  
-    internal ItemStats inventoryWeapon {
-        get { return inventoryTool; }
+    internal ItemStats InventoryTool { get; set; }  
+    internal ItemStats InventoryWeapon {
+        get { return inventoryWeapon; }
         set
         {
             //Обработка для изменения спрайта оружия у игрока
             //...
-            Debug.Log($"player {view.Owner.ActorNumber} has picked {inventoryTool.damage}");
-            inventoryTool = value;
+
+            Debug.Log($"player {view.Owner.ActorNumber} has picked {InventoryTool.damage}");
+            inventoryWeapon = value;
         }
-    } 
+    }
+    private ItemStats inventoryWeapon;
     internal int inventoryToolCount = 0;
     internal int inventoryWeaponCount = 0;
     #endregion
 
-    #region Методы Юнити
+    #region Методы Юнити Start() Update() OnTrigger()
 
     void Start()
     {
@@ -51,6 +65,8 @@ public class PlayerScript : MonoBehaviour
             THIS = this; //продубрировал для удобства
             EventsManager.currentPlayer = this;
             CameraFollow.target = this.transform;
+
+            GameObject.Find("tHealth").GetComponent<Text>().text = PhotonNetwork.CurrentRoom.Name;
         }
     }
 
@@ -93,7 +109,7 @@ public class PlayerScript : MonoBehaviour
     #endregion
 
 
-    #region Отличия логики игры для каждого класса
+    #region Логика самой игры. Отличия логики игры для каждого класса
 
     /// <summary>
     /// Вызывается когда начался матч для каждого игрока. Игроку задаётся роль,
@@ -106,9 +122,12 @@ public class PlayerScript : MonoBehaviour
         playerStats = PlayerStats.Stats[role];
         this.transform.position = new_position;
 
-        current_health = playerStats.max_health;
+        Current_health = playerStats.max_health;
 
-        switch(role)
+        if (view.IsMine)
+            StartCoroutine(FadeOutText(10.0f));
+
+        switch (role)
         {
             case PlayerStats.PlayerStatsType.scientist:
                 break;
@@ -138,6 +157,34 @@ public class PlayerScript : MonoBehaviour
 
 
     void empty_void() {}
+
+
+    #endregion
+
+
+    #region вспомогательные функции
+
+    IEnumerator FadeOutText(float fadeTime)
+    {
+        Text tbGuide = GameObject.Find("tbExplainWhatToDo").GetComponent<Text>();
+        tbGuide.gameObject.transform.rotation = Quaternion.identity;
+        tbGuide.text = $"You are {playerStats.rolename}\n{playerStats.guide}";
+
+        Color originalColor = tbGuide.color;
+        Color transparentColor = new Color(originalColor.r, originalColor.g, originalColor.b, 0);
+
+        float elapsedTime = 0.0f;
+
+        while (elapsedTime < fadeTime)
+        {
+            tbGuide.color = Color.Lerp(originalColor, transparentColor, elapsedTime / fadeTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        tbGuide.color = transparentColor;
+    }
+
 
     #endregion
 }

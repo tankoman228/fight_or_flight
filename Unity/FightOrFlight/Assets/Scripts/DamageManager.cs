@@ -20,7 +20,7 @@ namespace Assets.Scripts
         /// <param name="damage">размер урона</param>
         public static void apply_damage_to_payer(PlayerScript player, DamageManager.DamageTypes damage_type, float damage)
         {
-            player.current_health -= damage * player.playerStats.damageResistance[damage_type];
+            player.Current_health -= damage * player.playerStats.damageResistance[damage_type];
         }
 
         public enum DamageTypes

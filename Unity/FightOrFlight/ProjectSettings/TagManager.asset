@@ -8,6 +8,7 @@ TagManager:
   - Item
   - ItemSpawnpoint
   - btnInteract
+  - EnemySpawnpoint
   layers:
   - Default
   - TransparentFX
