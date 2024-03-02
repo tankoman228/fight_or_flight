@@ -53,7 +53,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
     //Нажатие на кнопку начала или отмены запуска таймера перед началом игры
     public void Onclick_btnStartGame()
     {
-        SendPhotonEvent(0, timerStartGameWaiter >= 5);
+        SendPhotonEvent(EventCodes.TimerReset, timerStartGameWaiter >= 5);
     }
 
     // Кнопка выхода из комнаты
@@ -80,7 +80,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
             var item = PlayerScript.selectedItem.GetComponent<Item>();
             int itemID = item.itemID;
 
-            SendPhotonEvent(2, itemID);
+            SendPhotonEvent(EventCodes.ItemFound, itemID);
         }
     }
 
@@ -88,7 +88,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
     public void Onclick_btnShoot()
     {
         if (currentPlayer.weapon.canAtack)
-            SendPhotonEvent(3, null);
+            SendPhotonEvent(EventCodes.PlayerAtack, null);
     }
 
     #endregion
@@ -106,7 +106,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 Destroy(btnLeaveRoom);
                 
                 game_awaiting = false;
-                SendPhotonEvent(1, new System.Random().Next(0, int.MaxValue - 1));
+                SendPhotonEvent(EventCodes.GameStarted, new System.Random().Next(0, int.MaxValue - 1));
             }
             timerStartGameWaiter -= Time.deltaTime;
         }
@@ -149,7 +149,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
     /// <exception cref="Exception"> произойдёт, если игрок на сцене не найден </exception>
     void OnEvent(EventData photonEvent)
     {
-        if (photonEvent.Code == 0) //Timer reset
+        if (photonEvent.Code == EventCodes.TimerReset) //Timer reset
         {
             bool activate_timer = (bool)photonEvent.CustomData;
             if (activate_timer)
@@ -165,13 +165,13 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 game_awaiting = false;
             }
         }
-        else if (photonEvent.Code == 1) //Game started
+        else if (photonEvent.Code == EventCodes.GameStarted) //Game started
         {
             seed = (int)photonEvent.CustomData;
             gameStartRolCall();
             PhotonNetwork.CurrentRoom.IsOpen = false;
         }
-        else if (photonEvent.Code == 2) //Item found
+        else if (photonEvent.Code == EventCodes.ItemFound) //Item found
         {
             int id_item = (int)photonEvent.CustomData;
       
@@ -215,7 +215,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
 
             throw new Exception("Player not found");
         }
-        else if (photonEvent.Code == 3)
+        else if (photonEvent.Code == EventCodes.PlayerAtack)
         {
             //Поиск игрока, который атаковал
             foreach (var player in FindObjectsOfType<PlayerScript>())
@@ -228,6 +228,10 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 }
             }
         }
+    }
+    static class EventCodes
+    {
+        internal const byte TimerReset = 0, GameStarted = 1, ItemFound = 2, PlayerAtack = 3;
     }
 
     int playersSend = 0; //Игроки, отправившие уведомление о том, что у них остановился таймер
