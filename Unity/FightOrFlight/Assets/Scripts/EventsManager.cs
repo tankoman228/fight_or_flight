@@ -1,13 +1,11 @@
+using Assets.Scripts;
+using ExitGames.Client.Photon;
+using Photon.Pun;
+using Photon.Realtime;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Photon.Pun;
-using ExitGames.Client.Photon;
-using Photon.Realtime;
-using Assets.Scripts;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Накинут на пустышку (сцена с игрой). Использован для реализации связи игроков друг 
@@ -86,7 +84,12 @@ public class EventsManager : MonoBehaviourPunCallbacks
         }
     }
 
-    
+    //Кнопка атаки (красная)
+    public void Onclick_btnShoot()
+    {
+        if (currentPlayer.weapon.canAtack)
+            SendPhotonEvent(3, null);
+    }
 
     #endregion
 
@@ -191,18 +194,39 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 {
                     Debug.Log($"Player {photonEvent.Sender} picked {item.itemType}");
 
+
                     if (item.itemStats.isWeapon)
-                        player.InventoryWeapon = item.itemStats;
+                    {
+                        item.itemStats = player.weapon.InventoryWeaponStats;
+                        item.count = player.weapon.Ammo;
+                        item.restart();
+
+                        player.weapon.InventoryWeapon = item;
+                    }
                     else
                         player.InventoryTool = item.itemStats;
 
-                    Destroy(item.gameObject);
+                    //Destroy(item.gameObject);
+
 
                     return;
                 }
             }
 
             throw new Exception("Player not found");
+        }
+        else if (photonEvent.Code == 3)
+        {
+            //Поиск игрока, который атаковал
+            foreach (var player in FindObjectsOfType<PlayerScript>())
+            {
+                if (player.view.Owner.ActorNumber == photonEvent.Sender)
+                {
+                    player.weapon.atackDelegate.Invoke();
+
+                    return;
+                }
+            }
         }
     }
 

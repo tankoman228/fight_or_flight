@@ -1,6 +1,4 @@
 using Assets.Scripts;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -12,11 +10,17 @@ public class Item : MonoBehaviour
     public ItemStats.ItemTypes itemType;
 
     public int itemID = -1; //MUST BE UNIQUE FOR EACH ITEM ON MAP
-    
+    public int count = 1;
+
     // Start is called before the first frame update
     void Start()
     {
         itemStats = ItemStats.ItemsStats[itemType];
+        if (itemStats == null )
+        {
+            Debug.LogError("Item of null type!");
+        }
+        count = itemStats.start_ammo;
 
         if (itemID == -1)
         {
@@ -31,5 +35,13 @@ public class Item : MonoBehaviour
                 itemStats.damage * itemStats.regarge_seconds * itemStats.start_ammo + 
                 transform.position.x * transform.position.y + transform.position.x + transform.position.y);
         }
+    }
+
+    /// <summary>
+    /// Заново вызывает метод Start, реинициализация согласно новым полям
+    /// </summary>
+    public void restart()
+    {
+        Start();
     }
 }

@@ -37,19 +37,10 @@ public class PlayerScript : MonoBehaviour
     #endregion
 
     #region Инвентарь
-    internal ItemStats InventoryTool { get; set; }  //Ячейка с инструментом
-    internal ItemStats InventoryWeapon { //Ячейка с оружием
-        get { return inventoryWeapon; }
-        set
-        {
-            //Обработка для изменения спрайта оружия у игрока
-            //...
 
-            Debug.Log($"player {view.Owner.ActorNumber} has picked {InventoryTool.damage}");
-            inventoryWeapon = value;
-        }
-    }
-    private ItemStats inventoryWeapon; //Тип оружия
+    public Weapon weapon; //Скрипт оружия, которое держит в руках игрок
+    internal ItemStats InventoryTool { get; set; }  //Ячейка с инструментом
+   
     internal int inventoryToolCount = 0; 
     internal int inventoryWeaponCount = 0;
     #endregion

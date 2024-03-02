@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -49,7 +45,7 @@ namespace Assets.Scripts
 
             goo_absorber,
             bite,
-            hypnocroak,
+            tongue,
 
             goo_imitator,
             walls_breaker,
@@ -59,7 +55,12 @@ namespace Assets.Scripts
 
         //Характеристики предметов различного типа
         public static Dictionary<ItemTypes, ItemStats> ItemsStats = new Dictionary<ItemTypes, ItemStats>() {
-            {ItemTypes.pick,  new ItemStats { }  },
+            {ItemTypes.pick,  new ItemStats {
+                regarge_seconds = 2
+            }  },
+            {ItemTypes.pistol, new ItemStats {
+                regarge_seconds = 1
+            } },
             {ItemTypes.dynamite,  new ItemStats { }  }
         };
     }
