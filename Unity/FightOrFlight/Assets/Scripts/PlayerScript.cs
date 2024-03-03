@@ -27,6 +27,11 @@ public class PlayerScript : MonoBehaviour
                 textHealth.text = ((int)value).ToString();  
             
             current_health = value;
+
+            if (current_health < 0)
+            {
+                transform.position = Vector3.zero;
+            }
         } 
     }
     private float current_health; //Текущее здоровье

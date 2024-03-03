@@ -8,8 +8,8 @@ public class Weapon : MonoBehaviour
 {
     #region Свойства и поля
 
-
     public PlayerScript player; //Задан из редактора в префабе
+    public GameObject DamageHitboxPrefub;
 
     /// <summary>
     /// Задавать новое оружие при подборе с карты
@@ -84,6 +84,19 @@ public class Weapon : MonoBehaviour
     {
         TimerCanAtackOnlyAfterZero = inventoryWeapon.regarge_seconds;
         Debug.Log("ATACK!");
+
+        if (player == EventsManager.currentPlayer)
+        {
+            var hitbox = Instantiate(
+                DamageHitboxPrefub,
+                this.transform
+                ).GetComponent<DamageHitbox>();
+            hitbox.init(
+                inventoryWeapon.damage_type, 
+                inventoryWeapon.damage, 
+                player.gameObject, 
+                !player.playerStats.IsMonster);
+        }
     }
 
     #endregion

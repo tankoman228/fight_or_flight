@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7523135136801951056}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -305,3 +305,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5775426096088862189}
+  DamageHitboxPrefub: {fileID: 466138650436266232, guid: d9d428e480dfb2a498a3482d89e19584, type: 3}

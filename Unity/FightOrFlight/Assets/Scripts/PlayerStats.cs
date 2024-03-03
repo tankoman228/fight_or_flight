@@ -29,6 +29,7 @@ namespace Assets.Scripts
 
         public string guide = "Guide for this class wasn't set";
         public string rolename;
+        public bool IsMonster = false; 
 
         #endregion
 
@@ -108,6 +109,7 @@ namespace Assets.Scripts
                 },
             }},
             { PlayerStatsType.black_goo, new PlayerStats {
+                IsMonster = true,
                 rolename = "black goo",
                 max_health = 500,
                 speed = 5,
@@ -122,6 +124,7 @@ namespace Assets.Scripts
                 " them, assimilate, help to other monsters"
             }},
             { PlayerStatsType.slither, new PlayerStats {
+                IsMonster = true,
                 rolename = "slither",
                 max_health = 2000,
                 speed = 4,
@@ -136,6 +139,7 @@ namespace Assets.Scripts
                 "If you make player to get in trap, human's chance is null!"
             }},
             { PlayerStatsType.megarat, new PlayerStats {
+                IsMonster = true,
                 rolename = "megarat",
                 max_health = 800,
                 speed = 7,
@@ -149,6 +153,7 @@ namespace Assets.Scripts
                 guide = "Kill every human, you are very dangerous, but 3 humans can easily kill you. "
             }},
             { PlayerStatsType.hypnotoad, new PlayerStats {
+                IsMonster = true,
                 rolename = "hypnotoad",
                 max_health = 250,
                 speed = 3,

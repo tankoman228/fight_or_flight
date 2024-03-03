@@ -89,6 +89,8 @@ public class EventsManager : MonoBehaviourPunCallbacks
     {
         if (currentPlayer.weapon.canAtack)
             SendPhotonEvent(EventCodes.PlayerAtack, null);
+
+
     }
 
     #endregion
@@ -228,10 +230,21 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 }
             }
         }
+        else if (photonEvent.Code == EventCodes.PlayerAtacked)
+        {
+            var data = DamageManager.DeserializeDamageMessage((byte[])photonEvent.CustomData);
+
+            if (currentPlayer.view.Owner.ActorNumber != data.atacked_id)
+                return;
+
+            DamageManager.recieve_damage(data.damage_type, data.damage);
+        }
+        
     }
-    static class EventCodes
+    internal static class EventCodes
     {
         internal const byte TimerReset = 0, GameStarted = 1, ItemFound = 2, PlayerAtack = 3;
+        internal const byte PlayerAtacked = 4;
     }
 
     int playersSend = 0; //Игроки, отправившие уведомление о том, что у них остановился таймер
