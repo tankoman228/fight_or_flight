@@ -21,12 +21,16 @@ public class DamageHitbox : MonoBehaviour
     /// <param name="DamageSize">Размер урона</param>
     /// <param name="instantinatedBy">Атакующий игрок</param>
     /// <param name="monsterUnderAtack">Атакуемая команда</param>
-    internal void init(DamageManager.DamageTypes DamageType, float DamageSize, GameObject instantinatedBy, bool monsterUnderAtack)
+    /// <param name="lifetime">Сколько секунд пройдёт перед уничтожением объекта</param>
+    internal void init(DamageManager.DamageTypes DamageType, float DamageSize, GameObject instantinatedBy, bool monsterUnderAtack,
+        float lifetime = 1)
     {
         this.DamageType = DamageType;
         this.DamageSize = DamageSize;
         this.instantinatedBy = instantinatedBy;
         this.IsMonsterAtacked = monsterUnderAtack;
+        
+        Destroy(this.gameObject, lifetime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

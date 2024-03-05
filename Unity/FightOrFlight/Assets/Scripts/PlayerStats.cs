@@ -67,7 +67,7 @@ namespace Assets.Scripts
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
                 {
                     { DamageManager.DamageTypes.firearms, 1},
-                    { DamageManager.DamageTypes.steel, 1},
+                    { DamageManager.DamageTypes.steel, 0.99f},
                     { DamageManager.DamageTypes.thermal, 1},
                     { DamageManager.DamageTypes.chemical, 1}
                 },

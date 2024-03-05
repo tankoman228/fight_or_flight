@@ -93,6 +93,13 @@ public class EventsManager : MonoBehaviourPunCallbacks
 
     }
 
+    //Кнопка использования предмета (зелёная)
+    public void Onclick_btnUse()
+    {
+        if (currentPlayer.inventoryToolCount > 0)    
+            SendPhotonEvent(EventCodes.InstrumentUsed, null);   
+    }
+
     #endregion
 
     //Обновление таймера ожидания старта игры
@@ -176,7 +183,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
         else if (photonEvent.Code == EventCodes.ItemFound) //Item found
         {
             int id_item = (int)photonEvent.CustomData;
-      
+
             //Поиск предмета с карты
             Item item = null;
             foreach (Item i in FindObjectsOfType<Item>())
@@ -199,14 +206,34 @@ public class EventsManager : MonoBehaviourPunCallbacks
 
                     if (item.itemStats.isWeapon)
                     {
-                        item.itemStats = player.weapon.InventoryWeaponStats;
-                        item.count = player.weapon.Ammo;
-                        item.restart();
+                        var iss = player.weapon.InventoryWeaponStats;
+                        var c = player.weapon.Ammo;
+                        var t = player.weapon.inventoryWeaponType;
 
                         player.weapon.InventoryWeapon = item;
+
+                        item.itemType = t;
+                        item.itemStats = iss;
+                        item.count = c;
+                        
+                        item.restart();
                     }
                     else
+                    {
+                        var iss = player.InventoryTool;
+                        var c = player.inventoryToolCount;
+                        var t = player.InventoryToolType;
+
                         player.InventoryTool = item.itemStats;
+                        player.InventoryToolType = item.itemType;
+                        player.inventoryToolCount = item.count;
+
+                        item.itemStats = iss;
+                        item.count = c;
+                        item.itemType = t;
+
+                        item.restart();
+                    }
 
                     //Destroy(item.gameObject);
 
@@ -224,7 +251,8 @@ public class EventsManager : MonoBehaviourPunCallbacks
             {
                 if (player.view.Owner.ActorNumber == photonEvent.Sender)
                 {
-                    player.weapon.atackDelegate.Invoke();
+                    player.weapon.shoot();
+                    //player.weapon.atackDelegate.Invoke();
 
                     return;
                 }
@@ -239,12 +267,25 @@ public class EventsManager : MonoBehaviourPunCallbacks
 
             DamageManager.recieve_damage(data.damage_type, data.damage);
         }
+        else if (photonEvent.Code == EventCodes.InstrumentUsed)
+        {
+            Debug.Log("Used instrumen!");
+            //Поиск игрока, который использовал предмет
+            foreach (var player in FindObjectsOfType<PlayerScript>())
+            {
+                if (player.view.Owner.ActorNumber == photonEvent.Sender)
+                {
+                    player.UseInstrument();
+                    return;
+                }
+            }
+        }
         
     }
     internal static class EventCodes
     {
         internal const byte TimerReset = 0, GameStarted = 1, ItemFound = 2, PlayerAtack = 3;
-        internal const byte PlayerAtacked = 4;
+        internal const byte PlayerAtacked = 4, InstrumentUsed = 5;
     }
 
     int playersSend = 0; //Игроки, отправившие уведомление о том, что у них остановился таймер

@@ -45,9 +45,9 @@ public class PlayerScript : MonoBehaviour
 
     public Weapon weapon; //Скрипт оружия, которое держит в руках игрок
     internal ItemStats InventoryTool { get; set; }  //Ячейка с инструментом
-   
+    internal ItemStats.ItemTypes InventoryToolType { get; set; }
+
     internal int inventoryToolCount = 0; 
-    internal int inventoryWeaponCount = 0;
     #endregion
 
     #region Методы Юнити Start() Update() OnTrigger()
@@ -60,7 +60,7 @@ public class PlayerScript : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         textHealth = GameObject.Find("tHealth").GetComponent<Text>();
 
-        updateForCurrentPlayerClass = new UpdateForCurrentPlayerClass(empty_void);
+        updateForCurrentPlayerClass = new UpdateForCurrentPlayerClass(() => { });
 
         if (view.IsMine)
         {
@@ -158,9 +158,25 @@ public class PlayerScript : MonoBehaviour
     delegate void UpdateForCurrentPlayerClass();
     UpdateForCurrentPlayerClass updateForCurrentPlayerClass;
 
-    //Не удалять, это костыль для инициализации updateForCurrentPlayerClas
-    void empty_void() {}
 
+    /// <summary>
+    /// Использование игроком инструмента из инвентаря, вся логика обработки
+    /// </summary>
+    internal void UseInstrument()
+    {
+        Debug.Log($"used {InventoryToolType}");
+
+        inventoryToolCount--;
+        Current_health += InventoryTool.health_add_after_used;
+
+        //ППЛГОНД
+
+        switch (InventoryToolType)
+        {
+            default:
+                break;
+        }
+    }
 
     #endregion
 

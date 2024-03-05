@@ -21,6 +21,7 @@ public class Weapon : MonoBehaviour
             Debug.Log($"player {player.view.Owner.ActorNumber} has picked {inventoryWeapon}");
 
             inventoryWeapon = value.itemStats;
+            inventoryWeaponType = value.itemType;
             ammo = value.count;
 
             initByType(value);
@@ -33,6 +34,7 @@ public class Weapon : MonoBehaviour
     private ItemStats inventoryWeapon = ItemStats.ItemsStats[ItemStats.ItemTypes.pick]; //Тип оружия
     private int ammo; //Осталось патронов
 
+    internal ItemStats.ItemTypes inventoryWeaponType;
     public ItemStats InventoryWeaponStats { get { return inventoryWeapon; } }
     public int Ammo { get { return ammo; } }
 
@@ -51,7 +53,7 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        atackDelegate = new AtackDelegate(shoot);
+        atackDelegate = new AtackDelegate(() => { });
     }
 
     /// <summary>
@@ -60,56 +62,98 @@ public class Weapon : MonoBehaviour
     /// <param name="type"></param>
     void initByType(Item item)
     {
-        atackDelegate = new AtackDelegate(shoot);
+        Debug.Log("Init by type");
+        atackDelegate = new AtackDelegate(()=>{ });
         switch(item.itemType)
         {
-            case ItemStats.ItemTypes.pick:      atackDelegate += pick_use;  break;
-            case ItemStats.ItemTypes.chainsaw: break;
-            case ItemStats.ItemTypes.pistol: break;
-            case ItemStats.ItemTypes.reagents: break;
-            case ItemStats.ItemTypes.machine_gun: break;
-            case ItemStats.ItemTypes.flamethrower: break;
-            case ItemStats.ItemTypes.sprayer: break;
-            case ItemStats.ItemTypes.plasma_cutter: break;
-            case ItemStats.ItemTypes.goo_absorber: break;
-            case ItemStats.ItemTypes.bite: break;
-            case ItemStats.ItemTypes.tongue: break;
+            case ItemStats.ItemTypes.pick:          atackDelegate += pick_use;  break;
+            case ItemStats.ItemTypes.chainsaw:      atackDelegate += chainsaw_use; break;
+            case ItemStats.ItemTypes.pistol:        atackDelegate += pistol_use; break;
+            case ItemStats.ItemTypes.reagents:      atackDelegate += reagents_use; break;
+            case ItemStats.ItemTypes.machine_gun:   atackDelegate += machine_gun_use; break;
+            case ItemStats.ItemTypes.flamethrower:  atackDelegate += flamethrower_use; break;
+            case ItemStats.ItemTypes.sprayer:       atackDelegate += sprayer_use; break;
+            case ItemStats.ItemTypes.plasma_cutter: atackDelegate += plasma_cutter_use; break;
+            case ItemStats.ItemTypes.goo_absorber:  atackDelegate += goo_absorber_use; break;
+            case ItemStats.ItemTypes.bite:          atackDelegate += bite_use; break;
+            case ItemStats.ItemTypes.tongue:        atackDelegate += tongue_use; break;
         }
     }
 
     /// <summary>
     /// Логика стрельбы для всех типов оружия. Вызывается для атакующего игрока по глобальному событию.
     /// </summary>
-    private void shoot()
+    public void shoot()
     {
         TimerCanAtackOnlyAfterZero = inventoryWeapon.regarge_seconds;
         Debug.Log("ATACK!");
 
+        if (player.weapon.ammo > 0)
+            ammo--;
+        else
+        {
+            //Нет патрон?
+            return;
+        }
+
         if (player == EventsManager.currentPlayer)
         {
-            var hitbox = Instantiate(
-                DamageHitboxPrefub,
-                this.transform
-                ).GetComponent<DamageHitbox>();
-            hitbox.init(
-                inventoryWeapon.damage_type, 
-                inventoryWeapon.damage, 
-                player.gameObject, 
-                !player.playerStats.IsMonster);
+            atackDelegate.Invoke();
         }
+        
     }
 
     #endregion
 
-    internal delegate void AtackDelegate();
-    internal AtackDelegate atackDelegate; //Вызывается для атакующего игрока при соот-щем глобальном сообытии
+    private delegate void AtackDelegate();
+    private AtackDelegate atackDelegate; //Вызывается для атакующего игрока при соот-щем глобальном сообытии
     
     #region Функции, их задавать делегату для разных типов оружия при инициализации
 
     void pick_use()
     {
-        Debug.Log("Pick used");
+        Debug.Log("Pick Used");
+        var hitbox = Instantiate(
+                DamageHitboxPrefub,
+                this.transform
+                ).GetComponent<DamageHitbox>();
+        hitbox.init(
+            inventoryWeapon.damage_type,
+            inventoryWeapon.damage,
+            player.gameObject,
+            !player.playerStats.IsMonster);
     }
+
+    void chainsaw_use()
+    {
+        Debug.Log("Chainsaw Used");
+        var hitbox = Instantiate(
+                DamageHitboxPrefub,
+                this.transform
+                ).GetComponent<DamageHitbox>();
+        hitbox.init(
+            inventoryWeapon.damage_type,
+            inventoryWeapon.damage,
+            player.gameObject,
+            !player.playerStats.IsMonster);
+    }
+    void pistol_use() { }
+
+    void reagents_use() { }
+
+    void machine_gun_use() { }
+
+    void flamethrower_use() { }
+
+    void sprayer_use() { }
+
+    void plasma_cutter_use() { }
+
+    void goo_absorber_use() { }
+
+    void bite_use() { }
+
+    void tongue_use() { }
 
     #endregion
 }
