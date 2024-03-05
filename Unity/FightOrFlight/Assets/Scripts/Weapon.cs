@@ -70,6 +70,7 @@ public class Weapon : MonoBehaviour
             case ItemStats.ItemTypes.chainsaw:      atackDelegate += chainsaw_use; break;
             case ItemStats.ItemTypes.pistol:        atackDelegate += pistol_use; break;
             case ItemStats.ItemTypes.reagents:      atackDelegate += reagents_use; break;
+            case ItemStats.ItemTypes.knife:         atackDelegate += knife_use; break;
             case ItemStats.ItemTypes.machine_gun:   atackDelegate += machine_gun_use; break;
             case ItemStats.ItemTypes.flamethrower:  atackDelegate += flamethrower_use; break;
             case ItemStats.ItemTypes.sprayer:       atackDelegate += sprayer_use; break;
@@ -137,6 +138,12 @@ public class Weapon : MonoBehaviour
             player.gameObject,
             !player.playerStats.IsMonster);
     }
+
+    void knife_use()
+    {
+        
+    }
+
     void pistol_use() { }
 
     void reagents_use() { }

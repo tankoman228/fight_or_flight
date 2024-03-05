@@ -11,7 +11,7 @@ public class DamageHitbox : MonoBehaviour
 {
     public DamageManager.DamageTypes DamageType;
     public float DamageSize;
-    public GameObject instantinatedBy;
+    public GameObject instantinatedBy; 
     public bool IsMonsterAtacked;
 
     /// <summary>
@@ -33,11 +33,12 @@ public class DamageHitbox : MonoBehaviour
         Destroy(this.gameObject, lifetime);
     }
 
+    //Нанесение урона игроку из противоположной команды
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag.Equals("Player"))
+        if (collision.gameObject != instantinatedBy)
         {
-            if (collision.gameObject != instantinatedBy)
+            if (collision.gameObject.tag.Equals("Player"))
             {
                 Debug.Log("Damage hitbox touched!");
 

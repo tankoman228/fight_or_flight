@@ -71,6 +71,9 @@ namespace Assets.Scripts
                     { DamageManager.DamageTypes.thermal, 1},
                     { DamageManager.DamageTypes.chemical, 1}
                 },
+                guide = "You are human. You need to escape this place by repairing generator and finding lift. " +
+                "Try to avoid monsters (players from the other team), their task is to kill you. Your speciality is" +
+                "miner. Use your pick to break some objects"
             }},
             { PlayerStatsType.guard, new PlayerStats {
                 rolename = "guard",
@@ -83,6 +86,9 @@ namespace Assets.Scripts
                     { DamageManager.DamageTypes.thermal, 1},
                     { DamageManager.DamageTypes.chemical, 1}
                 },
+                guide = "You are human. You need to escape this place by repairing generator and finding lift. " +
+                "Try to avoid monsters (players from the other team), their task is to kill you. Your speciality is" +
+                "guard. Protect other players from monsters, you can easily damage them, but they are stronger"
             }},
             { PlayerStatsType.scientist, new PlayerStats {
                 rolename = "scientist",
@@ -95,6 +101,9 @@ namespace Assets.Scripts
                     { DamageManager.DamageTypes.thermal, 1},
                     { DamageManager.DamageTypes.chemical, 1}
                 },
+                guide = "You are human. You need to escape this place by repairing generator and finding lift. " +
+                "Try to avoid monsters (players from the other team), their task is to kill you. Your speciality is" +
+                "scientist. Run as fast as you can, use some of your chemical things to defend yourself."
             }},
             { PlayerStatsType.enginier, new PlayerStats {
                 rolename = "enginier",
@@ -107,6 +116,10 @@ namespace Assets.Scripts
                     { DamageManager.DamageTypes.thermal, 1},
                     { DamageManager.DamageTypes.chemical, 1}
                 },
+                guide = "You are human. You need to escape this place by repairing generator and finding lift. " +
+                "Try to avoid monsters (players from the other team), their task is to kill you. Your speciality is" +
+                "enginier. You can kill some monsters with mines and traps or help other people. But don't face the " +
+                "danger, your basic may be useless against the monster."
             }},
             { PlayerStatsType.black_goo, new PlayerStats {
                 IsMonster = true,
