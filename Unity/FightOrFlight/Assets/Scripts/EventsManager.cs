@@ -10,7 +10,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Накинут на пустышку (сцена с игрой). Использован для реализации связи игроков друг 
 /// между другом, пользовательского интерфейса (UI) и глобальных событий Photon
-/// 
+/// Осторожно, спагетти код (я пока не умею правильно делать архитектуру таких проектов)
 /// </summary>
 public class EventsManager : MonoBehaviourPunCallbacks
 {
@@ -20,20 +20,28 @@ public class EventsManager : MonoBehaviourPunCallbacks
     bool game_awaiting = false; //Запущен ли таймер?
 
     //Прикрепить в редакторе
-    public GameObject btnAtack, btnUse, btnInteract, btnStartGame, btnLeaveRoom;
+    public GameObject btnAtack, btnUse, btnInteract, btnStartGame, btnLeaveRoom, textEndgame;
     public Image imageInv1, imageInv2;
     public Text textStartOrCancel; //Из кнопки
 
     //Глобальные переменные
     public static int seed = -1;
+    public static int monsters_total = 0, people_total = 0, people_escaped = 0;
 
     #region Пользовательский Интерфейс (UI)
 
     //Задание интерфейчу начального положения
     void Start()
     {
+        //Обнуление переменных
+        monsters_total = 0; 
+        people_total = 0; 
+        people_escaped = 0;
+        game_awaiting = false;
+
         THIS = this;
         btnInteract.SetActive(false);
+        textEndgame.SetActive(false);
 
         try
         {
@@ -89,8 +97,6 @@ public class EventsManager : MonoBehaviourPunCallbacks
     {
         if (currentPlayer.weapon.canAtack)
             SendPhotonEvent(EventCodes.PlayerAtack, null);
-
-
     }
 
     //Кнопка использования предмета (зелёная)
@@ -289,6 +295,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
     }
 
     int playersSend = 0; //Игроки, отправившие уведомление о том, что у них остановился таймер
+
     /// <summary>
     /// Используется в обработке события начала игры (код 1)
     /// Перепроверяется число игроков и последний отправивший определяет seed
@@ -329,12 +336,14 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 {
                     player.InitMatchStarted(roles[i],
                         allSpawnpoints[position_id_start].transform.position);
+                    people_total++;
                 }
                 else
                 {
                     player.InitMatchStarted(roles[i],
                         allEnemySpawnpoints[((seed / 22 - 255) + i) %
                         allEnemySpawnpoints.Length].transform.position);
+                    monsters_total++;
                 }
                 i++;
             }
@@ -355,6 +364,65 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 j++;
             }        
         }
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        Debug.Log("Player left room");
+        var players = GameObject.FindObjectsOfType<PlayerScript>();
+        foreach (var player in players)
+        {
+            if (player.view.Owner == otherPlayer)
+            {
+                if (!player.isAlive)
+                    return;
+
+                if (player.playerStats.IsMonster)
+                    monsters_total--;
+                else
+                    people_total--;
+
+                return;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Вызывается для проверки, закончена ли игра и если да, вызывается метод endgame
+    /// </summary>
+    internal void check_game_status()
+    {
+        if (monsters_total == 0)
+            endgame();
+        if (people_total == 0)
+            endgame();
+    }
+
+    /// <summary>
+    /// Должно быть вызвано по окончанию игры
+    /// </summary>
+    private void endgame()
+    {
+        textEndgame.SetActive(true);
+        string text;
+        
+        float score = (float)people_total / monsters_total;
+
+        if (score >= 0.4)
+        {
+            text = $"Humans win. {monsters_total} monsters stayed alive. Escaped humans: {people_total}";
+            textEndgame.GetComponent<Text>().color = Color.green;
+        }
+        else if (score <= 0.2)
+        {
+            text = $"Monsters win, their number is {monsters_total}. And {people_total} humans escaped";
+            textEndgame.GetComponent<Text>().color = Color.red;
+        }
+        else
+        {
+            text = $"Draw. {people_total} humans escaped, but {monsters_total} monsters stayed alive";
+        }
+        textEndgame.GetComponent<Text>().text = text;
     }
 
     #endregion

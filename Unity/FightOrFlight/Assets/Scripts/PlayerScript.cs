@@ -1,5 +1,6 @@
 using Assets.Scripts;
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,15 +29,18 @@ public class PlayerScript : MonoBehaviour
             
             current_health = value;
 
+            //Сюда прописать смерть игрока
             if (current_health < 0)
             {
-                transform.position = Vector3.zero;
+                isAlive = false;
+                EventsManager.THIS.check_game_status();
             }
         } 
     }
     private float current_health; //Текущее здоровье
 
     internal PlayerStats playerStats = PlayerStats.Stats[PlayerStats.PlayerStatsType.basic];
+    internal bool isAlive = true;
     internal static GameObject selectedItem = null; //Предмет, являющийся триггером, с которым возможно вз-вие
     internal static PlayerScript THIS; //Текущий игрок
     #endregion
@@ -93,6 +97,9 @@ public class PlayerScript : MonoBehaviour
     #region Триггеры
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (playerStats.IsMonster) //Монстры не могут подбирать предметы
+            return;
+
         if (view.IsMine && other.CompareTag("Item"))
         {
             EventsManager.THIS.btnInteract.SetActive(true);
@@ -178,6 +185,12 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    internal void Escape()
+    {
+        EventsManager.people_escaped++;
+        EventsManager.THIS.check_game_status();
+    }
+
     #endregion
 
 
@@ -204,7 +217,6 @@ public class PlayerScript : MonoBehaviour
 
         tbGuide.color = transparentColor;
     }
-
 
     #endregion
 }
