@@ -10,6 +10,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Накинут на пустышку (сцена с игрой). Использован для реализации связи игроков друг 
 /// между другом, пользовательского интерфейса (UI) и глобальных событий Photon
+/// Также хранит данные о карте, её состояние
 /// Осторожно, спагетти код (я пока не умею правильно делать архитектуру таких проектов)
 /// </summary>
 public class EventsManager : MonoBehaviourPunCallbacks
@@ -18,11 +19,15 @@ public class EventsManager : MonoBehaviourPunCallbacks
     public static EventsManager THIS; //Он всё равно 1 на карте
     float timerStartGameWaiter = float.MaxValue; //Таймер до старта игры
     bool game_awaiting = false; //Запущен ли таймер?
+    public static bool generator_activated = false;
+    public static bool generator_checkbox_overlapped = false;
+    public static bool lift_checkbox_overlapped = false;
 
     //Прикрепить в редакторе
     public GameObject btnAtack, btnUse, btnInteract, btnStartGame, btnLeaveRoom, textEndgame;
     public Image imageInv1, imageInv2;
     public Text textStartOrCancel; //Из кнопки
+    public GameObject generator;
 
     //Глобальные переменные
     public static int seed = -1;
@@ -89,6 +94,19 @@ public class EventsManager : MonoBehaviourPunCallbacks
             int itemID = item.itemID;
 
             SendPhotonEvent(EventCodes.ItemFound, itemID);
+        }
+        if (generator_checkbox_overlapped && !generator_activated)
+        {
+            SendPhotonEvent(EventCodes.GeneratorActivate, null);
+            btnInteract.SetActive(false);
+        }
+        if (lift_checkbox_overlapped)
+        {
+            if (generator_activated)
+            {
+                SendPhotonEvent(EventCodes.HumanEscaped, null);
+                btnInteract.SetActive(false);
+            }
         }
     }
 
@@ -275,7 +293,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
         }
         else if (photonEvent.Code == EventCodes.InstrumentUsed)
         {
-            Debug.Log("Used instrumen!");
+            Debug.Log("Used instrument!");
             //Поиск игрока, который использовал предмет
             foreach (var player in FindObjectsOfType<PlayerScript>())
             {
@@ -286,12 +304,57 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 }
             }
         }
-        
+        else if (photonEvent.Code == EventCodes.GeneratorActivate)
+        {
+            generator_activated = true; Debug.Log("Generator activated!");
+        }
+        else if (photonEvent.Code == EventCodes.HumanEscaped)
+        {
+            //Поиск игрока, который сбежал
+            foreach (var player in FindObjectsOfType<PlayerScript>())
+            {
+                if (player.view.Owner.ActorNumber == photonEvent.Sender)
+                {
+                    player.Escape();
+                    people_escaped++;
+                    THIS.check_game_status();
+
+                    return;
+                }
+            }
+        }
+        else if (photonEvent.Code == EventCodes.PlayerDied)
+        {
+            //Поиск игрока, который умер
+            foreach (var player in FindObjectsOfType<PlayerScript>())
+            {
+                if (player.view.Owner.ActorNumber == photonEvent.Sender)
+                {
+                    if (!player.isAlive)
+                        return;
+
+                    player.isAlive = false;
+
+                    if (player.playerStats.IsMonster)
+                        monsters_total--;
+                    else
+                        people_total--;
+
+
+                    player.transform.position = new Vector3(99, 999, 999);
+                    check_game_status();
+
+                    return;
+                }
+            }
+        }
+
     }
     internal static class EventCodes
     {
         internal const byte TimerReset = 0, GameStarted = 1, ItemFound = 2, PlayerAtack = 3;
-        internal const byte PlayerAtacked = 4, InstrumentUsed = 5;
+        internal const byte PlayerAtacked = 4, InstrumentUsed = 5, GeneratorActivate = 6;
+        internal const byte HumanEscaped = 7, PlayerDied = 8;
     }
 
     int playersSend = 0; //Игроки, отправившие уведомление о том, что у них остановился таймер
@@ -362,7 +425,13 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 allItems[j].transform.position = allItemsSpawnpoints[i].transform.position;      
                 allItemsSpawnpoints.RemoveAt(i);
                 j++;
-            }        
+            }
+
+            //Выбор точек спавна для генератора с карты, установка генератора на позицию
+            var allGeneratorSpawnpoints = new List<GameObject>
+                (GameObject.FindGameObjectsWithTag("GeneratorSpawnpoint"));
+            generator.transform.position = 
+                allGeneratorSpawnpoints[seed % allGeneratorSpawnpoints.Count].gameObject.transform.position;
         }
     }
 
@@ -395,6 +464,8 @@ public class EventsManager : MonoBehaviourPunCallbacks
         if (monsters_total == 0)
             endgame();
         if (people_total == 0)
+            endgame();
+        if (people_total == people_escaped)
             endgame();
     }
 

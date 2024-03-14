@@ -9,6 +9,9 @@ TagManager:
   - ItemSpawnpoint
   - btnInteract
   - EnemySpawnpoint
+  - GeneratorCheckbox
+  - GeneratorSpawnpoint
+  - LiftCheckbox
   layers:
   - Default
   - TransparentFX

@@ -151,26 +151,26 @@ public class Weapon : MonoBehaviour
 
     void knife_use()
     {
-        
+        chainsaw_use();
     }
 
-    void pistol_use() { }
+    void pistol_use() { chainsaw_use(); }
 
-    void reagents_use() { }
+    void reagents_use() { chainsaw_use(); }
 
-    void machine_gun_use() { }
+    void machine_gun_use() { chainsaw_use(); }
 
-    void flamethrower_use() { }
+    void flamethrower_use() { chainsaw_use(); }
 
-    void sprayer_use() { }
+    void sprayer_use() { chainsaw_use(); }
 
-    void plasma_cutter_use() { }
+    void plasma_cutter_use() { chainsaw_use(); }
 
-    void goo_absorber_use() { }
+    void goo_absorber_use() { chainsaw_use(); }
 
-    void bite_use() { }
+    void bite_use() { chainsaw_use(); }
 
-    void tongue_use() { }
+    void tongue_use() { chainsaw_use(); }
 
     #endregion
 }

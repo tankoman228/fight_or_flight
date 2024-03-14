@@ -33,10 +33,9 @@ public class PlayerScript : MonoBehaviour
             current_health = value;
 
             //Сюда прописать смерть игрока
-            if (current_health < 0)
+            if (current_health <= 0 && view.IsMine)
             {
-                isAlive = false;
-                EventsManager.THIS.check_game_status();
+                EventsManager.THIS.SendPhotonEvent(EventsManager.EventCodes.PlayerDied, null);
             }
         } 
     }
@@ -110,21 +109,44 @@ public class PlayerScript : MonoBehaviour
     #region Триггеры
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (playerStats.IsMonster) //Монстры не могут подбирать предметы
+        if (playerStats.IsMonster || !view.IsMine) //Монстры не могут подбирать предметы
             return;
 
-        if (view.IsMine && other.CompareTag("Item"))
+        if (other.CompareTag("Item"))
         {
             EventsManager.THIS.btnInteract.SetActive(true);
             selectedItem = other.gameObject; //Теперь можно подобрать предмет
         }
+        else if (other.CompareTag("GeneratorCheckbox") && !EventsManager.generator_activated)
+        {
+            EventsManager.THIS.btnInteract.SetActive(true);
+            EventsManager.generator_checkbox_overlapped = true;
+        }
+        else if (other.CompareTag("LiftCheckbox"))
+        {
+            EventsManager.THIS.btnInteract.SetActive(true);
+            EventsManager.lift_checkbox_overlapped = true;
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (view.IsMine && other.CompareTag("Item"))
+        if (!view.IsMine)
+            return;
+
+        if (other.CompareTag("Item"))
         {
             EventsManager.THIS.btnInteract.SetActive(false);
             selectedItem = null; //А теперь нельзя, отошли уже от него
+        }
+        else if (other.CompareTag("GeneratorCheckbox"))
+        {
+            EventsManager.generator_checkbox_overlapped = false;
+            EventsManager.THIS.btnInteract.SetActive(false);
+        }
+        else if (other.CompareTag("LiftCheckbox"))
+        {
+            EventsManager.THIS.btnInteract.SetActive(false);
+            EventsManager.lift_checkbox_overlapped = false;
         }
     }
     #endregion
@@ -243,8 +265,7 @@ public class PlayerScript : MonoBehaviour
 
     internal void Escape()
     {
-        EventsManager.people_escaped++;
-        EventsManager.THIS.check_game_status();
+        transform.position = new Vector3(999, 999, 999);
     }
 
     #endregion
