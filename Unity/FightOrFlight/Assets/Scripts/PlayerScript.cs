@@ -17,6 +17,9 @@ public class PlayerScript : MonoBehaviour
     Rigidbody2D rigidbody;
     Text textHealth;
 
+    //Из редактора
+    public GameObject graphicsMiner, graphicsGuard, graphicsEnginier, graphicsNikita, graphicsCherv, graphicsMouse, graphicsFrog, graphicsGoo;
+
     #region Поля и свйоства
 
     //Здоровье игрока. Обновляет шкалу здоровья при изменении
@@ -63,6 +66,16 @@ public class PlayerScript : MonoBehaviour
         joystick = FindFirstObjectByType<FloatingJoystick>();
         rigidbody = GetComponent<Rigidbody2D>();
         textHealth = GameObject.Find("tHealth").GetComponent<Text>();
+
+        //Прячем графику
+        graphicsNikita.SetActive(false);
+        graphicsMiner.SetActive(false);
+        graphicsGuard.SetActive(false);
+        graphicsEnginier.SetActive(true);
+        graphicsGoo.SetActive(false);
+        graphicsCherv.SetActive(false);
+        graphicsMouse.SetActive(false);
+        graphicsFrog.SetActive(false);
 
         updateForCurrentPlayerClass = new UpdateForCurrentPlayerClass(() => { });
 
@@ -137,28 +150,71 @@ public class PlayerScript : MonoBehaviour
         if (view.IsMine)
             StartCoroutine(FadeOutText(10.0f));
 
+        graphicsNikita.SetActive(false);
+        graphicsMiner.SetActive(false);
+        graphicsGuard.SetActive(false);
+        graphicsEnginier.SetActive(false);
+
+        graphicsGoo.SetActive(false);
+        graphicsCherv.SetActive(false);
+        graphicsMouse.SetActive(false);
+        graphicsFrog.SetActive(false);
+
         switch (role)
         {
             case PlayerStats.PlayerStatsType.scientist:
+                graphicsNikita.SetActive(true);
+                InventoryToolType = ItemStats.ItemTypes.first_aid_kit;
+                weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.reagents);
+
                 break;
             case PlayerStats.PlayerStatsType.miner:
+                graphicsMiner.SetActive(true);
+                InventoryToolType = ItemStats.ItemTypes.dynamite;
+                weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.pick);
+
                 break;
             case PlayerStats.PlayerStatsType.guard:
+                graphicsGuard.SetActive(true);
+                InventoryToolType = ItemStats.ItemTypes.stimulant;
+                weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.pistol);
+
                 break;
             case PlayerStats.PlayerStatsType.enginier:
+                graphicsEnginier.SetActive(true);
+                InventoryToolType = ItemStats.ItemTypes.knife;
+                weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.mine);
+
                 break;
 
             case PlayerStats.PlayerStatsType.black_goo:
+                graphicsGoo.SetActive(true);
+                InventoryToolType = ItemStats.ItemTypes.goo_imitator;
+                weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.goo_absorber);
+
                 break;
             case PlayerStats.PlayerStatsType.slither:
+                graphicsCherv.SetActive(true);
+                InventoryToolType = ItemStats.ItemTypes.walls_breaker;
+                weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.bite);
+
                 break;
             case PlayerStats.PlayerStatsType.megarat:
+                graphicsMouse.SetActive(true);
+                InventoryToolType = ItemStats.ItemTypes.jump;
+                weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.claws);
+
                 break;
             case PlayerStats.PlayerStatsType.hypnotoad:
+                graphicsFrog.SetActive(true);
+                InventoryToolType = ItemStats.ItemTypes.jump;
+                weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.tongue);
                 break;
             default:
                 break;
         }
+        InventoryTool = ItemStats.ItemsStats[InventoryToolType];
+        inventoryToolCount = InventoryTool.start_ammo;
     }
 
     //Вызывается в Update

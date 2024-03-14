@@ -24,12 +24,22 @@ public class Weapon : MonoBehaviour
             inventoryWeaponType = value.itemType;
             ammo = value.count;
 
-            initByType(value);
+            initByType(value.itemType);
             //Обработка для изменения спрайта оружия у игрока
             //...
 
 
         }
+    }
+    internal void setWeaponOnPlayerInit(ItemStats.ItemTypes itemType)
+    {
+        ItemStats itemStats = ItemStats.ItemsStats[itemType];
+
+        inventoryWeapon = itemStats;
+        inventoryWeaponType = itemType;
+        ammo = itemStats.start_ammo;
+
+        initByType(itemType);
     }
     private ItemStats inventoryWeapon = ItemStats.ItemsStats[ItemStats.ItemTypes.pick]; //Тип оружия
     private int ammo; //Осталось патронов
@@ -60,11 +70,11 @@ public class Weapon : MonoBehaviour
     /// Инициализация взятого оружия согласно характеристикам подобранного предмета
     /// </summary>
     /// <param name="type"></param>
-    void initByType(Item item)
+    void initByType(ItemStats.ItemTypes item)
     {
         Debug.Log("Init by type");
         atackDelegate = new AtackDelegate(()=>{ });
-        switch(item.itemType)
+        switch(item)
         {
             case ItemStats.ItemTypes.pick:          atackDelegate += pick_use;  break;
             case ItemStats.ItemTypes.chainsaw:      atackDelegate += chainsaw_use; break;

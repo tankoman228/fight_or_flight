@@ -12,9 +12,13 @@ public class Item : MonoBehaviour
     public int itemID = -1; //MUST BE UNIQUE FOR EACH ITEM ON MAP
     public int count = -1;
 
+    private SpriteRenderer spriteRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         itemStats = ItemStats.ItemsStats[itemType];
 
         if (count == -1)
@@ -38,6 +42,15 @@ public class Item : MonoBehaviour
             itemID = (int)(
                 itemStats.damage * itemStats.regarge_seconds * itemStats.start_ammo + 
                 transform.position.x * transform.position.y + transform.position.x + transform.position.y);
+        }
+
+        switch(itemType)
+        {
+            case ItemStats.ItemTypes.pick:
+                //spriteRenderer.sprite = ...;
+                break;
+            default:
+                break;
         }
     }
 
