@@ -36,6 +36,7 @@ public class PlayerScript : MonoBehaviour
             if (current_health <= 0 && view.IsMine)
             {
                 EventsManager.THIS.SendPhotonEvent(EventsManager.EventCodes.PlayerDied, null);
+                textHealth.text = "You are dead :(";
             }
         } 
     }
@@ -45,6 +46,7 @@ public class PlayerScript : MonoBehaviour
     internal bool isAlive = true;
     internal static GameObject selectedItem = null; //Предмет, являющийся триггером, с которым возможно вз-вие
     internal static PlayerScript THIS; //Текущий игрок
+    internal bool escaped = false;
     #endregion
 
     #region Инвентарь
@@ -266,6 +268,7 @@ public class PlayerScript : MonoBehaviour
     internal void Escape()
     {
         transform.position = new Vector3(999, 999, 999);
+        escaped = true;
     }
 
     #endregion

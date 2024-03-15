@@ -31,7 +31,10 @@ public class EventsManager : MonoBehaviourPunCallbacks
 
     //Глобальные переменные
     public static int seed = -1;
-    public static int monsters_total = 0, people_total = 0, people_escaped = 0;
+    public static int people_escaped = 0;
+
+    //Игроки в текущей сессии (инициализируется только в момент начала игры)
+    private PlayerScript[] players;
 
     #region Пользовательский Интерфейс (UI)
 
@@ -39,8 +42,6 @@ public class EventsManager : MonoBehaviourPunCallbacks
     void Start()
     {
         //Обнуление переменных
-        monsters_total = 0; 
-        people_total = 0; 
         people_escaped = 0;
         game_awaiting = false;
 
@@ -88,23 +89,23 @@ public class EventsManager : MonoBehaviourPunCallbacks
     //Кнопка взаимодействия (синяя)
     public void Onclick_btnInteract()
     {
-        if (PlayerScript.selectedItem != null)
+        if (PlayerScript.selectedItem != null) //Подбор предмета с земли
         {
             var item = PlayerScript.selectedItem.GetComponent<Item>();
             int itemID = item.itemID;
 
             SendPhotonEvent(EventCodes.ItemFound, itemID);
         }
-        if (generator_checkbox_overlapped && !generator_activated)
+        if (generator_checkbox_overlapped && !generator_activated) //Активация генератора
         {
             SendPhotonEvent(EventCodes.GeneratorActivate, null);
             btnInteract.SetActive(false);
         }
-        if (lift_checkbox_overlapped)
+        if (lift_checkbox_overlapped) //Человек сбегает
         {
             if (generator_activated)
             {
-                SendPhotonEvent(EventCodes.HumanEscaped, null);
+                SendPhotonEvent(EventCodes.HumanEscaped, null); 
                 btnInteract.SetActive(false);
             }
         }
@@ -197,12 +198,14 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 timerStartGameWaiter = float.MaxValue;
                 game_awaiting = false;
             }
+            return;
         }
         else if (photonEvent.Code == EventCodes.GameStarted) //Game started
         {
             seed = (int)photonEvent.CustomData;
             gameStartRolCall();
             PhotonNetwork.CurrentRoom.IsOpen = false;
+            return;
         }
         else if (photonEvent.Code == EventCodes.ItemFound) //Item found
         {
@@ -221,8 +224,9 @@ public class EventsManager : MonoBehaviourPunCallbacks
             }
 
             //Поиск игрока, который поднял предмет
-            foreach (var player in FindObjectsOfType<PlayerScript>())
+            foreach (var player in players)
             {
+                if (player == null) continue;
                 if (player.view.Owner.ActorNumber == photonEvent.Sender)
                 {
                     Debug.Log($"Player {photonEvent.Sender} picked {item.itemType}");
@@ -271,8 +275,9 @@ public class EventsManager : MonoBehaviourPunCallbacks
         else if (photonEvent.Code == EventCodes.PlayerAtack)
         {
             //Поиск игрока, который атаковал
-            foreach (var player in FindObjectsOfType<PlayerScript>())
+            foreach (var player in players)
             {
+                if (player == null) continue;
                 if (player.view.Owner.ActorNumber == photonEvent.Sender)
                 {
                     player.weapon.shoot();
@@ -295,8 +300,9 @@ public class EventsManager : MonoBehaviourPunCallbacks
         {
             Debug.Log("Used instrument!");
             //Поиск игрока, который использовал предмет
-            foreach (var player in FindObjectsOfType<PlayerScript>())
+            foreach (var player in players)
             {
+                if (player == null) continue;
                 if (player.view.Owner.ActorNumber == photonEvent.Sender)
                 {
                     player.UseInstrument();
@@ -311,8 +317,9 @@ public class EventsManager : MonoBehaviourPunCallbacks
         else if (photonEvent.Code == EventCodes.HumanEscaped)
         {
             //Поиск игрока, который сбежал
-            foreach (var player in FindObjectsOfType<PlayerScript>())
+            foreach (var player in players)
             {
+                if (player == null) continue;
                 if (player.view.Owner.ActorNumber == photonEvent.Sender)
                 {
                     player.Escape();
@@ -326,28 +333,23 @@ public class EventsManager : MonoBehaviourPunCallbacks
         else if (photonEvent.Code == EventCodes.PlayerDied)
         {
             //Поиск игрока, который умер
-            foreach (var player in FindObjectsOfType<PlayerScript>())
+            foreach (var player in players)
             {
+                if (player == null) continue;
                 if (player.view.Owner.ActorNumber == photonEvent.Sender)
                 {
+                    check_game_status();
                     if (!player.isAlive)
                         return;
 
                     player.isAlive = false;
-
-                    if (player.playerStats.IsMonster)
-                        monsters_total--;
-                    else
-                        people_total--;
-
-
                     player.transform.position = new Vector3(99, 999, 999);
-                    check_game_status();
 
                     return;
                 }
             }
         }
+        Debug.LogWarning("No return statment used in OnEvent, maybe player or object not found");
 
     }
     internal static class EventCodes
@@ -393,21 +395,21 @@ public class EventsManager : MonoBehaviourPunCallbacks
             //Выбор ролей игрокам, инициализация игроков, выбор стартовых позиций
             int i = 0;
             int position_id_start = ((int)seed / 29 - 300) % allSpawnpoints.Length;
+            players = new PlayerScript[allPlayers.Length];
             foreach (var player in allPlayers)
             {
                 if (i % 2 == 0)
                 {
                     player.InitMatchStarted(roles[i],
                         allSpawnpoints[position_id_start].transform.position);
-                    people_total++;
                 }
                 else
                 {
                     player.InitMatchStarted(roles[i],
                         allEnemySpawnpoints[((seed / 22 - 255) + i) %
                         allEnemySpawnpoints.Length].transform.position);
-                    monsters_total++;
                 }
+                players[i] = player;
                 i++;
             }
 
@@ -446,54 +448,75 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 if (!player.isAlive)
                     return;
 
-                if (player.playerStats.IsMonster)
-                    monsters_total--;
-                else
-                    people_total--;
+                check_game_status();
 
                 return;
             }
         }
     }
 
+    private int monsters_alive = 0, humans_notescaped = 0;
     /// <summary>
     /// Вызывается для проверки, закончена ли игра и если да, вызывается метод endgame
     /// </summary>
     internal void check_game_status()
     {
-        if (monsters_total == 0)
-            endgame();
-        if (people_total == 0)
-            endgame();
-        if (people_total == people_escaped)
-            endgame();
+        humans_notescaped = 0;
+        monsters_alive = 0;
+
+        foreach (var player in players)
+        {
+            if (player != null && player.isAlive && !player.escaped)
+            {
+                if (player.playerStats.IsMonster)
+                    monsters_alive++;
+                else
+                    humans_notescaped++;
+            }
+        }
+
+        if (humans_notescaped > 0 && monsters_alive != 0)
+            return;
+
+        if (monsters_alive == 0)
+            people_escaped += humans_notescaped; humans_notescaped = 0;
+
+        endgame((float)monsters_alive / ((float)people_escaped + 0.0001f));
     }
 
     /// <summary>
     /// Должно быть вызвано по окончанию игры
     /// </summary>
-    private void endgame()
+    private void endgame(float score)
     {
         textEndgame.SetActive(true);
         string text;
         
-        float score = (float)people_total / monsters_total;
 
-        if (score >= 0.4)
+        if (score <= 1.5)
         {
-            text = $"Humans win. {monsters_total} monsters stayed alive. Escaped humans: {people_total}";
+            text = $"Humans win. {monsters_alive} monsters stayed alive. Escaped humans: {people_escaped}";
             textEndgame.GetComponent<Text>().color = Color.green;
         }
-        else if (score <= 0.2)
+        else if (score > 4.0)
         {
-            text = $"Monsters win, their number is {monsters_total}. And {people_total} humans escaped";
+            text = $"Monsters win, their number is {monsters_alive}. And {people_escaped} humans escaped";
             textEndgame.GetComponent<Text>().color = Color.red;
         }
         else
         {
-            text = $"Draw. {people_total} humans escaped, but {monsters_total} monsters stayed alive";
+            text = $"Draw. {people_escaped} humans escaped, but {monsters_alive} monsters stayed alive";
         }
         textEndgame.GetComponent<Text>().text = text;
+
+        StartCoroutine(ExitRoomAfterDelay(5f));
+    }
+    private IEnumerator<WaitForSeconds> ExitRoomAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Выход из комнаты Photon
+        PhotonNetwork.LeaveRoom();
     }
 
     #endregion
