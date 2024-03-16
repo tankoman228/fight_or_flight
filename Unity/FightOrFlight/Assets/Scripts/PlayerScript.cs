@@ -19,6 +19,7 @@ public class PlayerScript : MonoBehaviour
 
     //Из редактора
     public GameObject graphicsMiner, graphicsGuard, graphicsEnginier, graphicsNikita, graphicsCherv, graphicsMouse, graphicsFrog, graphicsGoo;
+    public GameObject graphics;
 
     #region Поля и свйоства
 
@@ -28,9 +29,12 @@ public class PlayerScript : MonoBehaviour
         get { return current_health; } 
         set {
             if (view.IsMine)
-                textHealth.text = ((int)value).ToString();  
-            
-            current_health = value;
+                textHealth.text = ((int)value).ToString();
+
+            if (value <= playerStats.max_health)
+                current_health = value;
+            else
+                current_health = playerStats.max_health;
 
             //Сюда прописать смерть игрока
             if (current_health <= 0 && view.IsMine)
@@ -47,15 +51,28 @@ public class PlayerScript : MonoBehaviour
     internal static GameObject selectedItem = null; //Предмет, являющийся триггером, с которым возможно вз-вие
     internal static PlayerScript THIS; //Текущий игрок
     internal bool escaped = false;
+
+    //Значения, изменяющиеся в ходе игры (в результате использования предметов)
+    internal float speedMultiplyer = 1, resistanceMultiplyer = 1;
+    internal bool armorUsedFlag = false;
+
     #endregion
 
     #region Инвентарь
 
     public Weapon weapon; //Скрипт оружия, которое держит в руках игрок
     internal ItemStats InventoryTool { get; set; }  //Ячейка с инструментом
-    internal ItemStats.ItemTypes InventoryToolType { get; set; }
+    public ItemStats.ItemTypes InventoryToolType { get; set; }
 
-    internal int inventoryToolCount = 0; 
+    public int InventoryToolCount
+    {
+        get { return inventoryToolCount; }
+        set { 
+            inventoryToolCount = value; 
+            EventsManager.THIS.textCountItem.text = value.ToString();
+        }
+    }
+    private int inventoryToolCount = 0;
     #endregion
 
     #region Методы Юнити Start() Update() OnTrigger()
@@ -97,7 +114,7 @@ public class PlayerScript : MonoBehaviour
             return;
 
         var v = new Vector2(joystick.Horizontal, joystick.Vertical);
-        rigidbody.velocity = v * playerStats.speed;
+        rigidbody.velocity = v * playerStats.speed * speedMultiplyer;
 
         if (v != Vector2.zero)
         {
@@ -238,12 +255,28 @@ public class PlayerScript : MonoBehaviour
                 break;
         }
         InventoryTool = ItemStats.ItemsStats[InventoryToolType];
-        inventoryToolCount = InventoryTool.start_ammo;
+        InventoryToolCount = InventoryTool.start_ammo;
+
+        if (playerStats.IsMonster)
+            updateForCurrentPlayerClass += regenerate_monsters;
     }
 
     //Вызывается в Update
     delegate void UpdateForCurrentPlayerClass();
     UpdateForCurrentPlayerClass updateForCurrentPlayerClass;
+
+    //Вызовется у каждого монстра
+    private void regenerate_monsters()
+    {
+        if (current_health < playerStats.max_health)
+        {
+            current_health += Time.deltaTime;
+        }
+        if (speedMultiplyer < 1)
+        {
+            speedMultiplyer += Time.deltaTime / 10;
+        }
+    }
 
 
     /// <summary>
@@ -253,13 +286,74 @@ public class PlayerScript : MonoBehaviour
     {
         Debug.Log($"used {InventoryToolType}");
 
-        inventoryToolCount--;
+        InventoryToolCount--;
         Current_health += InventoryTool.health_add_after_used;
 
         //ППЛГОНД
 
         switch (InventoryToolType)
         {
+            case ItemStats.ItemTypes.mine:
+                break;
+            case ItemStats.ItemTypes.armor:
+                //Надеваем/снимаем бронник
+                armorUsedFlag = !armorUsedFlag;
+                if (armorUsedFlag)
+                {
+                    resistanceMultiplyer *= 0.5f;
+                    speedMultiplyer /= 1.2f;
+                }
+                else
+                {
+                    resistanceMultiplyer /= 0.5f;
+                    speedMultiplyer *= 1.2f;
+                }
+                break;
+            case ItemStats.ItemTypes.stimulant:
+                speedMultiplyer *= 1.3f;
+                resistanceMultiplyer *= 0.9f;
+                break;
+            case ItemStats.ItemTypes.didgeridoo:
+                foreach (var player in EventsManager.THIS.players)
+                {
+                    if (player.playerStats.IsMonster)
+                        player.speedMultiplyer *= -1;
+                    else
+                    {
+                        if (!view.IsMine)
+                            player.Current_health += 4;
+                    }
+                }
+                break;
+            case ItemStats.ItemTypes.invisiblity_hat:
+
+                if (resistanceMultiplyer < 1000)
+                {
+                    resistanceMultiplyer += 9999; //Теперь игрока можно ваншотнуть
+                    speedMultiplyer *= 0.05f; //А ещё он теперь черепаха
+                    textHealth.text = "[You are invisible]";
+
+                    graphics.SetActive(false);
+                }
+                else
+                {
+                    resistanceMultiplyer -= 9999; 
+                    speedMultiplyer /= 0.05f;
+                    textHealth.text = ((int)current_health).ToString();
+
+                    graphics.SetActive(true);
+                }
+                break;
+            case ItemStats.ItemTypes.goo_imitator:
+                break;
+            case ItemStats.ItemTypes.walls_breaker:
+                break;
+            case ItemStats.ItemTypes.jump:
+
+                if (view.IsMine)
+                    rigidbody.velocity *= 50;
+                break;
+
             default:
                 break;
         }
@@ -269,6 +363,8 @@ public class PlayerScript : MonoBehaviour
     {
         transform.position = new Vector3(999, 999, 999);
         escaped = true;
+        if (view.IsMine)
+            textHealth.text = "Successfully escaped :)";
     }
 
     #endregion

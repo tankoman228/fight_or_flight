@@ -19,7 +19,7 @@ namespace Assets.Scripts
         /// <param name="damage">размер урона</param>
         public static void apply_damage_to_player(PlayerScript player, DamageManager.DamageTypes damage_type, float damage_)
         {
-            player.Current_health -= damage_ * player.playerStats.damageResistance[damage_type];
+            player.Current_health -= damage_ * player.playerStats.damageResistance[damage_type] * EventsManager.currentPlayer.resistanceMultiplyer;
             EventsManager.THIS.SendPhotonEvent(EventsManager.EventCodes.PlayerAtacked,
                 SerializeDamageMessage(new DamageMessage
                 {
@@ -32,7 +32,7 @@ namespace Assets.Scripts
         public static void recieve_damage(DamageManager.DamageTypes damage_type, float damage_)
         {
             EventsManager.currentPlayer.Current_health -= 
-                damage_ * EventsManager.currentPlayer.playerStats.damageResistance[damage_type];
+                damage_ * EventsManager.currentPlayer.playerStats.damageResistance[damage_type] * EventsManager.currentPlayer.resistanceMultiplyer;
         }
 
         public enum DamageTypes

@@ -46,7 +46,10 @@ public class Weapon : MonoBehaviour
 
     internal ItemStats.ItemTypes inventoryWeaponType;
     public ItemStats InventoryWeaponStats { get { return inventoryWeapon; } }
-    public int Ammo { get { return ammo; } }
+    public int Ammo { 
+        set { ammo = value; EventsManager.THIS.textCountWeapon.text = value.ToString(); }
+        get { return ammo; } 
+    }
 
     public bool canAtack { get { return TimerCanAtackOnlyAfterZero < 0; } }
     private float TimerCanAtackOnlyAfterZero = 0;

@@ -32,9 +32,10 @@ public class EventsManager : MonoBehaviourPunCallbacks
     //Глобальные переменные
     public static int seed = -1;
     public static int people_escaped = 0;
+    public Text textCountWeapon, textCountItem;
 
     //Игроки в текущей сессии (инициализируется только в момент начала игры)
-    private PlayerScript[] players;
+    internal PlayerScript[] players;
 
     #region Пользовательский Интерфейс (UI)
 
@@ -121,7 +122,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
     //Кнопка использования предмета (зелёная)
     public void Onclick_btnUse()
     {
-        if (currentPlayer.inventoryToolCount > 0)    
+        if (currentPlayer.InventoryToolCount > 0)    
             SendPhotonEvent(EventCodes.InstrumentUsed, null);   
     }
 
@@ -229,11 +230,11 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 if (player == null) continue;
                 if (player.view.Owner.ActorNumber == photonEvent.Sender)
                 {
-                    Debug.Log($"Player {photonEvent.Sender} picked {item.itemType}");
-
-
+                    //Запихиваем игроку в инвентарь новый предмет, старый оставляем на карте
                     if (item.itemStats.isWeapon)
                     {
+                        Debug.Log($"Player {photonEvent.Sender} picked weapon {item.itemType}");
+
                         var iss = player.weapon.InventoryWeaponStats;
                         var c = player.weapon.Ammo;
                         var t = player.weapon.inventoryWeaponType;
@@ -248,17 +249,28 @@ public class EventsManager : MonoBehaviourPunCallbacks
                     }
                     else
                     {
+                        Debug.Log($"Player {photonEvent.Sender} picked item {item.itemType}");
+
+                        //Запихиваем игроку в инвентарь новый предмет, старый оставляем на карте
                         var iss = player.InventoryTool;
-                        var c = player.inventoryToolCount;
+                        var c = player.InventoryToolCount;
                         var t = player.InventoryToolType;
 
                         player.InventoryTool = item.itemStats;
                         player.InventoryToolType = item.itemType;
-                        player.inventoryToolCount = item.count;
+                        player.InventoryToolCount = item.count;
 
                         item.itemStats = iss;
                         item.count = c;
                         item.itemType = t;
+
+                        //Для подбора нового предмета нужно снять бронник
+                        if (player.armorUsedFlag)
+                        {
+                            player.armorUsedFlag = false;
+                            player.resistanceMultiplyer /= 0.5f;
+                            player.speedMultiplyer *= 1.2f;
+                        }
 
                         item.restart();
                     }

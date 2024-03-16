@@ -159,7 +159,7 @@ namespace Assets.Scripts
                 health_add_after_used = -20
             } },
             {ItemTypes.didgeridoo, new ItemStats {
-                health_add_after_used = -4,
+                health_add_after_used = -16,
                 start_ammo = int.MaxValue
             } },
             {ItemTypes.invisiblity_hat, new ItemStats {

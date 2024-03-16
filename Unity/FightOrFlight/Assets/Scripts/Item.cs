@@ -23,6 +23,8 @@ public class Item : MonoBehaviour
 
         if (count == -1)
             count = itemStats.start_ammo;
+        if (count == 0)
+            Destroy(this.gameObject);
 
         if (itemStats == null || (!itemStats.isWeapon && count == 0))
         {
