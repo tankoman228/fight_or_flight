@@ -126,8 +126,8 @@ TextureImporter:
       name: Grey_Floor
       rect:
         serializedVersion: 2
-        x: 0
-        y: 960
+        x: 9
+        y: 953
         width: 64
         height: 64
       alignment: 0
@@ -795,27 +795,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Objects_55
-      rect:
-        serializedVersion: 2
-        x: 327
-        y: 719
-        width: 84
-        height: 18
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 977c42c8cefab2d4e8760fa14db2d40f
-      internalID: -778046165
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Elevator_Closed
       rect:
         serializedVersion: 2
@@ -900,27 +879,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Objects_60
-      rect:
-        serializedVersion: 2
-        x: 327
-        y: 695
-        width: 84
-        height: 18
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 74c9750577ad4fd41ac76accaec42f70
-      internalID: -1917699757
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Door
       rect:
         serializedVersion: 2
@@ -937,27 +895,6 @@ TextureImporter:
       bones: []
       spriteID: 6344871e9d7b6d34da51925c606df817
       internalID: 653550104
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Objects_62
-      rect:
-        serializedVersion: 2
-        x: 327
-        y: 676
-        width: 78
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9fada20184f5a0c418e1d3da496fa8c5
-      internalID: 396162684
       vertices: []
       indices: 
       edges: []
