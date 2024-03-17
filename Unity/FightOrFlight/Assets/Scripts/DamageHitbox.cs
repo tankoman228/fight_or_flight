@@ -13,6 +13,8 @@ public class DamageHitbox : MonoBehaviour
     public float DamageSize;
     public GameObject instantinatedBy; 
     public bool IsMonsterAtacked;
+    public bool IsBullet = false;
+    public float bulletSpeed = 0;
 
     /// <summary>
     /// Инициализация после добавления хитбокса на сцену
@@ -31,6 +33,29 @@ public class DamageHitbox : MonoBehaviour
         this.IsMonsterAtacked = monsterUnderAtack;
         
         Destroy(this.gameObject, lifetime);
+    }
+
+    /// <summary>
+    ///  Инициализация после добавления хитбокса на сцену как снаряда,
+    ///  вызывать только совместно с обычным init
+    /// </summary>
+    /// <param name="speed">Скорость снаряда</param>
+    internal void init_as_bullet(float speed)
+    {
+        Vector3 direction = instantinatedBy.transform.right;
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        transform.rotation = rotation;
+        IsBullet = true;
+        bulletSpeed = speed;
+    }
+
+    /// <summary>
+    /// Движение снаряда
+    /// </summary>
+    private void Update()
+    {
+        if (IsBullet)
+            transform.Translate(instantinatedBy.transform.right * bulletSpeed * Time.deltaTime);
     }
 
     //Нанесение урона игроку из противоположной команды

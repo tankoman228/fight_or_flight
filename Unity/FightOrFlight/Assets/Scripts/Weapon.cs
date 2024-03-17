@@ -102,8 +102,8 @@ public class Weapon : MonoBehaviour
         TimerCanAtackOnlyAfterZero = inventoryWeapon.regarge_seconds;
         Debug.Log("ATACK!");
 
-        if (player.weapon.ammo > 0)
-            ammo--;
+        if (ammo > 0)
+            Ammo--;
         else
         {
             //Ќет патрон?
@@ -154,26 +154,190 @@ public class Weapon : MonoBehaviour
 
     void knife_use()
     {
-        chainsaw_use();
+        var hitbox = Instantiate(
+                DamageHitboxPrefub,
+                this.transform
+                ).GetComponent<DamageHitbox>();
+        hitbox.init(
+            inventoryWeapon.damage_type,
+            inventoryWeapon.damage,
+            player.gameObject,
+            !player.playerStats.IsMonster);
     }
 
-    void pistol_use() { chainsaw_use(); }
+    void pistol_use() {
+        var hitbox = Instantiate(
+                DamageHitboxPrefub,
+                this.transform
+                ).GetComponent<DamageHitbox>();
+        hitbox.transform.localScale = new Vector3(0.5f, 0.1f);
+        hitbox.init(
+            inventoryWeapon.damage_type,
+            inventoryWeapon.damage,
+            player.gameObject,
+            !player.playerStats.IsMonster,
+            0.2f);
+        hitbox.init_as_bullet(41.3f);
+    }
 
-    void reagents_use() { chainsaw_use(); }
+    void reagents_use() {
+        var hitbox = Instantiate(
+            DamageHitboxPrefub,
+            this.transform
+            ).GetComponent<DamageHitbox>();
+        hitbox.transform.localScale = new Vector3(0.7f, 0.7f);
+        hitbox.init(
+            inventoryWeapon.damage_type,
+            inventoryWeapon.damage,
+            player.gameObject,
+            !player.playerStats.IsMonster,
+            0.3f);
+        hitbox.init_as_bullet(31.3f);
+    }
 
-    void machine_gun_use() { chainsaw_use(); }
+    void machine_gun_use() {
+        for (int i = 0; i < 5 && ammo > 0; i++, Ammo--)
+        {
+            float spreadAngle = Random.Range(-25f, 25f); // √енерируем случайный угол разброса
+            Quaternion spreadRotation = Quaternion.Euler(0f, 0f, spreadAngle); // —оздаем кватернион поворота дл€ угла разброса
 
-    void flamethrower_use() { chainsaw_use(); }
+            var hitbox = Instantiate(
+                DamageHitboxPrefub,
+                this.transform
+            ).GetComponent<DamageHitbox>();
 
-    void sprayer_use() { chainsaw_use(); }
+            hitbox.transform.localScale = new Vector3(0.5f, 0.1f);
 
-    void plasma_cutter_use() { chainsaw_use(); }
+            // ѕримен€ем разброс к направлению снар€да
+            Vector3 bulletDirection = spreadRotation * Vector3.up;
 
-    void goo_absorber_use() { chainsaw_use(); }
+            hitbox.init(
+                inventoryWeapon.damage_type,
+                inventoryWeapon.damage,
+                player.gameObject,
+                !player.playerStats.IsMonster,
+                0.4f);
+            hitbox.init_as_bullet(51.3f);
 
-    void bite_use() { chainsaw_use(); }
+            hitbox.transform.up = bulletDirection; // ”станавливаем направление снар€да с учетом разброса
+        }
+    }
 
-    void tongue_use() { chainsaw_use(); }
+    void flamethrower_use() {
+
+        for (int i = 0; i < 10; i++)
+        {
+            float spreadAngle = Random.Range(-13f, 13f); // √енерируем случайный угол разброса от -10 до 10 градусов
+            Quaternion spreadRotation = Quaternion.Euler(0f, 0f, spreadAngle); // —оздаем кватернион поворота дл€ угла разброса
+
+            var hitbox = Instantiate(
+                DamageHitboxPrefub,
+                this.transform
+            ).GetComponent<DamageHitbox>();
+
+            hitbox.transform.localScale = new Vector3(0.5f, 0.1f);
+
+            // ѕримен€ем разброс к направлению снар€да
+            Vector3 bulletDirection = spreadRotation * Vector3.up;
+
+            hitbox.init(
+                inventoryWeapon.damage_type,
+                inventoryWeapon.damage,
+                player.gameObject,
+                !player.playerStats.IsMonster,
+                0.5f);
+            hitbox.init_as_bullet(18.3f);
+
+            hitbox.transform.up = bulletDirection; // ”станавливаем направление снар€да с учетом разброса
+        }
+    }
+
+    void sprayer_use() {
+        for (int i = 0; i < 10; i++)
+        {
+            float spreadAngle = Random.Range(-13f, 13f); // √енерируем случайный угол разброса от -10 до 10 градусов
+            Quaternion spreadRotation = Quaternion.Euler(0f, 0f, spreadAngle); // —оздаем кватернион поворота дл€ угла разброса
+
+            var hitbox = Instantiate(
+                DamageHitboxPrefub,
+                this.transform
+            ).GetComponent<DamageHitbox>();
+
+            hitbox.transform.localScale = new Vector3(0.5f, 0.1f);
+
+            // ѕримен€ем разброс к направлению снар€да
+            Vector3 bulletDirection = spreadRotation * Vector3.up;
+
+            hitbox.init(
+                inventoryWeapon.damage_type,
+                inventoryWeapon.damage,
+                player.gameObject,
+                !player.playerStats.IsMonster,
+                0.5f);
+            hitbox.init_as_bullet(8.3f);
+
+            hitbox.transform.up = bulletDirection; // ”станавливаем направление снар€да с учетом разброса
+        }
+    }
+
+    void plasma_cutter_use() {
+        var hitbox = Instantiate(
+        DamageHitboxPrefub,
+        this.transform
+        ).GetComponent<DamageHitbox>();
+        hitbox.transform.localScale = new Vector3(0.5f, 0.5f);
+        hitbox.init(
+            inventoryWeapon.damage_type,
+            inventoryWeapon.damage,
+            player.gameObject,
+            !player.playerStats.IsMonster,
+            0.2f);
+        hitbox.init_as_bullet(49.3f);
+    }
+
+    void goo_absorber_use() {
+        var hitbox = Instantiate(
+        DamageHitboxPrefub,
+        this.transform
+        ).GetComponent<DamageHitbox>();
+
+        hitbox.transform.localScale = new Vector3(2f, 2f);
+        hitbox.init(
+            inventoryWeapon.damage_type,
+            inventoryWeapon.damage,
+            player.gameObject,
+            !player.playerStats.IsMonster,
+            0.2f);
+    }
+
+    void bite_use() {
+        var hitbox = Instantiate(
+        DamageHitboxPrefub,
+        this.transform
+    ).GetComponent<DamageHitbox>();
+
+        hitbox.init(
+            inventoryWeapon.damage_type,
+            inventoryWeapon.damage,
+            player.gameObject,
+            !player.playerStats.IsMonster,
+            0.3f);
+    }
+
+    void tongue_use() {
+        var hitbox = Instantiate(
+        DamageHitboxPrefub,
+        this.transform
+        ).GetComponent<DamageHitbox>();
+
+        hitbox.transform.localScale = new Vector3(4f, 0.2f);
+        hitbox.init(
+            inventoryWeapon.damage_type,
+            inventoryWeapon.damage,
+            player.gameObject,
+            !player.playerStats.IsMonster,
+            0.2f);
+    }
 
     #endregion
 }

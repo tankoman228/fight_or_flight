@@ -112,21 +112,21 @@ namespace Assets.Scripts
             } },
             {ItemTypes.machine_gun, new ItemStats {
                 start_ammo = 100,
-                damage = 55,
+                damage = 5,
                 isWeapon = true,
                 damage_type = DamageManager.DamageTypes.firearms,
                 regarge_seconds = 0.2f
             } },
             {ItemTypes.flamethrower, new ItemStats {
                 start_ammo = 25,
-                damage = 25,
+                damage = 5,
                 isWeapon = true,
                 damage_type = DamageManager.DamageTypes.thermal,
                 regarge_seconds = 0.2f
             } },
             {ItemTypes.sprayer, new ItemStats {
                 start_ammo = 25,
-                damage = 25,
+                damage = 5,
                 isWeapon = true,
                 damage_type = DamageManager.DamageTypes.chemical,
                 regarge_seconds = 0.2f
@@ -176,13 +176,13 @@ namespace Assets.Scripts
                 start_ammo = int.MaxValue,
                 isWeapon = true,
                 damage = 40,
-                regarge_seconds = 1.3f
+                regarge_seconds = 0.3f
             } },
             {ItemTypes.tongue, new ItemStats {
                 start_ammo = int.MaxValue,
                 isWeapon = true,
-                damage = 30,
-                regarge_seconds = 2.1f,
+                damage = 10,
+                regarge_seconds = 0.4f,
                 damage_type = DamageManager.DamageTypes.firearms
             } },
             {ItemTypes.goo_imitator, new ItemStats {
