@@ -62,7 +62,13 @@ public class PlayerScript : MonoBehaviour
 
     public Weapon weapon; //Скрипт оружия, которое держит в руках игрок
     internal ItemStats InventoryTool { get; set; }  //Ячейка с инструментом
-    public ItemStats.ItemTypes InventoryToolType { get; set; }
+    public ItemStats.ItemTypes InventoryToolType { get { return inventoryToolType; } set
+        {
+            inventoryToolType = value;
+            if (view.IsMine)
+                TextureLoadingManager.loadSprite(value, EventsManager.THIS.imageInv1);
+        }}
+    private ItemStats.ItemTypes inventoryToolType;
 
     public int InventoryToolCount
     {
@@ -254,7 +260,7 @@ public class PlayerScript : MonoBehaviour
             default:
                 break;
         }
-        InventoryTool = ItemStats.ItemsStats[InventoryToolType];
+        InventoryTool = ItemStats.ItemsStats[inventoryToolType];
         InventoryToolCount = InventoryTool.start_ammo;
 
         if (playerStats.IsMonster)
@@ -284,14 +290,14 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     internal void UseInstrument()
     {
-        Debug.Log($"used {InventoryToolType}");
+        Debug.Log($"used {inventoryToolType}");
 
         InventoryToolCount--;
         Current_health += InventoryTool.health_add_after_used;
 
         //ППЛГОНД
 
-        switch (InventoryToolType)
+        switch (inventoryToolType)
         {
             case ItemStats.ItemTypes.mine:
                 break;

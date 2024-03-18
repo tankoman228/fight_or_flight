@@ -1,5 +1,6 @@
 using Assets.Scripts;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Объект, находится в префабе игрока, отвечает за оружие, атаку игрока других игроков и анимации
@@ -23,12 +24,13 @@ public class Weapon : MonoBehaviour
             inventoryWeapon = value.itemStats;
             inventoryWeaponType = value.itemType;
             ammo = value.count;
+            if (player.view.IsMine) EventsManager.THIS.textCountWeapon.text = ammo.ToString();
 
             initByType(value.itemType);
-            //Обработка для изменения спрайта оружия у игрока
-            //...
 
-
+            //Обработка для изменения спрайта оружия у игрока (инвентарь)
+            if (player.view.IsMine)
+                TextureLoadingManager.loadSprite(value.itemType, EventsManager.THIS.imageInv2);
         }
     }
     internal void setWeaponOnPlayerInit(ItemStats.ItemTypes itemType)
@@ -47,7 +49,7 @@ public class Weapon : MonoBehaviour
     internal ItemStats.ItemTypes inventoryWeaponType;
     public ItemStats InventoryWeaponStats { get { return inventoryWeapon; } }
     public int Ammo { 
-        set { ammo = value; EventsManager.THIS.textCountWeapon.text = value.ToString(); }
+        set { ammo = value; if (player.view.IsMine) EventsManager.THIS.textCountWeapon.text = value.ToString(); }
         get { return ammo; } 
     }
 
@@ -91,6 +93,11 @@ public class Weapon : MonoBehaviour
             case ItemStats.ItemTypes.goo_absorber:  atackDelegate += goo_absorber_use; break;
             case ItemStats.ItemTypes.bite:          atackDelegate += bite_use; break;
             case ItemStats.ItemTypes.tongue:        atackDelegate += tongue_use; break;
+        }
+
+        if (player.view.IsMine)
+        {
+            TextureLoadingManager.loadSprite(inventoryWeaponType, EventsManager.THIS.imageInv2);
         }
     }
 
