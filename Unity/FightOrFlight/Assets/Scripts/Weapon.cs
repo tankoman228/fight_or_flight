@@ -183,8 +183,8 @@ public class Weapon : MonoBehaviour
             inventoryWeapon.damage,
             player.gameObject,
             !player.playerStats.IsMonster,
-            0.2f);
-        hitbox.init_as_bullet(41.3f);
+            0.4f);
+        hitbox.init_as_bullet(21.3f);
     }
 
     void reagents_use() {

@@ -282,6 +282,14 @@ public class PlayerScript : MonoBehaviour
         {
             speedMultiplyer += Time.deltaTime / 10;
         }
+        else if (speedMultiplyer > 1)
+        {
+            speedMultiplyer -= Time.deltaTime * 10;
+            if (speedMultiplyer < 1)
+            {
+                speedMultiplyer = 1;
+            }
+        }
     }
 
 
@@ -337,7 +345,8 @@ public class PlayerScript : MonoBehaviour
                 {
                     resistanceMultiplyer += 9999; //Теперь игрока можно ваншотнуть
                     speedMultiplyer *= 0.05f; //А ещё он теперь черепаха
-                    textHealth.text = "[You are invisible]";
+                    if (view.IsMine)
+                        textHealth.text = "[You are invisible]";
 
                     graphics.SetActive(false);
                 }
@@ -345,7 +354,8 @@ public class PlayerScript : MonoBehaviour
                 {
                     resistanceMultiplyer -= 9999; 
                     speedMultiplyer /= 0.05f;
-                    textHealth.text = ((int)current_health).ToString();
+                    if (view.IsMine)
+                        textHealth.text = ((int)current_health).ToString();
 
                     graphics.SetActive(true);
                 }
@@ -357,7 +367,7 @@ public class PlayerScript : MonoBehaviour
             case ItemStats.ItemTypes.jump:
 
                 if (view.IsMine)
-                    rigidbody.velocity *= 50;
+                    speedMultiplyer = 10;
                 break;
 
             default:

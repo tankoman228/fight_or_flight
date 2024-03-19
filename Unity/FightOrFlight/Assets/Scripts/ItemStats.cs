@@ -181,8 +181,8 @@ namespace Assets.Scripts
             {ItemTypes.tongue, new ItemStats {
                 start_ammo = int.MaxValue,
                 isWeapon = true,
-                damage = 10,
-                regarge_seconds = 0.4f,
+                damage = 40,
+                regarge_seconds = 0.3f,
                 damage_type = DamageManager.DamageTypes.firearms
             } },
             {ItemTypes.goo_imitator, new ItemStats {

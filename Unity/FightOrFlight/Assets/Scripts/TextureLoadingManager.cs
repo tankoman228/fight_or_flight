@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Загружает текстуры из ресурсов, помогает доставать их из полученного кэша, а не ручками
+/// </summary>
 public static class TextureLoadingManager {
 
     public static Sprite[] spritesObjects;
@@ -75,7 +78,7 @@ public static class TextureLoadingManager {
         }
     }
 
-    public static void loadSprite(string spriteName, object image)
+    private static void loadSprite(string spriteName, object image)
     {
         Sprite desiredSprite = null;
         foreach (Sprite sprite in spritesObjects)

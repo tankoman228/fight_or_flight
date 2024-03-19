@@ -383,6 +383,8 @@ public class EventsManager : MonoBehaviourPunCallbacks
         playersSend++;
         if (playersSend >= PhotonNetwork.CurrentRoom.Players.Count)
         {
+            generator_activated = false;
+            people_escaped = 0;
             //Инициализация карты согласно выбранному ключу seed
 
 
