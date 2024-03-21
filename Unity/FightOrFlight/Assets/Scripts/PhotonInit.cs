@@ -14,6 +14,7 @@ public class PhotonInit : MonoBehaviourPunCallbacks
     {
         Debug.Log("Starting Loading");
         PhotonNetwork.OfflineMode = false;
+        //PhotonNetwork.ConnectToRegion("ru");
         PhotonNetwork.ConnectUsingSettings();
     }
 

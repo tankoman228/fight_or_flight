@@ -41,6 +41,19 @@ public class MenuButtonsOnclick : MonoBehaviourPunCallbacks
         TryJoinOrCreateRoom(); //Запуск попыток подключения
     }
 
+    public void createClicked()
+    {
+        Debug.Log("btnOnclick");
+        roomNumber = int.MaxValue;
+        PhotonNetwork.JoinOrCreateRoom(inputField.text, roomOptions, TypedLobby.Default, null);
+    }
+    public void joinClicked()
+    {
+        Debug.Log("btnOnclick");
+        roomNumber = int.MaxValue;
+        PhotonNetwork.JoinRoom(inputField.text, null);
+    }
+
 
     #region MatchMaking
 

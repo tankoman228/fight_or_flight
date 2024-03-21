@@ -433,7 +433,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 (GameObject.FindGameObjectsWithTag("ItemSpawnpoint"));
             System.Random rand = new System.Random(seed);
             int j = 0;
-            while(j < allItems.Length) 
+            while(j < allItems.Length && allItemsSpawnpoints.Count > 0) 
             {
                 //Пока список предметов не опустеет, кидаем на рандомную позицию,
                 //Вычёркиваем из списка возможных использованную позицию
