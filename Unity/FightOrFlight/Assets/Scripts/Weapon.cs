@@ -174,32 +174,46 @@ public class Weapon : MonoBehaviour
 
     void pistol_use() {
         var hitbox = Instantiate(
-                DamageHitboxPrefub,
-                this.transform
-                ).GetComponent<DamageHitbox>();
+                        DamageHitboxPrefub,
+                        this.transform
+                    ).GetComponent<DamageHitbox>();
+
         hitbox.transform.localScale = new Vector3(0.5f, 0.1f);
+
+        // ѕримен€ем разброс к направлению снар€да
+        Vector3 bulletDirection = Vector3.up;
+
         hitbox.init(
             inventoryWeapon.damage_type,
             inventoryWeapon.damage,
             player.gameObject,
             !player.playerStats.IsMonster,
             0.4f);
-        hitbox.init_as_bullet(21.3f);
+        hitbox.init_as_bullet(41.3f);
+
+        hitbox.transform.up = bulletDirection;
     }
 
     void reagents_use() {
         var hitbox = Instantiate(
-            DamageHitboxPrefub,
-            this.transform
-            ).GetComponent<DamageHitbox>();
-        hitbox.transform.localScale = new Vector3(0.7f, 0.7f);
+                        DamageHitboxPrefub,
+                        this.transform
+                    ).GetComponent<DamageHitbox>();
+
+        hitbox.transform.localScale = new Vector3(0.5f, 0.1f);
+
+        // ѕримен€ем разброс к направлению снар€да
+        Vector3 bulletDirection = Vector3.up;
+
         hitbox.init(
             inventoryWeapon.damage_type,
             inventoryWeapon.damage,
             player.gameObject,
             !player.playerStats.IsMonster,
-            0.3f);
+            0.8f);
         hitbox.init_as_bullet(31.3f);
+
+        hitbox.transform.up = bulletDirection;
     }
 
     void machine_gun_use() {
@@ -289,17 +303,24 @@ public class Weapon : MonoBehaviour
 
     void plasma_cutter_use() {
         var hitbox = Instantiate(
-        DamageHitboxPrefub,
-        this.transform
-        ).GetComponent<DamageHitbox>();
-        hitbox.transform.localScale = new Vector3(0.5f, 0.5f);
+                        DamageHitboxPrefub,
+                        this.transform
+                    ).GetComponent<DamageHitbox>();
+
+        hitbox.transform.localScale = new Vector3(0.5f, 0.1f);
+
+        // ѕримен€ем разброс к направлению снар€да
+        Vector3 bulletDirection = Vector3.up;
+
         hitbox.init(
             inventoryWeapon.damage_type,
             inventoryWeapon.damage,
             player.gameObject,
             !player.playerStats.IsMonster,
-            0.2f);
-        hitbox.init_as_bullet(49.3f);
+            0.6f);
+        hitbox.init_as_bullet(51.3f);
+
+        hitbox.transform.up = bulletDirection;
     }
 
     void goo_absorber_use() {

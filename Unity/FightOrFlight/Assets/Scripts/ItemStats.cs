@@ -181,7 +181,7 @@ namespace Assets.Scripts
             {ItemTypes.tongue, new ItemStats {
                 start_ammo = int.MaxValue,
                 isWeapon = true,
-                damage = 40,
+                damage = 30,
                 regarge_seconds = 0.3f,
                 damage_type = DamageManager.DamageTypes.firearms
             } },

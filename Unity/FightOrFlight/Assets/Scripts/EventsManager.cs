@@ -141,7 +141,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 Destroy(btnLeaveRoom);
                 
                 game_awaiting = false;
-                SendPhotonEvent(EventCodes.GameStarted, new System.Random().Next(0, int.MaxValue - 1));
+                SendPhotonEvent(EventCodes.GameStarted, new System.Random((int)DateTime.Now.Ticks).Next(0, int.MaxValue - 1));
             }
             timerStartGameWaiter -= Time.deltaTime;
         }
@@ -390,6 +390,21 @@ public class EventsManager : MonoBehaviourPunCallbacks
 
             var allPlayers = FindObjectsOfType<PlayerScript>();
             Array.Sort(allPlayers, (x, y) => x.view.ViewID - y.view.ViewID);
+
+            int kek = seed;
+            for (int k = 0; k < allPlayers.Length; k++)
+            {           
+                for (int kk = k + 1; kk < allPlayers.Length; kk++)
+                {
+                    if (kek % 10 >= 5)
+                    {
+                        var tmp = allPlayers[kk];
+                        allPlayers[kk] = allPlayers[k];
+                        allPlayers[k] = tmp;
+                    }
+                }
+                kek /= 10;
+            }
 
             var allSpawnpoints = GameObject.FindGameObjectsWithTag("PlayerSpawnpoint");
             var allEnemySpawnpoints = GameObject.FindGameObjectsWithTag("EnemySpawnpoint");

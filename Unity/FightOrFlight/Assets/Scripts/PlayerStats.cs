@@ -63,7 +63,7 @@ namespace Assets.Scripts
             { PlayerStatsType.miner, new PlayerStats {
                 rolename = "miner",
                 max_health = 200,
-                speed = 4,
+                speed = 4.3f,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
                 {
                     { DamageManager.DamageTypes.firearms, 1},
@@ -168,7 +168,7 @@ namespace Assets.Scripts
             { PlayerStatsType.hypnotoad, new PlayerStats {
                 IsMonster = true,
                 rolename = "hypnotoad",
-                max_health = 250,
+                max_health = 200,
                 speed = 3,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
                 {

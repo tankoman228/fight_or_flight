@@ -367,7 +367,7 @@ public class PlayerScript : MonoBehaviour
             case ItemStats.ItemTypes.jump:
 
                 if (view.IsMine)
-                    speedMultiplyer = 10;
+                    speedMultiplyer = 7;
                 break;
 
             default:
