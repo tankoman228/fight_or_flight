@@ -462,7 +462,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
             var allGeneratorSpawnpoints = new List<GameObject>
                 (GameObject.FindGameObjectsWithTag("GeneratorSpawnpoint"));
             generator.transform.position = 
-                allGeneratorSpawnpoints[seed % allGeneratorSpawnpoints.Count].gameObject.transform.position;
+                allGeneratorSpawnpoints[seed / 1000 % allGeneratorSpawnpoints.Count].gameObject.transform.position;
         }
     }
 
