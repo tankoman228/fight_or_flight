@@ -3,6 +3,7 @@ using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,12 +23,15 @@ public class EventsManager : MonoBehaviourPunCallbacks
     public static bool generator_activated = false;
     public static bool generator_checkbox_overlapped = false;
     public static bool lift_checkbox_overlapped = false;
+    internal static bool spectatorMode = false;
 
     //Прикрепить в редакторе
     public GameObject btnAtack, btnUse, btnInteract, btnStartGame, btnLeaveRoom, textEndgame;
     public Image imageInv1, imageInv2;
     public Text textStartOrCancel; //Из кнопки
     public GameObject generator;
+    public SpriteRenderer generatorSprite;
+    public Text textTimeOut;
 
     //Глобальные переменные
     public static int seed = -1;
@@ -113,8 +117,41 @@ public class EventsManager : MonoBehaviourPunCallbacks
     }
 
     //Кнопка атаки (красная)
+    private int id_spectated = 0;
+    private void switchSpectaded(int c)
+    {
+        int attempts = 0;
+
+    findAnother:
+
+        attempts++;
+        id_spectated += c;
+        if (id_spectated > players.Length)
+            id_spectated = 0;
+        if (id_spectated < 0)
+            id_spectated = players.Length - 1;
+
+        if (attempts > 8)
+        {
+            CameraFollow.target = generator.transform; return;
+        }
+
+        if (players[id_spectated].escaped || !players[id_spectated].isAlive)
+        {
+            goto findAnother;
+        }
+        else
+        {
+            CameraFollow.target = players[id_spectated].transform;
+        }
+    }
     public void Onclick_btnShoot()
     {
+        if (spectatorMode)
+        {
+            switchSpectaded(1); return;
+        }
+
         if (currentPlayer.weapon.canAtack)
             SendPhotonEvent(EventCodes.PlayerAtack, null);
     }
@@ -122,6 +159,11 @@ public class EventsManager : MonoBehaviourPunCallbacks
     //Кнопка использования предмета (зелёная)
     public void Onclick_btnUse()
     {
+        if (spectatorMode)
+        {
+            switchSpectaded(-1); return;
+        }
+
         if (currentPlayer.InventoryToolCount > 0)    
             SendPhotonEvent(EventCodes.InstrumentUsed, null);   
     }
@@ -325,6 +367,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
         else if (photonEvent.Code == EventCodes.GeneratorActivate)
         {
             generator_activated = true; Debug.Log("Generator activated!");
+            generatorSprite.color = Color.white;
         }
         else if (photonEvent.Code == EventCodes.HumanEscaped)
         {
@@ -362,6 +405,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
             }
         }
         Debug.LogWarning("No return statment used in OnEvent, maybe player or object not found");
+        Debug.LogWarning("Error code " + photonEvent.Code);
 
     }
     internal static class EventCodes
@@ -441,7 +485,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 players[i] = player;
                 i++;
             }
-
+      
             //Выбор предметов с карты, их перераспределение по возможным точкам появления
             var allItems = GameObject.FindGameObjectsWithTag("Item");
             var allItemsSpawnpoints = new List<GameObject> 
@@ -463,8 +507,27 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 (GameObject.FindGameObjectsWithTag("GeneratorSpawnpoint"));
             generator.transform.position = 
                 allGeneratorSpawnpoints[seed / 1000 % allGeneratorSpawnpoints.Count].gameObject.transform.position;
+
+            //Запуск таймера до окончания матча
+            timeLeft = 360;
+            textTimeOut.CrossFadeColor(Color.red, timeLeft, false, false);
+            StartCoroutine(StartTimer());
         }
     }
+
+    private int timeLeft = 360;
+    IEnumerator StartTimer()
+    {
+        while (timeLeft > 0)
+        {
+            yield return new WaitForSeconds(1);
+            timeLeft--;
+
+            textTimeOut.text = $"{timeLeft}s";
+        }
+        endgame(2);
+    }
+
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {

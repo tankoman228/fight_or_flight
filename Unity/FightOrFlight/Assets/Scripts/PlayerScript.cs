@@ -41,6 +41,8 @@ public class PlayerScript : MonoBehaviour
             {
                 EventsManager.THIS.SendPhotonEvent(EventsManager.EventCodes.PlayerDied, null);
                 textHealth.text = "You are dead :(";
+                EventsManager.spectatorMode = true;
+                CameraFollow.target = EventsManager.THIS.generator.transform;
             }
         } 
     }
@@ -75,7 +77,8 @@ public class PlayerScript : MonoBehaviour
         get { return inventoryToolCount; }
         set { 
             inventoryToolCount = value; 
-            EventsManager.THIS.textCountItem.text = value.ToString();
+            if (view.IsMine)
+                EventsManager.THIS.textCountItem.text = value.ToString();
         }
     }
     private int inventoryToolCount = 0;
@@ -111,6 +114,8 @@ public class PlayerScript : MonoBehaviour
 
             GameObject.Find("tHealth").GetComponent<Text>().text = PhotonNetwork.CurrentRoom.Name;
         }
+
+        EventsManager.spectatorMode = false;
     }
 
     //Управление, вращение спрайтом
@@ -407,6 +412,7 @@ public class PlayerScript : MonoBehaviour
             yield return null;
         }
 
+        tbGuide.transform.position = new Vector3(999,999,999);
         tbGuide.color = transparentColor;
     }
 

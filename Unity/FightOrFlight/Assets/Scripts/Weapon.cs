@@ -49,7 +49,7 @@ public class Weapon : MonoBehaviour
     internal ItemStats.ItemTypes inventoryWeaponType;
     public ItemStats InventoryWeaponStats { get { return inventoryWeapon; } }
     public int Ammo { 
-        set { ammo = value; if (player.view.IsMine) EventsManager.THIS.textCountWeapon.text = value.ToString(); }
+        set { ammo = value; if (player.view.IsMine) { EventsManager.THIS.textCountWeapon.text = value.ToString(); } }
         get { return ammo; } 
     }
 
