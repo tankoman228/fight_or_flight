@@ -69,6 +69,37 @@ public class EventsManager : MonoBehaviourPunCallbacks
 
     #region Onclick Listeners
 
+    #region Spectator mode
+    private int id_spectated = 0;
+    private void switchSpectaded(int c)
+    {
+        int attempts = 0;
+
+    findAnother:
+
+        attempts++;
+        id_spectated += c;
+        if (id_spectated > players.Length)
+            id_spectated = 0;
+        if (id_spectated < 0)
+            id_spectated = players.Length - 1;
+
+        if (attempts > 8)
+        {
+            CameraFollow.target = generator.transform; return;
+        }
+
+        if (players[id_spectated].escaped || !players[id_spectated].isAlive)
+        {
+            goto findAnother;
+        }
+        else
+        {
+            CameraFollow.target = players[id_spectated].transform;
+        }
+    }
+    #endregion
+
     //Нажатие на кнопку начала или отмены запуска таймера перед началом игры
     public void Onclick_btnStartGame()
     {
@@ -117,34 +148,6 @@ public class EventsManager : MonoBehaviourPunCallbacks
     }
 
     //Кнопка атаки (красная)
-    private int id_spectated = 0;
-    private void switchSpectaded(int c)
-    {
-        int attempts = 0;
-
-    findAnother:
-
-        attempts++;
-        id_spectated += c;
-        if (id_spectated > players.Length)
-            id_spectated = 0;
-        if (id_spectated < 0)
-            id_spectated = players.Length - 1;
-
-        if (attempts > 8)
-        {
-            CameraFollow.target = generator.transform; return;
-        }
-
-        if (players[id_spectated].escaped || !players[id_spectated].isAlive)
-        {
-            goto findAnother;
-        }
-        else
-        {
-            CameraFollow.target = players[id_spectated].transform;
-        }
-    }
     public void Onclick_btnShoot()
     {
         if (spectatorMode)
