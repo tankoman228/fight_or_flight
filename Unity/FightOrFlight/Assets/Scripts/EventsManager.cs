@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 /// <summary>
@@ -32,6 +33,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
     public GameObject generator;
     public SpriteRenderer generatorSprite;
     public Text textTimeOut;
+    public Light2D lightGlobal;
 
     //Глобальные переменные
     public static int seed = -1;
@@ -53,6 +55,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
         THIS = this;
         btnInteract.SetActive(false);
         textEndgame.SetActive(false);
+        lightGlobal.color = Color.black;
 
         try
         {
@@ -371,6 +374,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
         {
             generator_activated = true; Debug.Log("Generator activated!");
             generatorSprite.color = Color.white;
+            lightGlobal.color = Color.white;
         }
         else if (photonEvent.Code == EventCodes.HumanEscaped)
         {
