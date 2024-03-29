@@ -139,8 +139,8 @@ namespace Assets.Scripts
             { PlayerStatsType.slither, new PlayerStats {
                 IsMonster = true,
                 rolename = "slither",
-                max_health = 2000,
-                speed = 4,
+                max_health = 1000,
+                speed = 3.5f,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
                 {
                     { DamageManager.DamageTypes.firearms, 1},
@@ -154,7 +154,7 @@ namespace Assets.Scripts
             { PlayerStatsType.megarat, new PlayerStats {
                 IsMonster = true,
                 rolename = "megarat",
-                max_health = 800,
+                max_health = 400,
                 speed = 7,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
                 {

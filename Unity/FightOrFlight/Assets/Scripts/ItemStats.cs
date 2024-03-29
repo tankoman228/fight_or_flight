@@ -176,7 +176,8 @@ namespace Assets.Scripts
                 start_ammo = int.MaxValue,
                 isWeapon = true,
                 damage = 40,
-                regarge_seconds = 0.3f
+                regarge_seconds = 0.3f,
+                damage_type = DamageManager.DamageTypes.steel
             } },
             {ItemTypes.tongue, new ItemStats {
                 start_ammo = int.MaxValue,

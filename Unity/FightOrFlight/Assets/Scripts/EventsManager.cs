@@ -462,16 +462,47 @@ public class EventsManager : MonoBehaviourPunCallbacks
             var allEnemySpawnpoints = GameObject.FindGameObjectsWithTag("EnemySpawnpoint");
 
             //Приоритеты ролей, если игроков меньше 8
-            PlayerStats.PlayerStatsType[] roles = { 
-                PlayerStats.PlayerStatsType.miner,      //Если человек 1, он всегда шахтёр
-                PlayerStats.PlayerStatsType.hypnotoad,
-                PlayerStats.PlayerStatsType.guard,
-                PlayerStats.PlayerStatsType.slither,
-                PlayerStats.PlayerStatsType.scientist,
-                PlayerStats.PlayerStatsType.megarat,
-                PlayerStats.PlayerStatsType.enginier,
-                PlayerStats.PlayerStatsType.black_goo   //Черная слизь появится только при полном наборе игроков
-            };
+            PlayerStats.PlayerStatsType[] roles;
+            switch (seed / 1000 % 3)
+            {
+                case 0:
+                    roles = new PlayerStats.PlayerStatsType[] {
+                    PlayerStats.PlayerStatsType.guard,
+                    PlayerStats.PlayerStatsType.slither,
+                    PlayerStats.PlayerStatsType.miner,
+                    PlayerStats.PlayerStatsType.hypnotoad,
+                    PlayerStats.PlayerStatsType.scientist,
+                    PlayerStats.PlayerStatsType.megarat,
+                    PlayerStats.PlayerStatsType.enginier,
+                    PlayerStats.PlayerStatsType.black_goo   //Черная слизь появится только при полном наборе игроков
+                };
+                    break;
+                case 1:
+                    roles = new PlayerStats.PlayerStatsType[] {
+                    PlayerStats.PlayerStatsType.miner,      //Если человек 1, он всегда шахтёр
+                    PlayerStats.PlayerStatsType.hypnotoad,
+                    PlayerStats.PlayerStatsType.guard,
+                    PlayerStats.PlayerStatsType.slither,
+                    PlayerStats.PlayerStatsType.scientist,
+                    PlayerStats.PlayerStatsType.megarat,
+                    PlayerStats.PlayerStatsType.enginier,
+                    PlayerStats.PlayerStatsType.black_goo   //Черная слизь появится только при полном наборе игроков
+                };
+                    break;
+
+                default:
+                    roles = new PlayerStats.PlayerStatsType[] {
+                    PlayerStats.PlayerStatsType.scientist,      //Если человек 1, он всегда шахтёр
+                    PlayerStats.PlayerStatsType.megarat,
+                    PlayerStats.PlayerStatsType.guard,
+                    PlayerStats.PlayerStatsType.slither,
+                    PlayerStats.PlayerStatsType.miner,
+                    PlayerStats.PlayerStatsType.hypnotoad,
+                    PlayerStats.PlayerStatsType.enginier,
+                    PlayerStats.PlayerStatsType.black_goo   //Черная слизь появится только при полном наборе игроков
+                    };
+                    break;
+            }
 
             //Выбор ролей игрокам, инициализация игроков, выбор стартовых позиций
             int i = 0;

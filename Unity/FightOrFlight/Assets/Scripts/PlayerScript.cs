@@ -1,4 +1,4 @@
-using Assets.Scripts;
+п»їusing Assets.Scripts;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
@@ -7,23 +7,23 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Скрипт игрока (именно логика), поведение объекта игрока
+/// РЎРєСЂРёРїС‚ РёРіСЂРѕРєР° (РёРјРµРЅРЅРѕ Р»РѕРіРёРєР°), РїРѕРІРµРґРµРЅРёРµ РѕР±СЉРµРєС‚Р° РёРіСЂРѕРєР°
 /// </summary>
 public class PlayerScript : MonoBehaviour
 {
-    //Из getcomponent
+    //РР· getcomponent
     internal PhotonView view;
     FloatingJoystick joystick;
     Rigidbody2D rigidbody;
     Text textHealth;
 
-    //Из редактора
+    //РР· СЂРµРґР°РєС‚РѕСЂР°
     public GameObject graphicsMiner, graphicsGuard, graphicsEnginier, graphicsNikita, graphicsCherv, graphicsMouse, graphicsFrog, graphicsGoo;
     public GameObject graphics;
 
-    #region Поля и свйоства
+    #region РџРѕР»СЏ Рё СЃРІР№РѕСЃС‚РІР°
 
-    //Здоровье игрока. Обновляет шкалу здоровья при изменении
+    //Р—РґРѕСЂРѕРІСЊРµ РёРіСЂРѕРєР°. РћР±РЅРѕРІР»СЏРµС‚ С€РєР°Р»Сѓ Р·РґРѕСЂРѕРІСЊСЏ РїСЂРё РёР·РјРµРЅРµРЅРёРё
     public float Current_health { 
         
         get { return current_health; } 
@@ -36,7 +36,7 @@ public class PlayerScript : MonoBehaviour
             else
                 current_health = playerStats.max_health;
 
-            //Сюда прописать смерть игрока
+            //РЎСЋРґР° РїСЂРѕРїРёСЃР°С‚СЊ СЃРјРµСЂС‚СЊ РёРіСЂРѕРєР°
             if (current_health <= 0 && view.IsMine)
             {
                 EventsManager.THIS.SendPhotonEvent(EventsManager.EventCodes.PlayerDied, null);
@@ -46,24 +46,24 @@ public class PlayerScript : MonoBehaviour
             }
         } 
     }
-    private float current_health; //Текущее здоровье
+    private float current_health; //РўРµРєСѓС‰РµРµ Р·РґРѕСЂРѕРІСЊРµ
 
     internal PlayerStats playerStats = PlayerStats.Stats[PlayerStats.PlayerStatsType.basic];
     internal bool isAlive = true;
-    internal static GameObject selectedItem = null; //Предмет, являющийся триггером, с которым возможно вз-вие
-    internal static PlayerScript THIS; //Текущий игрок
+    internal static GameObject selectedItem = null; //РџСЂРµРґРјРµС‚, СЏРІР»СЏСЋС‰РёР№СЃСЏ С‚СЂРёРіРіРµСЂРѕРј, СЃ РєРѕС‚РѕСЂС‹Рј РІРѕР·РјРѕР¶РЅРѕ РІР·-РІРёРµ
+    internal static PlayerScript THIS; //РўРµРєСѓС‰РёР№ РёРіСЂРѕРє
     internal bool escaped = false;
 
-    //Значения, изменяющиеся в ходе игры (в результате использования предметов)
+    //Р—РЅР°С‡РµРЅРёСЏ, РёР·РјРµРЅСЏСЋС‰РёРµСЃСЏ РІ С…РѕРґРµ РёРіСЂС‹ (РІ СЂРµР·СѓР»СЊС‚Р°С‚Рµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РїСЂРµРґРјРµС‚РѕРІ)
     internal float speedMultiplyer = 1, resistanceMultiplyer = 1;
     internal bool armorUsedFlag = false;
 
     #endregion
 
-    #region Инвентарь
+    #region РРЅРІРµРЅС‚Р°СЂСЊ
 
-    public Weapon weapon; //Скрипт оружия, которое держит в руках игрок
-    internal ItemStats InventoryTool { get; set; }  //Ячейка с инструментом
+    public Weapon weapon; //РЎРєСЂРёРїС‚ РѕСЂСѓР¶РёСЏ, РєРѕС‚РѕСЂРѕРµ РґРµСЂР¶РёС‚ РІ СЂСѓРєР°С… РёРіСЂРѕРє
+    internal ItemStats InventoryTool { get; set; }  //РЇС‡РµР№РєР° СЃ РёРЅСЃС‚СЂСѓРјРµРЅС‚РѕРј
     public ItemStats.ItemTypes InventoryToolType { get { return inventoryToolType; } set
         {
             inventoryToolType = value;
@@ -84,9 +84,9 @@ public class PlayerScript : MonoBehaviour
     private int inventoryToolCount = 0;
     #endregion
 
-    #region Методы Юнити Start() Update() OnTrigger()
+    #region РњРµС‚РѕРґС‹ Р®РЅРёС‚Рё Start() Update() OnTrigger()
 
-    //Инициализация полей
+    //РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїРѕР»РµР№
     void Start()
     {
         view = GetComponent<PhotonView>();
@@ -94,7 +94,7 @@ public class PlayerScript : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         textHealth = GameObject.Find("tHealth").GetComponent<Text>();
 
-        //Прячем графику
+        //РџСЂСЏС‡РµРј РіСЂР°С„РёРєСѓ
         graphicsNikita.SetActive(false);
         graphicsMiner.SetActive(false);
         graphicsGuard.SetActive(false);
@@ -108,7 +108,7 @@ public class PlayerScript : MonoBehaviour
 
         if (view.IsMine)
         {
-            THIS = this; //продубрировал для удобства
+            THIS = this; //РїСЂРѕРґСѓР±СЂРёСЂРѕРІР°Р» РґР»СЏ СѓРґРѕР±СЃС‚РІР°
             EventsManager.currentPlayer = this;
             CameraFollow.target = this.transform;
 
@@ -118,7 +118,7 @@ public class PlayerScript : MonoBehaviour
         EventsManager.spectatorMode = false;
     }
 
-    //Управление, вращение спрайтом
+    //РЈРїСЂР°РІР»РµРЅРёРµ, РІСЂР°С‰РµРЅРёРµ СЃРїСЂР°Р№С‚РѕРј
     void Update()
     {
         if (!view.IsMine)
@@ -133,19 +133,19 @@ public class PlayerScript : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
-        updateForCurrentPlayerClass.Invoke(); //Поведение и логика конкретного игрока
+        updateForCurrentPlayerClass.Invoke(); //РџРѕРІРµРґРµРЅРёРµ Рё Р»РѕРіРёРєР° РєРѕРЅРєСЂРµС‚РЅРѕРіРѕ РёРіСЂРѕРєР°
     }
 
-    #region Триггеры
+    #region РўСЂРёРіРіРµСЂС‹
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (playerStats.IsMonster || !view.IsMine) //Монстры не могут подбирать предметы
+        if (playerStats.IsMonster || !view.IsMine) //РњРѕРЅСЃС‚СЂС‹ РЅРµ РјРѕРіСѓС‚ РїРѕРґР±РёСЂР°С‚СЊ РїСЂРµРґРјРµС‚С‹
             return;
 
         if (other.CompareTag("Item"))
         {
             EventsManager.THIS.btnInteract.SetActive(true);
-            selectedItem = other.gameObject; //Теперь можно подобрать предмет
+            selectedItem = other.gameObject; //РўРµРїРµСЂСЊ РјРѕР¶РЅРѕ РїРѕРґРѕР±СЂР°С‚СЊ РїСЂРµРґРјРµС‚
         }
         else if (other.CompareTag("GeneratorCheckbox") && !EventsManager.generator_activated)
         {
@@ -166,7 +166,7 @@ public class PlayerScript : MonoBehaviour
         if (other.CompareTag("Item"))
         {
             EventsManager.THIS.btnInteract.SetActive(false);
-            selectedItem = null; //А теперь нельзя, отошли уже от него
+            selectedItem = null; //Рђ С‚РµРїРµСЂСЊ РЅРµР»СЊР·СЏ, РѕС‚РѕС€Р»Рё СѓР¶Рµ РѕС‚ РЅРµРіРѕ
         }
         else if (other.CompareTag("GeneratorCheckbox"))
         {
@@ -184,14 +184,14 @@ public class PlayerScript : MonoBehaviour
     #endregion
 
 
-    #region Логика самой игры. Отличия логики игры для каждого класса
+    #region Р›РѕРіРёРєР° СЃР°РјРѕР№ РёРіСЂС‹. РћС‚Р»РёС‡РёСЏ Р»РѕРіРёРєРё РёРіСЂС‹ РґР»СЏ РєР°Р¶РґРѕРіРѕ РєР»Р°СЃСЃР°
 
     /// <summary>
-    /// Вызывается, когда начался матч, у каждого игрока. Игроку задаётся роль,
-    /// команда, позиция на точке спавна, стартовый инвентарь, спрайт и т.п.
+    /// Р’С‹Р·С‹РІР°РµС‚СЃСЏ, РєРѕРіРґР° РЅР°С‡Р°Р»СЃСЏ РјР°С‚С‡, Сѓ РєР°Р¶РґРѕРіРѕ РёРіСЂРѕРєР°. РРіСЂРѕРєСѓ Р·Р°РґР°С‘С‚СЃСЏ СЂРѕР»СЊ,
+    /// РєРѕРјР°РЅРґР°, РїРѕР·РёС†РёСЏ РЅР° С‚РѕС‡РєРµ СЃРїР°РІРЅР°, СЃС‚Р°СЂС‚РѕРІС‹Р№ РёРЅРІРµРЅС‚Р°СЂСЊ, СЃРїСЂР°Р№С‚ Рё С‚.Рї.
     /// </summary>
-    /// <param name="role">Тип игрока</param>
-    /// <param name="new_position">Точка спавна</param>
+    /// <param name="role">РўРёРї РёРіСЂРѕРєР°</param>
+    /// <param name="new_position">РўРѕС‡РєР° СЃРїР°РІРЅР°</param>
     internal void InitMatchStarted(PlayerStats.PlayerStatsType role, Vector3 new_position)
     {
         playerStats = PlayerStats.Stats[role];
@@ -250,11 +250,21 @@ public class PlayerScript : MonoBehaviour
                 InventoryToolType = ItemStats.ItemTypes.walls_breaker;
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.bite);
 
+                FindObjectOfType<SnakeHead>().InstantinateSegments();
+                if (view.IsMine)
+                {
+                    textHealth.text = "в€ћ";
+                }
+                else
+                {
+                    rigidbody.simulated = false;
+                }
+
                 break;
             case PlayerStats.PlayerStatsType.megarat:
                 graphicsMouse.SetActive(true);
                 InventoryToolType = ItemStats.ItemTypes.jump;
-                weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.claws);
+                weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.bite);
 
                 break;
             case PlayerStats.PlayerStatsType.hypnotoad:
@@ -272,11 +282,11 @@ public class PlayerScript : MonoBehaviour
             updateForCurrentPlayerClass += regenerate_monsters;
     }
 
-    //Вызывается в Update
+    //Р’С‹Р·С‹РІР°РµС‚СЃСЏ РІ Update
     delegate void UpdateForCurrentPlayerClass();
     UpdateForCurrentPlayerClass updateForCurrentPlayerClass;
 
-    //Вызовется у каждого монстра
+    //Р’С‹Р·РѕРІРµС‚СЃСЏ Сѓ РєР°Р¶РґРѕРіРѕ РјРѕРЅСЃС‚СЂР°
     private void regenerate_monsters()
     {
         if (current_health < playerStats.max_health)
@@ -299,7 +309,7 @@ public class PlayerScript : MonoBehaviour
 
 
     /// <summary>
-    /// Использование игроком инструмента из инвентаря, вся логика обработки
+    /// РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ РёРіСЂРѕРєРѕРј РёРЅСЃС‚СЂСѓРјРµРЅС‚Р° РёР· РёРЅРІРµРЅС‚Р°СЂСЏ, РІСЃСЏ Р»РѕРіРёРєР° РѕР±СЂР°Р±РѕС‚РєРё
     /// </summary>
     internal void UseInstrument()
     {
@@ -308,7 +318,7 @@ public class PlayerScript : MonoBehaviour
         InventoryToolCount--;
         Current_health += InventoryTool.health_add_after_used;
 
-        //ППЛГОНД
+        //РџРџР›Р“РћРќР”
 
         switch (inventoryToolType)
         {
@@ -319,7 +329,7 @@ public class PlayerScript : MonoBehaviour
 
                 break;
             case ItemStats.ItemTypes.armor:
-                //Надеваем/снимаем бронник
+                //РќР°РґРµРІР°РµРј/СЃРЅРёРјР°РµРј Р±СЂРѕРЅРЅРёРє
                 armorUsedFlag = !armorUsedFlag;
                 if (armorUsedFlag)
                 {
@@ -352,8 +362,8 @@ public class PlayerScript : MonoBehaviour
 
                 if (resistanceMultiplyer < 1000)
                 {
-                    resistanceMultiplyer += 9999; //Теперь игрока можно ваншотнуть
-                    speedMultiplyer *= 0.05f; //А ещё он теперь черепаха
+                    resistanceMultiplyer += 9999; //РўРµРїРµСЂСЊ РёРіСЂРѕРєР° РјРѕР¶РЅРѕ РІР°РЅС€РѕС‚РЅСѓС‚СЊ
+                    speedMultiplyer *= 0.05f; //Рђ РµС‰С‘ РѕРЅ С‚РµРїРµСЂСЊ С‡РµСЂРµРїР°С…Р°
                     if (view.IsMine)
                         textHealth.text = "[You are invisible]";
 
@@ -395,9 +405,9 @@ public class PlayerScript : MonoBehaviour
     #endregion
 
 
-    #region вспомогательные функции
+    #region РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ С„СѓРЅРєС†РёРё
 
-    //Анимация с текстом, где игроку пишет, кто он и что ему нужно делать
+    //РђРЅРёРјР°С†РёСЏ СЃ С‚РµРєСЃС‚РѕРј, РіРґРµ РёРіСЂРѕРєСѓ РїРёС€РµС‚, РєС‚Рѕ РѕРЅ Рё С‡С‚Рѕ РµРјСѓ РЅСѓР¶РЅРѕ РґРµР»Р°С‚СЊ
     IEnumerator FadeOutText(float fadeTime)
     {
         Text tbGuide = GameObject.Find("tbExplainWhatToDo").GetComponent<Text>();

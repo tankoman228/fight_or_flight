@@ -344,6 +344,7 @@ public class Weapon : MonoBehaviour
         this.transform
     ).GetComponent<DamageHitbox>();
 
+        hitbox.transform.localScale = new Vector3(2, 2);
         hitbox.init(
             inventoryWeapon.damage_type,
             inventoryWeapon.damage,

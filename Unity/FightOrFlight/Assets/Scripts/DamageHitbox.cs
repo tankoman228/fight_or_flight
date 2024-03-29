@@ -17,8 +17,6 @@ public class DamageHitbox : MonoBehaviour
     public bool IsBullet = false;
     public float bulletSpeed = 0;
 
-    private Rigidbody2D rigidbody;
-
     /// <summary>
     /// Инициализация после добавления хитбокса на сцену
     /// </summary>
@@ -34,9 +32,6 @@ public class DamageHitbox : MonoBehaviour
         this.DamageSize = DamageSize;
         this.instantinatedBy = instantinatedBy;
         this.IsMonsterAtacked = monsterUnderAtack;
-        
-        rigidbody = GetComponent<Rigidbody2D>();
-        rigidbody.simulated = false;
 
         Destroy(this.gameObject, lifetime);
     }
@@ -53,9 +48,6 @@ public class DamageHitbox : MonoBehaviour
         transform.rotation = rotation;
         IsBullet = true;
         bulletSpeed = speed;
-
-        rigidbody.simulated = true;
-        rigidbody.velocity = instantinatedBy.transform.right * bulletSpeed;
     }
 
     /// <summary>
@@ -63,8 +55,8 @@ public class DamageHitbox : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        //if (IsBullet)
-        //    transform.Translate(instantinatedBy.transform.right * bulletSpeed * Time.deltaTime);
+        if (IsBullet)
+            transform.Translate(instantinatedBy.transform.right * bulletSpeed * Time.deltaTime);
     }
 
     //Нанесение урона игроку из противоположной команды
