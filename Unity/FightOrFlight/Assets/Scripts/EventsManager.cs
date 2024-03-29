@@ -355,6 +355,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 return;
 
             DamageManager.recieve_damage(data.damage_type, data.damage);
+            return;
         }
         else if (photonEvent.Code == EventCodes.InstrumentUsed)
         {

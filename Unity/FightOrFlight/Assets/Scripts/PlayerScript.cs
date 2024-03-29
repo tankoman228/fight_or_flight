@@ -313,6 +313,10 @@ public class PlayerScript : MonoBehaviour
         switch (inventoryToolType)
         {
             case ItemStats.ItemTypes.mine:
+            case ItemStats.ItemTypes.dynamite:
+
+                PhotonNetwork.Instantiate("Bimb", transform.position, Quaternion.identity);
+
                 break;
             case ItemStats.ItemTypes.armor:
                 //Надеваем/снимаем бронник
