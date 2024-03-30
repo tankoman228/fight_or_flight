@@ -463,7 +463,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
 
             //Приоритеты ролей, если игроков меньше 8
             PlayerStats.PlayerStatsType[] roles;
-            switch (seed / 1000 % 3)
+            switch (seed / 1000 % 4)
             {
                 case 0:
                     roles = new PlayerStats.PlayerStatsType[] {
@@ -489,17 +489,28 @@ public class EventsManager : MonoBehaviourPunCallbacks
                     PlayerStats.PlayerStatsType.black_goo   //Черная слизь появится только при полном наборе игроков
                 };
                     break;
-
-                default:
+                case 2:
                     roles = new PlayerStats.PlayerStatsType[] {
-                    PlayerStats.PlayerStatsType.scientist,      //Если человек 1, он всегда шахтёр
-                    PlayerStats.PlayerStatsType.megarat,
+                    PlayerStats.PlayerStatsType.miner,      //Если человек 1, он всегда шахтёр
+                    PlayerStats.PlayerStatsType.hypnotoad,
                     PlayerStats.PlayerStatsType.guard,
                     PlayerStats.PlayerStatsType.slither,
-                    PlayerStats.PlayerStatsType.miner,
-                    PlayerStats.PlayerStatsType.hypnotoad,
+                    PlayerStats.PlayerStatsType.scientist,
+                    PlayerStats.PlayerStatsType.megarat,
                     PlayerStats.PlayerStatsType.enginier,
                     PlayerStats.PlayerStatsType.black_goo   //Черная слизь появится только при полном наборе игроков
+                };
+                    break;
+                default:
+                    roles = new PlayerStats.PlayerStatsType[] {
+                    PlayerStats.PlayerStatsType.enginier,
+                    PlayerStats.PlayerStatsType.black_goo,
+                    PlayerStats.PlayerStatsType.slither,
+                    PlayerStats.PlayerStatsType.guard,
+                    PlayerStats.PlayerStatsType.megarat,            
+                    PlayerStats.PlayerStatsType.miner,
+                    PlayerStats.PlayerStatsType.hypnotoad,
+                    PlayerStats.PlayerStatsType.scientist,
                     };
                     break;
             }

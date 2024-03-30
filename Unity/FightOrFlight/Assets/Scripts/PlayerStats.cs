@@ -131,10 +131,9 @@ namespace Assets.Scripts
                     { DamageManager.DamageTypes.firearms, 1},
                     { DamageManager.DamageTypes.steel, 1},
                     { DamageManager.DamageTypes.thermal, 1},
-                    { DamageManager.DamageTypes.chemical, 1}
+                    { DamageManager.DamageTypes.chemical, 2}
                 },
-                guide = "Don't let humans to escape! You can change map structure to stop" +
-                " them, assimilate, help to other monsters"
+                guide = "Kill every human. You can get through any object, but this ability can kill you"
             }},
             { PlayerStatsType.slither, new PlayerStats {
                 IsMonster = true,

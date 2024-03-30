@@ -167,8 +167,8 @@ namespace Assets.Scripts
             } },
             {ItemTypes.goo_absorber, new ItemStats {
                 start_ammo = int.MaxValue,
-                damage = 5,
-                regarge_seconds = 0.1f,
+                damage = 34,
+                regarge_seconds = 0.8f,
                 damage_type = DamageManager.DamageTypes.chemical,
                 isWeapon = true
             } },

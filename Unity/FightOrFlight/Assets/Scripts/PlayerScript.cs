@@ -235,7 +235,7 @@ public class PlayerScript : MonoBehaviour
             case PlayerStats.PlayerStatsType.enginier:
                 graphicsEnginier.SetActive(true);
                 InventoryToolType = ItemStats.ItemTypes.dynamite;
-                InventoryToolCount *= 5;
+
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.knife);
                 
 
@@ -245,6 +245,9 @@ public class PlayerScript : MonoBehaviour
                 graphicsGoo.SetActive(true);
                 InventoryToolType = ItemStats.ItemTypes.goo_imitator;
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.goo_absorber);
+
+                updateForCurrentPlayerClass += gooImitating;
+
 
                 break;
             case PlayerStats.PlayerStatsType.slither:
@@ -284,6 +287,10 @@ public class PlayerScript : MonoBehaviour
         }
         InventoryTool = ItemStats.ItemsStats[inventoryToolType];
         InventoryToolCount = InventoryTool.start_ammo;
+        if (role == PlayerStats.PlayerStatsType.enginier)
+        {
+            inventoryToolCount *= 10;
+        }
 
         if (playerStats.IsMonster)
             updateForCurrentPlayerClass += regenerate_monsters;
@@ -311,6 +318,18 @@ public class PlayerScript : MonoBehaviour
             {
                 speedMultiplyer = 1;
             }
+        }
+    }
+
+    //Для слизняка в режиме жыжи
+    private void gooImitating()
+    {
+        if (!this.rigidbody.simulated)
+        {
+            Current_health -= Time.deltaTime * 55;
+            this.transform.rotation = Quaternion.identity;
+            var v = new Vector2(joystick.Horizontal, joystick.Vertical);
+            transform.Translate(v * Time.deltaTime * 5);
         }
     }
 
@@ -388,6 +407,9 @@ public class PlayerScript : MonoBehaviour
                 }
                 break;
             case ItemStats.ItemTypes.goo_imitator:
+
+                this.rigidbody.simulated = !this.rigidbody.simulated;
+
                 break;
             case ItemStats.ItemTypes.walls_breaker:
                 break;
@@ -408,6 +430,9 @@ public class PlayerScript : MonoBehaviour
         escaped = true;
         if (view.IsMine)
             textHealth.text = "Successfully escaped :)";
+
+        EventsManager.spectatorMode = true;
+        CameraFollow.target = EventsManager.THIS.generator.transform;
     }
 
     #endregion
