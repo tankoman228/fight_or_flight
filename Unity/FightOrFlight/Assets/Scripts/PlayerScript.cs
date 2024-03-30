@@ -234,8 +234,10 @@ public class PlayerScript : MonoBehaviour
                 break;
             case PlayerStats.PlayerStatsType.enginier:
                 graphicsEnginier.SetActive(true);
-                InventoryToolType = ItemStats.ItemTypes.knife;
-                weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.mine);
+                InventoryToolType = ItemStats.ItemTypes.dynamite;
+                InventoryToolCount *= 5;
+                weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.knife);
+                
 
                 break;
 
@@ -254,6 +256,7 @@ public class PlayerScript : MonoBehaviour
                 if (view.IsMine)
                 {
                     textHealth.text = "∞";
+                    EventsManager.THIS.btnUse.SetActive(false);
                 }
                 else
                 {
@@ -263,8 +266,12 @@ public class PlayerScript : MonoBehaviour
                 break;
             case PlayerStats.PlayerStatsType.megarat:
                 graphicsMouse.SetActive(true);
-                InventoryToolType = ItemStats.ItemTypes.jump;
-                weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.bite);
+                //InventoryToolType = ItemStats.ItemTypes.invisiblity_hat;
+                if (view.IsMine)
+                {
+                    EventsManager.THIS.btnUse.SetActive(false);
+                }
+                weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.claws);
 
                 break;
             case PlayerStats.PlayerStatsType.hypnotoad:
@@ -325,7 +332,8 @@ public class PlayerScript : MonoBehaviour
             case ItemStats.ItemTypes.mine:
             case ItemStats.ItemTypes.dynamite:
 
-                PhotonNetwork.Instantiate("Bimb", transform.position, Quaternion.identity);
+                if (view.IsMine)
+                    PhotonNetwork.Instantiate("Bimb", transform.position, Quaternion.identity);
 
                 break;
             case ItemStats.ItemTypes.armor:

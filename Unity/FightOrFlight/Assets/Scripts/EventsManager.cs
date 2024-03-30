@@ -551,6 +551,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
             timeLeft = 360;
             textTimeOut.CrossFadeColor(Color.red, timeLeft, false, false);
             StartCoroutine(StartTimer());
+            StartCoroutine(checkerGameStatus());
         }
     }
 
@@ -614,6 +615,14 @@ public class EventsManager : MonoBehaviourPunCallbacks
 
         endgame((float)monsters_alive / ((float)people_escaped + 0.0001f));
     }
+    IEnumerator checkerGameStatus()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(6);
+            check_game_status();
+        }
+    }
 
     /// <summary>
     /// Должно быть вызвано по окончанию игры
@@ -626,17 +635,17 @@ public class EventsManager : MonoBehaviourPunCallbacks
 
         if (score <= 1.5)
         {
-            text = $"Humans win. {monsters_alive} monsters stayed alive. Escaped humans: {people_escaped}";
+            text = $"Humans win";
             textEndgame.GetComponent<Text>().color = Color.green;
         }
         else if (score > 4.0)
         {
-            text = $"Monsters win, their number is {monsters_alive}. And {people_escaped} humans escaped";
+            text = $"Monsters win";
             textEndgame.GetComponent<Text>().color = Color.red;
         }
         else
         {
-            text = $"Draw. {people_escaped} humans escaped, but {monsters_alive} monsters stayed alive";
+            text = $"Draw";
         }
         textEndgame.GetComponent<Text>().text = text;
 

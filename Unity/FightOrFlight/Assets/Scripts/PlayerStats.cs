@@ -63,7 +63,7 @@ namespace Assets.Scripts
             { PlayerStatsType.miner, new PlayerStats {
                 rolename = "miner",
                 max_health = 200,
-                speed = 4.3f,
+                speed = 4.8f,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
                 {
                     { DamageManager.DamageTypes.firearms, 1},
@@ -140,7 +140,7 @@ namespace Assets.Scripts
                 IsMonster = true,
                 rolename = "slither",
                 max_health = 1000,
-                speed = 3.5f,
+                speed = 3.8f,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
                 {
                     { DamageManager.DamageTypes.firearms, 1},
@@ -154,8 +154,8 @@ namespace Assets.Scripts
             { PlayerStatsType.megarat, new PlayerStats {
                 IsMonster = true,
                 rolename = "megarat",
-                max_health = 400,
-                speed = 7,
+                max_health = 150,
+                speed = 6,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
                 {
                     { DamageManager.DamageTypes.firearms, 1},

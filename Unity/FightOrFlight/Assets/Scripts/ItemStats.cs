@@ -195,8 +195,8 @@ namespace Assets.Scripts
             {ItemTypes.claws, new ItemStats {
                 start_ammo = int.MaxValue,
                 isWeapon = true,
-                damage = 40,
-                regarge_seconds = 1.3f,
+                damage = 10,
+                regarge_seconds = 1.5f,
             } },
             {ItemTypes.jump, new ItemStats {
                 start_ammo = int.MaxValue

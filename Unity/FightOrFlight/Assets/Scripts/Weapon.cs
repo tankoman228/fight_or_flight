@@ -92,6 +92,7 @@ public class Weapon : MonoBehaviour
             case ItemStats.ItemTypes.plasma_cutter: atackDelegate += plasma_cutter_use; break;
             case ItemStats.ItemTypes.goo_absorber:  atackDelegate += goo_absorber_use; break;
             case ItemStats.ItemTypes.bite:          atackDelegate += bite_use; break;
+            case ItemStats.ItemTypes.claws:         atackDelegate += claws_use; break;
             case ItemStats.ItemTypes.tongue:        atackDelegate += tongue_use; break;
         }
 
@@ -351,6 +352,21 @@ public class Weapon : MonoBehaviour
             player.gameObject,
             !player.playerStats.IsMonster,
             0.3f);
+    }
+    void claws_use()
+    {
+        var hitbox = Instantiate(
+        DamageHitboxPrefub,
+        this.transform
+    ).GetComponent<DamageHitbox>();
+
+        hitbox.transform.localScale = new Vector3(1.3f, 1.3f);
+        hitbox.init(
+            inventoryWeapon.damage_type,
+            inventoryWeapon.damage,
+            player.gameObject,
+            !player.playerStats.IsMonster,
+            0.7f);
     }
 
     void tongue_use() {
