@@ -429,10 +429,12 @@ public class PlayerScript : MonoBehaviour
         transform.position = new Vector3(999, 999, 999);
         escaped = true;
         if (view.IsMine)
+        {
             textHealth.text = "Successfully escaped :)";
 
-        EventsManager.spectatorMode = true;
-        CameraFollow.target = EventsManager.THIS.generator.transform;
+            EventsManager.spectatorMode = true;
+            CameraFollow.target = EventsManager.THIS.generator.transform;
+        }
     }
 
     #endregion
