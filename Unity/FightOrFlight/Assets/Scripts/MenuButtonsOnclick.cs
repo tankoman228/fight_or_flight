@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
@@ -29,6 +30,11 @@ public class MenuButtonsOnclick : MonoBehaviourPunCallbacks
         roomNumber = 0;
         needRetryCreating = false;
         isJoinedRoom = false;
+    }
+
+    public void tutorialClicked()
+    {
+        SceneManager.LoadScene("SceneTutorial");
     }
 
     /// <summary>

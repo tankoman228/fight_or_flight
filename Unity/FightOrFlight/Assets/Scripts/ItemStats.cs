@@ -88,7 +88,7 @@ namespace Assets.Scripts
             {ItemTypes.chainsaw,  new ItemStats {
                 start_ammo = int.MaxValue,
                 regarge_seconds = 0.2f,
-                damage = 60,
+                damage = 30,
                 isWeapon = true
             }  },
             {ItemTypes.pistol, new ItemStats {
@@ -187,7 +187,7 @@ namespace Assets.Scripts
                 damage_type = DamageManager.DamageTypes.firearms
             } },
             {ItemTypes.goo_imitator, new ItemStats {
-                start_ammo = 4
+                start_ammo = int.MaxValue
             } },
             {ItemTypes.walls_breaker, new ItemStats {
                 start_ammo = int.MaxValue
@@ -199,7 +199,8 @@ namespace Assets.Scripts
                 regarge_seconds = 1.5f,
             } },
             {ItemTypes.jump, new ItemStats {
-                start_ammo = int.MaxValue
+                start_ammo = int.MaxValue,
+                regarge_seconds = 2f
             } }
         };
     }

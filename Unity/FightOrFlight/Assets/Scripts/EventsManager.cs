@@ -189,7 +189,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 Destroy(btnLeaveRoom);
                 
                 game_awaiting = false;
-                SendPhotonEvent(EventCodes.GameStarted, new System.Random((int)DateTime.Now.Ticks).Next(0, int.MaxValue - 1));
+                SendPhotonEvent(EventCodes.GameStarted, new System.Random(DateTime.Now.Second).Next(0, int.MaxValue - 1));
             }
             timerStartGameWaiter -= Time.deltaTime;
         }

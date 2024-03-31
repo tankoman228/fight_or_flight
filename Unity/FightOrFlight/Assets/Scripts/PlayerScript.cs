@@ -390,7 +390,7 @@ public class PlayerScript : MonoBehaviour
                 if (resistanceMultiplyer < 1000)
                 {
                     resistanceMultiplyer += 9999; //Теперь игрока можно ваншотнуть
-                    speedMultiplyer *= 0.05f; //А ещё он теперь черепаха
+                    speedMultiplyer *= 0.5f; //А ещё он теперь черепаха
                     if (view.IsMine)
                         textHealth.text = "[You are invisible]";
 
@@ -399,7 +399,7 @@ public class PlayerScript : MonoBehaviour
                 else
                 {
                     resistanceMultiplyer -= 9999; 
-                    speedMultiplyer /= 0.05f;
+                    speedMultiplyer /= 0.5f;
                     if (view.IsMine)
                         textHealth.text = ((int)current_health).ToString();
 
@@ -416,7 +416,7 @@ public class PlayerScript : MonoBehaviour
             case ItemStats.ItemTypes.jump:
 
                 if (view.IsMine)
-                    speedMultiplyer = 7;
+                    speedMultiplyer = 15;
                 break;
 
             default:
