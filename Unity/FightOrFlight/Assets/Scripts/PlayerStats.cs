@@ -71,9 +71,8 @@ namespace Assets.Scripts
                     { DamageManager.DamageTypes.thermal, 1},
                     { DamageManager.DamageTypes.chemical, 1}
                 },
-                guide = "You are human. You need to escape this place by repairing generator and finding lift. " +
-                "Try to avoid monsters (players from the other team), their task is to kill you. Your speciality is" +
-                "miner. Use your pick to break some objects"
+                guide = "You are miner (strong and slow) and need to escape this place by repairing generator and finding lift. " +
+                "Try to avoid monsters (players from the other team), their task is to kill you"
             }},
             { PlayerStatsType.guard, new PlayerStats {
                 rolename = "guard",
@@ -86,9 +85,9 @@ namespace Assets.Scripts
                     { DamageManager.DamageTypes.thermal, 1},
                     { DamageManager.DamageTypes.chemical, 1}
                 },
-                guide = "You are human. You need to escape this place by repairing generator and finding lift. " +
-                "Try to avoid monsters (players from the other team), their task is to kill you. Your speciality is" +
-                "guard. Protect other players from monsters, you can easily damage them, but they are stronger"
+                guide = "You are guard (fast and strong). You need to escape this place by repairing generator and finding lift. " +
+                "Try to avoid monsters (players from the other team), their task is to kill you. " +
+                "Protect other players from monsters, you can easily damage them, but they are stronger"
             }},
             { PlayerStatsType.scientist, new PlayerStats {
                 rolename = "scientist",
@@ -101,9 +100,9 @@ namespace Assets.Scripts
                     { DamageManager.DamageTypes.thermal, 1},
                     { DamageManager.DamageTypes.chemical, 1}
                 },
-                guide = "You are human. You need to escape this place by repairing generator and finding lift. " +
-                "Try to avoid monsters (players from the other team), their task is to kill you. Your speciality is" +
-                "scientist. Run as fast as you can, use some of your chemical things to defend yourself."
+                guide = "You are scientist. You need to escape this place by repairing generator and finding lift. " +
+                "Try to avoid monsters (players from the other team), their task is to kill you." +
+                " Run as fast as you can, use some of your chemical things to defend yourself."
             }},
             { PlayerStatsType.enginier, new PlayerStats {
                 rolename = "enginier",
@@ -116,10 +115,9 @@ namespace Assets.Scripts
                     { DamageManager.DamageTypes.thermal, 1},
                     { DamageManager.DamageTypes.chemical, 1}
                 },
-                guide = "You are human. You need to escape this place by repairing generator and finding lift. " +
-                "Try to avoid monsters (players from the other team), their task is to kill you. Your speciality is" +
-                "enginier. You can kill some monsters with mines and traps or help other people. But don't face the " +
-                "danger, your basic may be useless against the monster."
+                guide = "You are enginier. You need to escape this place by repairing generator and finding lift. " +
+                "Try to avoid monsters (players from the other team), their task is to kill you." +
+                " You have a lot of bombs, it\'s the best start inventory in game"
             }},
             { PlayerStatsType.black_goo, new PlayerStats {
                 IsMonster = true,
@@ -147,7 +145,8 @@ namespace Assets.Scripts
                     { DamageManager.DamageTypes.thermal, 1},
                     { DamageManager.DamageTypes.chemical, 1}
                 },
-                guide = "Kill every human, you are heavy and slow, but armored like tank. " +
+                guide = "Kill every human, you are heavy and slow, but armored like tank and can\'t be" +
+                " damaged by weapon. Only a lot of bombs may kill you. \n" +
                 "If you make player to get in trap, human's chance is null!"
             }},
             { PlayerStatsType.megarat, new PlayerStats {
@@ -162,7 +161,7 @@ namespace Assets.Scripts
                     { DamageManager.DamageTypes.thermal, 1},
                     { DamageManager.DamageTypes.chemical, 1}
                 },
-                guide = "Kill every human, you are very dangerous, but 3 humans can easily kill you. "
+                guide = "Kill every human, you are very dangerous, but humans can easily kill you. "
             }},
             { PlayerStatsType.hypnotoad, new PlayerStats {
                 IsMonster = true,

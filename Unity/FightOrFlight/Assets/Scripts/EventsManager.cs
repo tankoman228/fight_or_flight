@@ -189,7 +189,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 Destroy(btnLeaveRoom);
                 
                 game_awaiting = false;
-                SendPhotonEvent(EventCodes.GameStarted, new System.Random(DateTime.Now.Second).Next(0, int.MaxValue - 1));
+                SendPhotonEvent(EventCodes.GameStarted, new System.Random(DateTime.Now.Second + DateTime.Now.Minute * 100).Next(0, int.MaxValue - 1));
             }
             timerStartGameWaiter -= Time.deltaTime;
         }
@@ -521,7 +521,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
             players = new PlayerScript[allPlayers.Length];
             foreach (var player in allPlayers)
             {
-                if (i % 2 == 0)
+                if (!PlayerStats.Stats[roles[i]].IsMonster)
                 {
                     player.InitMatchStarted(roles[i],
                         allSpawnpoints[position_id_start].transform.position);

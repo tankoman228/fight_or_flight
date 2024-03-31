@@ -167,7 +167,7 @@ namespace Assets.Scripts
             } },
             {ItemTypes.goo_absorber, new ItemStats {
                 start_ammo = int.MaxValue,
-                damage = 34,
+                damage = 80,
                 regarge_seconds = 0.8f,
                 damage_type = DamageManager.DamageTypes.chemical,
                 isWeapon = true
@@ -175,7 +175,7 @@ namespace Assets.Scripts
             {ItemTypes.bite, new ItemStats { 
                 start_ammo = int.MaxValue,
                 isWeapon = true,
-                damage = 40,
+                damage = 60,
                 regarge_seconds = 0.3f,
                 damage_type = DamageManager.DamageTypes.steel
             } },
@@ -195,8 +195,8 @@ namespace Assets.Scripts
             {ItemTypes.claws, new ItemStats {
                 start_ammo = int.MaxValue,
                 isWeapon = true,
-                damage = 10,
-                regarge_seconds = 1.5f,
+                damage = 60,
+                regarge_seconds = 1f,
             } },
             {ItemTypes.jump, new ItemStats {
                 start_ammo = int.MaxValue,
