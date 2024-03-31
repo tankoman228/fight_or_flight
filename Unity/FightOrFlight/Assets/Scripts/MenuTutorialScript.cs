@@ -51,12 +51,12 @@ public class MenuTutorialScript : MonoBehaviour
         switch(currentGuideId)
         {
             case 1:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconJoystick");
                 text.text = "Touch any free place of the left part of screen and move your finger to direction " +
                     "you want to move";
                 break;
             case 2:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconButtons");
                 text.text = "Red (central) button is for atack. The atack won\'t be made if your" +
                     " weapon is recharging now. For some types of weapon and monsters it\'s better to " +
                     "click as fast as it is possible. \n\n" +
@@ -66,14 +66,14 @@ public class MenuTutorialScript : MonoBehaviour
                     "take item near you). Disappears if there is no objects to intetact with.";
                 break;
             case 3:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconHP");
                 text.text = "If your health is down 0, your character dies. People can heal themselves " +
                     "using first aid kits (white). " +
                     "Black aid kit makes you faster, but damages you, didgeridoo is also dangerous for it\'s user" +
                     "\n\nMonsters heal during time";
                 break;
             case 4:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconCommands");
                 text.text = "There are 2 teams \n\n\tHumans:\n" +
                     "Kill or escape every monster. If you can\'t find normal weapon, it\'s better to run. " +
                     "To win need to kill every monster or find generator and escape using any lift. " +
@@ -84,44 +84,44 @@ public class MenuTutorialScript : MonoBehaviour
                     "can\'t work and humans can\'t win in a quick way!";
                 break;
             case 5:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconGenerator");
                 text.text = "Generator spawns in random room, this object is target position for every team. " +
                     "Finding geretator is key for win. " +
                     "\nUse blue button to activate and make lifts enabled. " +
                     "Also it makes this place not so dark as at the begining.";
                 break;
             case 6:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconElevator");
                 text.text = "Lifts are situated in every corner of this place, but using blue button " +
                     "gives no effect until generator is not activated. \nHumans need to escape so after " +
                     "generator activated you need to run to nearest lift. Monsters can\'t win if somebody escapes!\n\n" +
                     "Lifts become enabled only after generator activated and complex becomes not so dark.";
                 break;
             case 7:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconCyberFrog");
                 text.text = "Toad is a huge frog-alike creature with medium damage. \n\n" +
                     "Using green button while walking makes a jump. Recharge is about 2 seconds. \n\n" +
                     "Weakness: chainsaw";
                 break;
             case 8:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconMouse");
                 text.text = "Rat is a huge... rat. Fast with big damage, but can be easily killed by human";
                 break;
             case 9:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconSlither");
                 text.text = "Slither can\'t be damaged by any weapon, may block some locations by it\'s own body. \n\n" +
                     "If you see it, just run, because it can make a trap for you using tactics\n\n" +
                     "Weakness: bombs, dynamite and didgeridoo";
                 break;
             case 10:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconGoo");
                 text.text = "Black goo is something really strange. \n" +
                     "Special ability: walking throgh solid objects (to switch modes use ability button). " +
                     "Damages the monster, so this ability can\'t be used for a long time. \n\n" +
                     "Weakness: women";
                 break;
             case 11:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconWeapons");
                 text.text = "Weapon is very different, for some classes ammo is limited. \n\n" +
                     "Chainsaw, knife, pick are effective, but monsers can also hit you while that. " +
                     "Just spam the attack button to use this weapon in most effective way. \n\n" +
@@ -130,26 +130,26 @@ public class MenuTutorialScript : MonoBehaviour
                     "P.S. Slither doesn\'t care about this page of tutorial";
                 break;
             case 12:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconBomb");
                 text.text = "Bomb can kill everyone in it\'s radius, use carefully. Is very useful against slither, because " +
                     "it is the only way to damage this monster.";
                 break;
             case 13:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconFirstAid");
                 text.text = "First aid kit heals you, the black one (stimulator) damages, but makes faster\n\n" +
                     "Advice: miner needs stimulant more than any other human";
                 break;
             case 14:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconTimer");
                 text.text = "Don\'t forget about timer! If game is finished and nobody wins, the game will finish in a draw.";
                 break;
             case 15:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconInvisible");
                 text.text = "Invisiblity hat. Effective if generator is already on, in darkness monsters feel your soul and" +
                     " can find you (but it takes more time and). It is very useful (sometimes), makes you speed lesser";
                 break;
             case 16:
-                image.sprite = Resources.Load<Sprite>("otval");
+                image.sprite = Resources.Load<Sprite>("IconDidjeridy");
                 text.text = "Didgeridoo damages your body, but makes monsters to suffer. For few secons they " +
                     "can\'t move normally, slither is the most weak against this. \n" +
                     "If toad jumps you can use it and the green monster flyes away. Have fun, but don\'t forget, " +
