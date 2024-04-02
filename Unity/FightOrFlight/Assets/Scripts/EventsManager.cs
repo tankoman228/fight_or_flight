@@ -189,7 +189,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 Destroy(btnLeaveRoom);
                 
                 game_awaiting = false;
-                SendPhotonEvent(EventCodes.GameStarted, new System.Random(DateTime.Now.Second + DateTime.Now.Minute * 100).Next(0, int.MaxValue - 1));
+                SendPhotonEvent(EventCodes.GameStarted, UnityEngine.Random.Range(0, int.MaxValue - 1));
             }
             timerStartGameWaiter -= Time.deltaTime;
         }
@@ -376,6 +376,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
             generator_activated = true; Debug.Log("Generator activated!");
             generatorSprite.color = Color.white;
             lightGlobal.color = Color.white;
+            SoundManager.PlaySound(generator, "GeneratorOn");
         }
         else if (photonEvent.Code == EventCodes.HumanEscaped)
         {
