@@ -777,8 +777,8 @@ TextureImporter:
       name: BigDoor
       rect:
         serializedVersion: 2
-        x: 240
-        y: 719
+        x: 168
+        y: 722
         width: 84
         height: 18
       alignment: 0
@@ -861,8 +861,8 @@ TextureImporter:
       name: BigDoor_Blocked
       rect:
         serializedVersion: 2
-        x: 240
-        y: 695
+        x: 168
+        y: 698
         width: 84
         height: 18
       alignment: 0
@@ -882,8 +882,8 @@ TextureImporter:
       name: Door
       rect:
         serializedVersion: 2
-        x: 248
-        y: 676
+        x: 351
+        y: 461
         width: 78
         height: 11
       alignment: 0
@@ -1403,6 +1403,405 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: DeadGuardSit1
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 91
+        width: 48
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccdf8b808cf5323498e8515fe9f52487
+      internalID: -321816905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadGuardSit2
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 91
+        width: 49
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcf162fc5f1815f4d847aceb10f5a691
+      internalID: -723864106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadNikitaSit1
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 93
+        width: 38
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bf65dc4c49f1aa458bf40dedcc6ebf9
+      internalID: -562382142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadNikitaSit2
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 96
+        width: 41
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d2ce8aaa3430be41899d1ac4130f1ec
+      internalID: 540124546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadNikitaLie1
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 13
+        width: 107
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9fa276086add08419ced249e1204d94
+      internalID: 247876991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadNikitaLie2
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 22
+        width: 74
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4d87d424ff2bb34b818ef12dbfd4720
+      internalID: 1238798220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadGuardLie1
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 20
+        width: 147
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a999f51014e51e846bb958255f2ff33d
+      internalID: -626320072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadGuardLie2
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 19
+        width: 165
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca0263065459d1447a074f1b5512a7db
+      internalID: -908465201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GeneratorOff
+      rect:
+        serializedVersion: 2
+        x: 415
+        y: 751
+        width: 124
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8da5c3758afeb64e99b7bb2f9c9db7a
+      internalID: -1691083746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigDoor1
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 722
+        width: 84
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b5c2558c2b87b54694cd6429883345f
+      internalID: 1632014798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigDoor_Blocked1
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 698
+        width: 84
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db223dfe4e5e8c2429665a4cbfce126e
+      internalID: -1886434764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigDoor2
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 719
+        width: 84
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08d84e26f1f026c40be277bbc4a7aadc
+      internalID: 1100985355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigDoor_Blocked2
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 695
+        width: 84
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: faed4c6f5b7f02d41a4a4d52a64f39d4
+      internalID: -1664940647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigDoor3
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 719
+        width: 84
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d948d213ca2814b4986ad6773599a201
+      internalID: 1568427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigDoor_Blocked3
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 695
+        width: 84
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bc7e0ad219106b4182d1cc4ff299571
+      internalID: 650352893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigDoor4
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 677
+        width: 84
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ce803cf5339e8a449a2f73e6f78c18d
+      internalID: 1601480938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boom1
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 781
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 028bc9fa3cf4bf441b6258bbbec2818f
+      internalID: -25670571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boom2
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 874
+        width: 115
+        height: 115
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83f3b74ce07df634ea8762ee0ade28af
+      internalID: -490868976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: boom3
+      rect:
+        serializedVersion: 2
+        x: 838
+        y: 855
+        width: 160
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57ea6a59f24cb354d98583dde30ed43d
+      internalID: -1207858911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1418,7 +1817,14 @@ TextureImporter:
       BedsideTable: -1139265279
       BentPipe: 756889093
       BigDoor: 1391739604
+      BigDoor1: 1632014798
+      BigDoor2: 1100985355
+      BigDoor3: 1568427
+      BigDoor4: 1601480938
       BigDoor_Blocked: -1478588433
+      BigDoor_Blocked1: -1886434764
+      BigDoor_Blocked2: -1664940647
+      BigDoor_Blocked3: 650352893
       Big_Blood: -985816207
       Bloody_OperationTable: -888080745
       Bomb: -1242194240
@@ -1428,6 +1834,14 @@ TextureImporter:
       ComputerTable: -1970242732
       Cooler: -1813619180
       DamagedPipe: -30132123
+      DeadGuardLie1: -626320072
+      DeadGuardLie2: -626320072
+      DeadGuardSit1: -321816905
+      DeadGuardSit2: -723864106
+      DeadNikitaLie1: 247876991
+      DeadNikitaLie2: 247876991
+      DeadNikitaSit1: -562382142
+      DeadNikitaSit2: -562382142
       Didgeridoo1: -1105933896
       Didgeridoo2: 1116171840
       Door: 653550104
@@ -1437,6 +1851,7 @@ TextureImporter:
       Elevator_Closed: 477449307
       FlowerPlant: 651841835
       Generator: -1108121944
+      GeneratorOff: -1691083746
       GreaterBox: -1348263255
       GreyWall: -854895546
       GreyWall_End: 443365410
@@ -1458,6 +1873,7 @@ TextureImporter:
       Medium_Blood: -1713979059
       Mine: 1939065577
       NikitaTable: 880500038
+      Objects_0: -782174884
       Objects_13: -328240035
       Objects_14: -1346784836
       Objects_15: 696842208
@@ -1484,6 +1900,7 @@ TextureImporter:
       Objects_60: -1917699757
       Objects_62: 396162684
       Objects_67: -1288498065
+      Objects_7: -1032148873
       OperationTable: 1745804408
       Pickaxe: 810707821
       Pipe: 1768984301
@@ -1501,6 +1918,9 @@ TextureImporter:
       Warehouse_HorizontalYellow_Floor: -1810266089
       Warehouse_VerticalYellow_Floor: 762181370
       Warehouse_YellowCross_Floor: -1012317291
+      boom1: -25670571
+      boom2: -490868976
+      boom3: -1207858911
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
