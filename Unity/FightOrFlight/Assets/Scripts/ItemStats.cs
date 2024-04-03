@@ -93,10 +93,10 @@ namespace Assets.Scripts
             }  },
             {ItemTypes.pistol, new ItemStats {
                 start_ammo = 20,
-                regarge_seconds = 1,
+                regarge_seconds = 0.8f,
                 isWeapon = true,
                 damage_type = DamageManager.DamageTypes.firearms,
-                damage = 50
+                damage = 60
             } },
             {ItemTypes.dynamite,  new ItemStats {
                 start_ammo = 2,

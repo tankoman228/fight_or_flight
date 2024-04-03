@@ -106,7 +106,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
     //Нажатие на кнопку начала или отмены запуска таймера перед началом игры
     public void Onclick_btnStartGame()
     {
-        SendPhotonEvent(EventCodes.TimerReset, timerStartGameWaiter >= 5);
+        SendPhotonEvent(EventCodes.TimerReset, timerStartGameWaiter >= 15);
     }
 
     // Кнопка выхода из комнаты
@@ -179,9 +179,10 @@ public class EventsManager : MonoBehaviourPunCallbacks
     //Обновление таймера ожидания старта игры
     private void Update()
     {
-        if (game_awaiting && timerStartGameWaiter <= 5)
+        if (game_awaiting && timerStartGameWaiter <= 15)
         {
-            textStartOrCancel.text = $"Cancel ({(int)(timerStartGameWaiter * 5)})";
+            textStartOrCancel.text = $"Cancel ({(int)(timerStartGameWaiter)})";
+            timerStartGameWaiter -= Time.deltaTime;
 
             if (timerStartGameWaiter < 0)
             {
@@ -190,8 +191,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 
                 game_awaiting = false;
                 SendPhotonEvent(EventCodes.GameStarted, UnityEngine.Random.Range(0, int.MaxValue - 1));
-            }
-            timerStartGameWaiter -= Time.deltaTime;
+            }          
         }
     }
 
@@ -238,14 +238,16 @@ public class EventsManager : MonoBehaviourPunCallbacks
             if (activate_timer)
             {
                 textStartOrCancel.text = "Cancel";
-                timerStartGameWaiter = 5;
+                timerStartGameWaiter = 15;
                 game_awaiting = true;
+                SoundManager.changeMusic("timer");
             }
             else
             {
                 textStartOrCancel.text = "Start match";
                 timerStartGameWaiter = float.MaxValue;
                 game_awaiting = false;
+                SoundManager.changeMusic("lobby");
             }
             return;
         }
@@ -254,6 +256,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
             seed = (int)photonEvent.CustomData;
             gameStartRolCall();
             PhotonNetwork.CurrentRoom.IsOpen = false;
+            SoundManager.changeMusic("game");
             return;
         }
         else if (photonEvent.Code == EventCodes.ItemFound) //Item found
@@ -267,6 +270,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 //Debug.Log($"{item.itemID} == {id}");
                 if (i.itemID == id_item)
                 {
+                    SoundManager.PlaySound(i.gameObject, "Took");
                     item = i;
                     break;
                 }
@@ -389,6 +393,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
                     player.Escape();
                     people_escaped++;
                     THIS.check_game_status();
+                    SoundManager.PlaySound(player.gameObject, "GeneratorOn");
 
                     return;
                 }
@@ -408,6 +413,15 @@ public class EventsManager : MonoBehaviourPunCallbacks
 
                     player.isAlive = false;
                     player.transform.position = new Vector3(99, 999, 999);
+
+                    if (player.playerStats.IsMonster)
+                    {
+                        SoundManager.PlaySound(player.gameObject, "GoOo");
+                    }
+                    else
+                    {
+                        SoundManager.PlaySound(player.gameObject, "Spray");
+                    }
 
                     return;
                 }
@@ -592,6 +606,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 if (!player.isAlive)
                     return;
 
+                PhotonNetwork.Destroy(player.gameObject);
                 check_game_status();
 
                 return;

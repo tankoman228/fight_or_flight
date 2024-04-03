@@ -64,6 +64,11 @@ public class DamageHitbox : MonoBehaviour
     {
         if (collision.gameObject != instantinatedBy)
         {
+            if (IsBullet && collision.gameObject.tag.Equals("Wall"))
+            {
+                Destroy(this.gameObject);
+                return;
+            }
             if (collision.gameObject.tag.Equals("Player"))
             {
                 Debug.Log("Damage hitbox touched!");

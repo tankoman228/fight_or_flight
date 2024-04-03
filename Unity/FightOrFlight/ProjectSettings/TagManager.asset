@@ -12,6 +12,7 @@ TagManager:
   - GeneratorCheckbox
   - GeneratorSpawnpoint
   - LiftCheckbox
+  - Wall
   layers:
   - Default
   - TransparentFX

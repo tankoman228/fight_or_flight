@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
@@ -110,7 +111,8 @@ public class MenuButtonsOnclick : MonoBehaviourPunCallbacks
         {
             if (!isJoinedRoom)
             {
-                isJoinedRoom = true;             
+                isJoinedRoom = true;
+                SoundManager.changeMusic("lobby");
                 PhotonNetwork.LoadLevel("SceneGame");
             }
         }

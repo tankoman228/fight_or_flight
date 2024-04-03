@@ -118,6 +118,47 @@ public class Weapon : MonoBehaviour
             return;
         }
 
+        switch (inventoryWeaponType)
+        {
+            case ItemStats.ItemTypes.pick: 
+                SoundManager.PlaySound(gameObject, "PickUse"); break;
+
+            case ItemStats.ItemTypes.chainsaw: 
+                SoundManager.PlaySound(gameObject, "Lazer"); break;
+
+            case ItemStats.ItemTypes.pistol:
+                SoundManager.PlaySound(gameObject, "Shoot"); break;
+
+            case ItemStats.ItemTypes.reagents:
+                SoundManager.PlaySound(gameObject, "Spray"); break;
+
+            case ItemStats.ItemTypes.knife:
+                SoundManager.PlaySound(gameObject, "PickUse"); break;
+
+            case ItemStats.ItemTypes.machine_gun:
+                SoundManager.PlaySound(gameObject, "ShootAk47"); break;
+
+            case ItemStats.ItemTypes.flamethrower: break;
+
+            case ItemStats.ItemTypes.sprayer:
+                SoundManager.PlaySound(gameObject, "Spray"); break;
+
+            case ItemStats.ItemTypes.plasma_cutter:
+                SoundManager.PlaySound(gameObject, "lazer"); break;
+
+            case ItemStats.ItemTypes.goo_absorber:
+                SoundManager.PlaySound(gameObject, "GoOo"); break;
+
+            case ItemStats.ItemTypes.bite:
+                SoundManager.PlaySound(gameObject, "GoOo"); break;
+
+            case ItemStats.ItemTypes.claws:
+                SoundManager.PlaySound(gameObject, "MouseAtack"); break;
+
+            case ItemStats.ItemTypes.tongue:
+                SoundManager.PlaySound(gameObject, "WOA"); break;
+
+        }
         if (player == EventsManager.currentPlayer)
         {
             atackDelegate.Invoke();
@@ -144,6 +185,7 @@ public class Weapon : MonoBehaviour
             inventoryWeapon.damage,
             player.gameObject,
             !player.playerStats.IsMonster);
+        
     }
 
     void chainsaw_use()
@@ -158,6 +200,7 @@ public class Weapon : MonoBehaviour
             inventoryWeapon.damage,
             player.gameObject,
             !player.playerStats.IsMonster);
+
     }
 
     void knife_use()
@@ -171,6 +214,7 @@ public class Weapon : MonoBehaviour
             inventoryWeapon.damage,
             player.gameObject,
             !player.playerStats.IsMonster);
+
     }
 
     void pistol_use() {
@@ -179,7 +223,7 @@ public class Weapon : MonoBehaviour
                         this.transform
                     ).GetComponent<DamageHitbox>();
 
-        hitbox.transform.localScale = new Vector3(0.5f, 0.1f);
+        hitbox.transform.localScale = new Vector3(0.7f, 0.3f);
 
         // ѕримен€ем разброс к направлению снар€да
         Vector3 bulletDirection = Vector3.up;
@@ -242,7 +286,7 @@ public class Weapon : MonoBehaviour
             hitbox.init_as_bullet(51.3f);
 
             hitbox.transform.up = bulletDirection; // ”станавливаем направление снар€да с учетом разброса
-        }
+        }       
     }
 
     void flamethrower_use() {
@@ -296,7 +340,7 @@ public class Weapon : MonoBehaviour
                 player.gameObject,
                 !player.playerStats.IsMonster,
                 0.5f);
-            hitbox.init_as_bullet(8.3f);
+            hitbox.init_as_bullet(12.3f);
 
             hitbox.transform.up = bulletDirection; // ”станавливаем направление снар€да с учетом разброса
         }
@@ -308,7 +352,7 @@ public class Weapon : MonoBehaviour
                         this.transform
                     ).GetComponent<DamageHitbox>();
 
-        hitbox.transform.localScale = new Vector3(0.5f, 0.1f);
+        hitbox.transform.localScale = new Vector3(0.7f, 0.3f);
 
         // ѕримен€ем разброс к направлению снар€да
         Vector3 bulletDirection = Vector3.up;
@@ -337,6 +381,7 @@ public class Weapon : MonoBehaviour
             player.gameObject,
             !player.playerStats.IsMonster,
             0.2f);
+        SoundManager.PlaySound(gameObject, "GoOo");
     }
 
     void bite_use() {
@@ -352,6 +397,7 @@ public class Weapon : MonoBehaviour
             player.gameObject,
             !player.playerStats.IsMonster,
             0.3f);
+        
     }
     void claws_use()
     {
@@ -382,6 +428,7 @@ public class Weapon : MonoBehaviour
             player.gameObject,
             !player.playerStats.IsMonster,
             0.2f);
+        
     }
 
     #endregion

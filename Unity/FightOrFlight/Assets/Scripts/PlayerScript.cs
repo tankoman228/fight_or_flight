@@ -68,7 +68,13 @@ public class PlayerScript : MonoBehaviour
         {
             inventoryToolType = value;
             if (view.IsMine)
+            {
                 TextureLoadingManager.loadSprite(value, EventsManager.THIS.imageInv1);
+                if (InventoryToolType == ItemStats.ItemTypes.armor)
+                {
+                    textHealth.text = $"{current_health} (use item to take armor on)";
+                }
+            }
         }}
     private ItemStats.ItemTypes inventoryToolType;
 
@@ -247,7 +253,7 @@ public class PlayerScript : MonoBehaviour
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.goo_absorber);
 
                 updateForCurrentPlayerClass += gooImitating;
-
+                SoundManager.PlaySound(gameObject, "Spray");
 
                 break;
             case PlayerStats.PlayerStatsType.slither:
@@ -265,6 +271,7 @@ public class PlayerScript : MonoBehaviour
                 {
                     rigidbody.simulated = false;
                 }
+                SoundManager.PlaySound(gameObject, "Boom");
 
                 break;
             case PlayerStats.PlayerStatsType.megarat:
@@ -275,12 +282,14 @@ public class PlayerScript : MonoBehaviour
                     EventsManager.THIS.btnUse.SetActive(false);
                 }
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.claws);
+                SoundManager.PlaySound(gameObject, "MouseLoud");
 
                 break;
             case PlayerStats.PlayerStatsType.hypnotoad:
                 graphicsFrog.SetActive(true);
                 InventoryToolType = ItemStats.ItemTypes.jump;
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.tongue);
+                SoundManager.PlaySound(gameObject, "WOA");
                 break;
             default:
                 break;
@@ -289,7 +298,7 @@ public class PlayerScript : MonoBehaviour
         InventoryToolCount = InventoryTool.start_ammo;
         if (role == PlayerStats.PlayerStatsType.enginier)
         {
-            inventoryToolCount *= 10;
+            InventoryToolCount *= 10;
         }
 
         if (playerStats.IsMonster)
@@ -344,8 +353,8 @@ public class PlayerScript : MonoBehaviour
         InventoryToolCount--;
         Current_health += InventoryTool.health_add_after_used;
 
-        //ППЛГОНД
 
+        //ППЛГОНД
         switch (inventoryToolType)
         {
             case ItemStats.ItemTypes.mine:
@@ -360,18 +369,25 @@ public class PlayerScript : MonoBehaviour
                 armorUsedFlag = !armorUsedFlag;
                 if (armorUsedFlag)
                 {
-                    resistanceMultiplyer *= 0.5f;
-                    speedMultiplyer /= 1.2f;
+                    resistanceMultiplyer *= 0.3f;
+                    speedMultiplyer /= 2f;
+                    SoundManager.PlaySound(gameObject, "Spray");
+                    if (view.IsMine)
+                        textHealth.text = $"{current_health} (use item to take armor on)";
                 }
                 else
                 {
-                    resistanceMultiplyer /= 0.5f;
-                    speedMultiplyer *= 1.2f;
+                    resistanceMultiplyer /= 0.3f;
+                    speedMultiplyer *= 2f;
+                    SoundManager.PlaySound(gameObject, "Took");
+                    if (view.IsMine)
+                        textHealth.text = $"{current_health} (use item to take armor off)";
                 }
                 break;
             case ItemStats.ItemTypes.stimulant:
                 speedMultiplyer *= 1.3f;
                 resistanceMultiplyer *= 0.9f;
+                SoundManager.PlaySound(gameObject, "PickUse");
                 break;
             case ItemStats.ItemTypes.didgeridoo:
                 foreach (var player in EventsManager.THIS.players)
@@ -384,6 +400,7 @@ public class PlayerScript : MonoBehaviour
                             player.Current_health += 4;
                     }
                 }
+                SoundManager.PlaySound(gameObject, "didgeridoo");
                 break;
             case ItemStats.ItemTypes.invisiblity_hat:
 
@@ -405,24 +422,31 @@ public class PlayerScript : MonoBehaviour
 
                     graphics.SetActive(true);
                 }
+                SoundManager.PlaySound(gameObject, "GoOo");
                 break;
             case ItemStats.ItemTypes.goo_imitator:
 
                 this.rigidbody.simulated = !this.rigidbody.simulated;
+                SoundManager.PlaySound(gameObject, "GoOo");
 
                 break;
             case ItemStats.ItemTypes.walls_breaker:
                 break;
             case ItemStats.ItemTypes.jump:
 
-                if (view.IsMine)
+                if (view.IsMine && Time.time > timeJumpWait)
+                {
+                    timeJumpWait = Time.time + 3;
                     speedMultiplyer = 15;
+                    SoundManager.PlaySound(gameObject, "WOA");
+                }
                 break;
 
             default:
                 break;
         }
     }
+    float timeJumpWait = 0;
 
     internal void Escape()
     {

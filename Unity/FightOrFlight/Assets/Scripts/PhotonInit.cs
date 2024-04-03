@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 using System;
+using Assets.Scripts;
 
 /// <summary>
 /// Инициализация библиотеки "Фотон", подключение к серверу 
@@ -22,6 +23,8 @@ public class PhotonInit : MonoBehaviourPunCallbacks
         PhotonNetwork.OfflineMode = false;
         //PhotonNetwork.ConnectToRegion("ru");
         PhotonNetwork.ConnectUsingSettings();
+
+        SoundManager.changeMusic("menu");
     }
 
     public override void OnConnectedToMaster()

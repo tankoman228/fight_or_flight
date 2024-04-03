@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
@@ -54,6 +55,7 @@ public class Bimb : MonoBehaviour
             hitbox.init_as_bullet(11.3f);
             hitbox.transform.up = bulletDirection; // Устанавливаем направление снаряда с учетом разброса
         }
+        SoundManager.PlaySound(gameObject, "Boom");
         yield return new WaitForSeconds(1);
 
         PhotonNetwork.Destroy(this.GetComponent<PhotonView>());
