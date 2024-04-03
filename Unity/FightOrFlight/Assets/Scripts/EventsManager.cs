@@ -319,9 +319,9 @@ public class EventsManager : MonoBehaviourPunCallbacks
                         //Для подбора нового предмета нужно снять бронник
                         if (player.armorUsedFlag)
                         {
+                            player.resistanceMultiplyer /= 0.3f;
+                            player.speedMultiplyer *= 2f;
                             player.armorUsedFlag = false;
-                            player.resistanceMultiplyer /= 0.5f;
-                            player.speedMultiplyer *= 1.2f;
                         }
 
                         item.restart();

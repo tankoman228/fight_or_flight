@@ -373,7 +373,7 @@ public class PlayerScript : MonoBehaviour
                     speedMultiplyer /= 2f;
                     SoundManager.PlaySound(gameObject, "Spray");
                     if (view.IsMine)
-                        textHealth.text = $"{current_health} (use item to take armor on)";
+                        textHealth.text = $"{current_health} (use item to take armor off)";
                 }
                 else
                 {
@@ -381,7 +381,7 @@ public class PlayerScript : MonoBehaviour
                     speedMultiplyer *= 2f;
                     SoundManager.PlaySound(gameObject, "Took");
                     if (view.IsMine)
-                        textHealth.text = $"{current_health} (use item to take armor off)";
+                        textHealth.text = $"{current_health} (use item to take armor on)";
                 }
                 break;
             case ItemStats.ItemTypes.stimulant:
