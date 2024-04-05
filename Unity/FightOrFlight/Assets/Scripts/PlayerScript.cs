@@ -16,7 +16,6 @@ public class PlayerScript : MonoBehaviour
     FloatingJoystick joystick;
     Rigidbody2D rigidbody;
     Text textHealth;
-    public Animator animator;
 
     //Из редактора
     public GameObject graphicsMiner, graphicsGuard, graphicsEnginier, graphicsNikita, graphicsCherv, graphicsMouse, graphicsFrog, graphicsGoo;
@@ -97,7 +96,6 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         view = GetComponent<PhotonView>();
-        animator = GetComponent<Animator>();
         joystick = FindFirstObjectByType<FloatingJoystick>();
         rigidbody = GetComponent<Rigidbody2D>();
         textHealth = GameObject.Find("tHealth").GetComponent<Text>();
@@ -224,28 +222,24 @@ public class PlayerScript : MonoBehaviour
         {
             case PlayerStats.PlayerStatsType.scientist:
                 graphicsNikita.SetActive(true);
-                animator.SetInteger("Type", 0);
                 InventoryToolType = ItemStats.ItemTypes.first_aid_kit;
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.reagents);
 
                 break;
             case PlayerStats.PlayerStatsType.miner:
                 graphicsMiner.SetActive(true);
-                animator.SetInteger("Type", 1);
                 InventoryToolType = ItemStats.ItemTypes.dynamite;
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.pick);
 
                 break;
             case PlayerStats.PlayerStatsType.guard:
                 graphicsGuard.SetActive(true);
-                animator.SetInteger("Type", 2);
                 InventoryToolType = ItemStats.ItemTypes.stimulant;
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.pistol);
 
                 break;
             case PlayerStats.PlayerStatsType.enginier:
                 graphicsEnginier.SetActive(true);
-                animator.SetInteger("Type", 3);
                 InventoryToolType = ItemStats.ItemTypes.dynamite;
 
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.knife);
@@ -255,7 +249,6 @@ public class PlayerScript : MonoBehaviour
 
             case PlayerStats.PlayerStatsType.black_goo:
                 graphicsGoo.SetActive(true);
-                animator.SetInteger("Type", 4);
                 InventoryToolType = ItemStats.ItemTypes.goo_imitator;
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.goo_absorber);
 
@@ -265,7 +258,6 @@ public class PlayerScript : MonoBehaviour
                 break;
             case PlayerStats.PlayerStatsType.slither:
                 graphicsCherv.SetActive(true);
-                animator.SetInteger("Type", 5);
                 InventoryToolType = ItemStats.ItemTypes.walls_breaker;
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.bite);
 
@@ -284,7 +276,6 @@ public class PlayerScript : MonoBehaviour
                 break;
             case PlayerStats.PlayerStatsType.megarat:
                 graphicsMouse.SetActive(true);
-                animator.SetInteger("Type", 6);
                 //InventoryToolType = ItemStats.ItemTypes.invisiblity_hat;
                 if (view.IsMine)
                 {
@@ -296,7 +287,6 @@ public class PlayerScript : MonoBehaviour
                 break;
             case PlayerStats.PlayerStatsType.hypnotoad:
                 graphicsFrog.SetActive(true);
-                animator.SetInteger("Type", 7);
                 InventoryToolType = ItemStats.ItemTypes.jump;
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.tongue);
                 SoundManager.PlaySound(gameObject, "WOA");
