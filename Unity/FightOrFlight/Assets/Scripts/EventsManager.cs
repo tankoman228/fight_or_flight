@@ -378,6 +378,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
         else if (photonEvent.Code == EventCodes.GeneratorActivate)
         {
             generator_activated = true; Debug.Log("Generator activated!");
+            generatorSprite.sprite = Resources.Load<SpriteRenderer>("Generator").sprite;
             generatorSprite.color = Color.white;
             lightGlobal.color = Color.white;
             SoundManager.PlaySound(generator, "GeneratorOn");

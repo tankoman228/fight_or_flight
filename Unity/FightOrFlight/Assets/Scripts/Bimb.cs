@@ -4,10 +4,13 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Bimb : MonoBehaviour
 {
     public GameObject DamageHitboxPrefub;
+    public Animator Animator;
+    public Light2D BoomLight, BeepLight;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +20,15 @@ public class Bimb : MonoBehaviour
 
     IEnumerator BimbBoomDelay()
     {
+        BoomLight.gameObject.SetActive(false);
         yield return new WaitForSeconds(2.75f);
+
+        BeepLight.gameObject.SetActive(false);
+        BoomLight.gameObject.SetActive(true);
+        Animator = GetComponent<Animator>();
+        Animator.SetBool("isBoom", true);
+
+        //yield return new WaitForSeconds(0.25f);
 
         for (int i = 0; i < 18; i++)
         {
@@ -55,6 +66,7 @@ public class Bimb : MonoBehaviour
             hitbox.init_as_bullet(11.3f);
             hitbox.transform.up = bulletDirection; // Устанавливаем направление снаряда с учетом разброса
         }
+        
         SoundManager.PlaySound(gameObject, "Boom");
         yield return new WaitForSeconds(1);
 
