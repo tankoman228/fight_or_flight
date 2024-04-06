@@ -86,6 +86,7 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         atackDelegate = new AtackDelegate(() => { });
+        atackAnimationDelegate = new AtackDelegate(() => { });
     }
 
     /// <summary>
@@ -96,21 +97,35 @@ public class Weapon : MonoBehaviour
     {
         Debug.Log("Init by type");
         atackDelegate = new AtackDelegate(()=>{ });
+        atackAnimationDelegate = new AtackDelegate(()=>{ });
         switch(item)
         {
-            case ItemStats.ItemTypes.pick:          atackDelegate += pick_use;  break;
-            case ItemStats.ItemTypes.chainsaw:      atackDelegate += chainsaw_use; break;
-            case ItemStats.ItemTypes.pistol:        atackDelegate += pistol_use; break;
-            case ItemStats.ItemTypes.reagents:      atackDelegate += reagents_use; break;
-            case ItemStats.ItemTypes.knife:         atackDelegate += knife_use; break;
-            case ItemStats.ItemTypes.machine_gun:   atackDelegate += machine_gun_use; break;
-            case ItemStats.ItemTypes.flamethrower:  atackDelegate += flamethrower_use; break;
-            case ItemStats.ItemTypes.sprayer:       atackDelegate += sprayer_use; break;
-            case ItemStats.ItemTypes.plasma_cutter: atackDelegate += plasma_cutter_use; break;
-            case ItemStats.ItemTypes.goo_absorber:  atackDelegate += goo_absorber_use; break;
-            case ItemStats.ItemTypes.bite:          atackDelegate += bite_use; break;
-            case ItemStats.ItemTypes.claws:         atackDelegate += claws_use; break;
-            case ItemStats.ItemTypes.tongue:        atackDelegate += tongue_use; break;
+            case ItemStats.ItemTypes.pick:          
+                atackDelegate += pick_use; atackAnimationDelegate += animate_pick_use; break;
+            case ItemStats.ItemTypes.chainsaw:      
+                atackDelegate += chainsaw_use; atackAnimationDelegate += animate_chainsaw_use; break;
+            case ItemStats.ItemTypes.pistol:        
+                atackDelegate += pistol_use; atackAnimationDelegate += animate_pistol_use; break;
+            case ItemStats.ItemTypes.reagents:      
+                atackDelegate += reagents_use; atackAnimationDelegate += animate_reagents_use; break;
+            case ItemStats.ItemTypes.knife:         
+                atackDelegate += knife_use; atackAnimationDelegate += animate_knife_use; break;
+            case ItemStats.ItemTypes.machine_gun:   
+                atackDelegate += machine_gun_use; atackAnimationDelegate += animate_machine_gun_use; break;
+            case ItemStats.ItemTypes.flamethrower:  
+                atackDelegate += flamethrower_use; atackAnimationDelegate += animate_flamethrower_use; break;
+            case ItemStats.ItemTypes.sprayer:       
+                atackDelegate += sprayer_use; atackAnimationDelegate += animate_sprayer_use; break;
+            case ItemStats.ItemTypes.plasma_cutter: 
+                atackDelegate += plasma_cutter_use; atackAnimationDelegate += animate_plasma_cutter_use; break;
+            case ItemStats.ItemTypes.goo_absorber:  
+                atackDelegate += goo_absorber_use; atackAnimationDelegate += animate_goo_absorber_use; break;
+            case ItemStats.ItemTypes.bite:          
+                atackDelegate += bite_use; atackAnimationDelegate += animate_bite_use; break;
+            case ItemStats.ItemTypes.claws:         
+                atackDelegate += claws_use; atackAnimationDelegate += animate_claws_use; break;
+            case ItemStats.ItemTypes.tongue:        
+                atackDelegate += tongue_use; atackAnimationDelegate += animate_tongue_use; break;
         }
 
         if (player.view.IsMine)
@@ -135,58 +150,19 @@ public class Weapon : MonoBehaviour
             return;
         }
 
-        switch (inventoryWeaponType)
-        {
-            case ItemStats.ItemTypes.pick: 
-                SoundManager.PlaySound(gameObject, "PickUse"); break;
-
-            case ItemStats.ItemTypes.chainsaw: 
-                SoundManager.PlaySound(gameObject, "Lazer"); break;
-
-            case ItemStats.ItemTypes.pistol:
-                SoundManager.PlaySound(gameObject, "Shoot"); break;
-
-            case ItemStats.ItemTypes.reagents:
-                SoundManager.PlaySound(gameObject, "Spray"); break;
-
-            case ItemStats.ItemTypes.knife:
-                SoundManager.PlaySound(gameObject, "PickUse"); break;
-
-            case ItemStats.ItemTypes.machine_gun:
-                SoundManager.PlaySound(gameObject, "ShootAk47"); break;
-
-            case ItemStats.ItemTypes.flamethrower: break;
-
-            case ItemStats.ItemTypes.sprayer:
-                SoundManager.PlaySound(gameObject, "Spray"); break;
-
-            case ItemStats.ItemTypes.plasma_cutter:
-                SoundManager.PlaySound(gameObject, "lazer"); break;
-
-            case ItemStats.ItemTypes.goo_absorber:
-                SoundManager.PlaySound(gameObject, "GoOo"); break;
-
-            case ItemStats.ItemTypes.bite:
-                SoundManager.PlaySound(gameObject, "GoOo"); break;
-
-            case ItemStats.ItemTypes.claws:
-                SoundManager.PlaySound(gameObject, "MouseAtack"); break;
-
-            case ItemStats.ItemTypes.tongue:
-                SoundManager.PlaySound(gameObject, "WOA"); break;
-
-        }
+        
         if (player == EventsManager.currentPlayer)
         {
             atackDelegate.Invoke();
         }
+        atackAnimationDelegate.Invoke();
         
     }
 
     #endregion
 
     private delegate void AtackDelegate();
-    private AtackDelegate atackDelegate; //Вызывается для атакующего игрока при соот-щем глобальном сообытии
+    private AtackDelegate atackDelegate, atackAnimationDelegate; //Вызывается для атакующего игрока при соот-щем глобальном сообытии
     
     #region Функции, их задавать делегату для разных типов оружия при инициализации
 
@@ -369,7 +345,7 @@ public class Weapon : MonoBehaviour
                         this.transform
                     ).GetComponent<DamageHitbox>();
 
-        hitbox.transform.localScale = new Vector3(0.7f, 0.3f);
+        hitbox.transform.localScale = new Vector3(1.3f, 1.3f);
         // Применяем разброс к направлению снаряда
         Vector3 bulletDirection = Vector3.up;
 
@@ -378,7 +354,7 @@ public class Weapon : MonoBehaviour
             inventoryWeapon.damage,
             player.gameObject,
             !player.playerStats.IsMonster,
-            0.6f);
+            0.7f);
         hitbox.init_as_bullet(51.3f);
 
         hitbox.transform.up = bulletDirection;
@@ -390,7 +366,7 @@ public class Weapon : MonoBehaviour
         this.transform
         ).GetComponent<DamageHitbox>();
 
-        hitbox.transform.localScale = new Vector3(2f, 2f);
+        hitbox.transform.localScale = new Vector3(1f, 1f);
         hitbox.init(
             inventoryWeapon.damage_type,
             inventoryWeapon.damage,
@@ -428,7 +404,7 @@ public class Weapon : MonoBehaviour
             inventoryWeapon.damage,
             player.gameObject,
             !player.playerStats.IsMonster,
-            0.7f);
+            0.4f);
     }
 
     void tongue_use() {
@@ -445,6 +421,75 @@ public class Weapon : MonoBehaviour
             !player.playerStats.IsMonster,
             0.2f);
         
+    }
+
+    #endregion
+
+
+    #region Функции, задавать делегату для анимаций при атаке
+
+    void animate_pick_use()
+    {
+        SoundManager.PlaySound(gameObject, "PickUse");
+    }
+
+    void animate_chainsaw_use()
+    {
+        SoundManager.PlaySound(gameObject, "Lazer");
+    }
+
+    void animate_knife_use()
+    {
+        SoundManager.PlaySound(gameObject, "PickUse");
+    }
+
+    void animate_pistol_use()
+    {
+        SoundManager.PlaySound(gameObject, "Shoot");
+    }
+
+    void animate_reagents_use()
+    {
+        SoundManager.PlaySound(gameObject, "Spray");
+    }
+
+    void animate_machine_gun_use()
+    {
+        SoundManager.PlaySound(gameObject, "ShootAk47");
+    }
+
+    void animate_flamethrower_use()
+    {
+
+    }
+
+    void animate_sprayer_use()
+    {
+        SoundManager.PlaySound(gameObject, "Spray");
+    }
+
+    void animate_plasma_cutter_use()
+    {
+        SoundManager.PlaySound(gameObject, "lazer");
+    }
+
+    void animate_goo_absorber_use()
+    {
+        SoundManager.PlaySound(gameObject, "GoOo");
+    }
+
+    void animate_bite_use()
+    {
+        SoundManager.PlaySound(gameObject, "GoOo");
+    }
+    void animate_claws_use()
+    {
+        SoundManager.PlaySound(gameObject, "MouseAtack");
+    }
+
+    void animate_tongue_use()
+    {
+        SoundManager.PlaySound(gameObject, "WOA"); 
     }
 
     #endregion

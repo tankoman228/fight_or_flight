@@ -62,13 +62,13 @@ namespace Assets.Scripts
             }},
             { PlayerStatsType.miner, new PlayerStats {
                 rolename = "Miner",
-                max_health = 200,
+                max_health = 250,
                 speed = 4.8f,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
                 {
                     { DamageManager.DamageTypes.firearms, 1},
-                    { DamageManager.DamageTypes.steel, 0.99f},
-                    { DamageManager.DamageTypes.thermal, 1},
+                    { DamageManager.DamageTypes.steel, 0.9f},
+                    { DamageManager.DamageTypes.thermal, 0.8f},
                     { DamageManager.DamageTypes.chemical, 1}
                 },
                 guide = "You are miner (strong and slow) and need to escape this place by repairing generator and finding lift. " +
@@ -112,7 +112,7 @@ namespace Assets.Scripts
                 {
                     { DamageManager.DamageTypes.firearms, 1},
                     { DamageManager.DamageTypes.steel, 1},
-                    { DamageManager.DamageTypes.thermal, 1},
+                    { DamageManager.DamageTypes.thermal, 0.7f},
                     { DamageManager.DamageTypes.chemical, 1}
                 },
                 guide = "You are enginier. You need to escape this place by repairing generator and finding lift. " +
@@ -126,8 +126,8 @@ namespace Assets.Scripts
                 speed = 5,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
                 {
-                    { DamageManager.DamageTypes.firearms, 1},
-                    { DamageManager.DamageTypes.steel, 1},
+                    { DamageManager.DamageTypes.firearms, 0.5f},
+                    { DamageManager.DamageTypes.steel, 0.3f},
                     { DamageManager.DamageTypes.thermal, 1},
                     { DamageManager.DamageTypes.chemical, 2}
                 },
@@ -142,7 +142,7 @@ namespace Assets.Scripts
                 {
                     { DamageManager.DamageTypes.firearms, 1},
                     { DamageManager.DamageTypes.steel, 1},
-                    { DamageManager.DamageTypes.thermal, 1},
+                    { DamageManager.DamageTypes.thermal, 2},
                     { DamageManager.DamageTypes.chemical, 1}
                 },
                 guide = "Kill every human, you are heavy and slow, but armored like tank and can\'t be" +
@@ -153,13 +153,13 @@ namespace Assets.Scripts
                 IsMonster = true,
                 rolename = "Megarat",
                 max_health = 150,
-                speed = 6,
+                speed = 7,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
                 {
                     { DamageManager.DamageTypes.firearms, 1},
-                    { DamageManager.DamageTypes.steel, 1},
+                    { DamageManager.DamageTypes.steel, 0.5f},
                     { DamageManager.DamageTypes.thermal, 1},
-                    { DamageManager.DamageTypes.chemical, 1}
+                    { DamageManager.DamageTypes.chemical, 0.8f}
                 },
                 guide = "Kill every human, you are very dangerous, but humans can easily kill you. "
             }},
@@ -171,9 +171,9 @@ namespace Assets.Scripts
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
                 {
                     { DamageManager.DamageTypes.firearms, 1},
-                    { DamageManager.DamageTypes.steel, 1},
+                    { DamageManager.DamageTypes.steel, 2},
                     { DamageManager.DamageTypes.thermal, 1},
-                    { DamageManager.DamageTypes.chemical, 1}
+                    { DamageManager.DamageTypes.chemical, 0.6f}
                 },
                 guide = "Kill every human, you are weak, but can jump for long distance. Kill them one by one, " +
                 "not more than 1 player at time"
