@@ -370,7 +370,6 @@ public class Weapon : MonoBehaviour
                     ).GetComponent<DamageHitbox>();
 
         hitbox.transform.localScale = new Vector3(0.7f, 0.3f);
-
         // ѕримен€ем разброс к направлению снар€да
         Vector3 bulletDirection = Vector3.up;
 

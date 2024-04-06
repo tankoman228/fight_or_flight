@@ -207,7 +207,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerKnife
+      name: EnginierKnife
       rect:
         serializedVersion: 2
         x: 456
@@ -228,7 +228,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerChainsaw
+      name: EnginierChainsaw
       rect:
         serializedVersion: 2
         x: 584
@@ -291,7 +291,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaSpray
+      name: ScientistSpray
       rect:
         serializedVersion: 2
         x: 1184
@@ -312,7 +312,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaGrenade
+      name: ScientistReagents
       rect:
         serializedVersion: 2
         x: 1096
@@ -396,7 +396,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardMachinegunFire
+      name: GuardMachineGunFire
       rect:
         serializedVersion: 2
         x: 531
@@ -417,7 +417,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardMachinegun
+      name: GuardMachineGun
       rect:
         serializedVersion: 2
         x: 584
@@ -438,7 +438,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MinerPickaxeAtack1
+      name: MinerPickAtack1
       rect:
         serializedVersion: 2
         x: 413
@@ -459,7 +459,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MinerPickaxeAtack2
+      name: MinerPickAtack2
       rect:
         serializedVersion: 2
         x: 571
@@ -480,7 +480,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MinerPickaxe
+      name: MinerPick
       rect:
         serializedVersion: 2
         x: 416
@@ -543,7 +543,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MinerPlasma1
+      name: MinerPlasmaCutter
       rect:
         serializedVersion: 2
         x: 509
@@ -585,7 +585,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MinerPlasma2
+      name: MinerPlasmaCutter1
       rect:
         serializedVersion: 2
         x: 480
@@ -606,7 +606,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MinerPlasma3
+      name: MinerPlasmaCutter2
       rect:
         serializedVersion: 2
         x: 545
@@ -795,7 +795,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MinerMachinegun
+      name: MinerMachineGun
       rect:
         serializedVersion: 2
         x: 641
@@ -816,7 +816,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MinerMachinegunFire
+      name: MinerMachineGunFire
       rect:
         serializedVersion: 2
         x: 696
@@ -942,7 +942,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MinerKnife1
+      name: MinerKnife
       rect:
         serializedVersion: 2
         x: 708
@@ -984,7 +984,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MinerGrenade1
+      name: MinerReagents
       rect:
         serializedVersion: 2
         x: 797
@@ -1026,7 +1026,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MinerKnife2
+      name: MinerKnife1
       rect:
         serializedVersion: 2
         x: 689
@@ -1047,7 +1047,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MinerGrenade2
+      name: MinerReagents1
       rect:
         serializedVersion: 2
         x: 817
@@ -1089,7 +1089,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MinerKnife3
+      name: MinerKnife2
       rect:
         serializedVersion: 2
         x: 706
@@ -1110,7 +1110,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MinerGrenade3
+      name: MinerReagents2
       rect:
         serializedVersion: 2
         x: 780
@@ -1131,7 +1131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MinerPlasma4
+      name: MinerPlasmaCutter3
       rect:
         serializedVersion: 2
         x: 852
@@ -1236,7 +1236,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NukutaChainsaw
+      name: ScientistChainsaw
       rect:
         serializedVersion: 2
         x: 1235
@@ -1257,7 +1257,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaPlasma1
+      name: ScientistPlasmaCutter
       rect:
         serializedVersion: 2
         x: 1282
@@ -1278,7 +1278,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaPlasma2
+      name: ScientistPlasmaCutter1
       rect:
         serializedVersion: 2
         x: 1337
@@ -1299,7 +1299,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaPlasma3
+      name: ScientistPlasmaCutter2
       rect:
         serializedVersion: 2
         x: 1394
@@ -1320,7 +1320,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaPlasma4
+      name: ScientistPlasmaCutter3
       rect:
         serializedVersion: 2
         x: 1446
@@ -1362,7 +1362,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardSprayer
+      name: GuardSpray
       rect:
         serializedVersion: 2
         x: 755
@@ -1383,7 +1383,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardPlasma1
+      name: GuardPlasmaCutter
       rect:
         serializedVersion: 2
         x: 817
@@ -1425,7 +1425,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaMachinegunFire
+      name: ScientistMachineGunFire
       rect:
         serializedVersion: 2
         x: 1078
@@ -1446,7 +1446,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaMachinegun
+      name: ScientistMachineGun
       rect:
         serializedVersion: 2
         x: 1134
@@ -1467,7 +1467,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaPlasmaAtack2
+      name: ScientistPlasmaAtack2
       rect:
         serializedVersion: 2
         x: 1337
@@ -1488,7 +1488,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaPlasmaAtack1
+      name: ScientistPlasmaAtack1
       rect:
         serializedVersion: 2
         x: 1276
@@ -1509,7 +1509,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaPlasmaAtack3
+      name: ScientistPlasmaAtack3
       rect:
         serializedVersion: 2
         x: 1394
@@ -1530,7 +1530,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaPlasmaAtack4
+      name: ScientistPlasmaAtack4
       rect:
         serializedVersion: 2
         x: 1451
@@ -1551,7 +1551,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardPickaxe1
+      name: GuardPick
       rect:
         serializedVersion: 2
         x: 417
@@ -1572,7 +1572,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardKnife3
+      name: GuardKnife2
       rect:
         serializedVersion: 2
         x: 746
@@ -1593,7 +1593,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardPlasma2
+      name: GuardPlasmaCutter1
       rect:
         serializedVersion: 2
         x: 812
@@ -1614,7 +1614,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardPickaxe2
+      name: GuardPick1
       rect:
         serializedVersion: 2
         x: 493
@@ -1635,7 +1635,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardPickaxe3
+      name: GuardPick2
       rect:
         serializedVersion: 2
         x: 589
@@ -1656,7 +1656,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardKnife2
+      name: GuardKnife1
       rect:
         serializedVersion: 2
         x: 661
@@ -1677,10 +1677,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardPlasma3
+      name: GuardPlasmaCutter2
       rect:
         serializedVersion: 2
-        x: 810
+        x: 811
         y: 1279
         width: 54
         height: 72
@@ -1740,7 +1740,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaPistolFire
+      name: ScientistPistolFire
       rect:
         serializedVersion: 2
         x: 1089
@@ -1761,7 +1761,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaPistol
+      name: ScientistPistol
       rect:
         serializedVersion: 2
         x: 1140
@@ -1782,7 +1782,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardKnife1
+      name: GuardKnife
       rect:
         serializedVersion: 2
         x: 421
@@ -1803,7 +1803,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardGrenade1
+      name: GuardReagents
       rect:
         serializedVersion: 2
         x: 491
@@ -1824,7 +1824,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardGrenade3
+      name: GuardReagents2
       rect:
         serializedVersion: 2
         x: 749
@@ -1845,7 +1845,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardPlasma4
+      name: GuardPlasmaCutter3
       rect:
         serializedVersion: 2
         x: 556
@@ -1866,7 +1866,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GuardGrenade2
+      name: GuardReagents1
       rect:
         serializedVersion: 2
         x: 664
@@ -1887,11 +1887,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaPickaxe3
+      name: ScientistPick2
       rect:
         serializedVersion: 2
         x: 1257
-        y: 1230
+        y: 1231
         width: 49
         height: 76
       alignment: 9
@@ -1908,7 +1908,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaPickaxe1
+      name: ScientistPick
       rect:
         serializedVersion: 2
         x: 1092
@@ -1929,7 +1929,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaPickaxe2
+      name: ScientistPick1
       rect:
         serializedVersion: 2
         x: 1171
@@ -1950,7 +1950,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaKnife1
+      name: ScientistKnife
       rect:
         serializedVersion: 2
         x: 1097
@@ -1971,7 +1971,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaKnife2
+      name: ScientistKnife1
       rect:
         serializedVersion: 2
         x: 1176
@@ -1992,7 +1992,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaKnife3
+      name: ScientistKnife2
       rect:
         serializedVersion: 2
         x: 1340
@@ -2013,7 +2013,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaGrenade3
+      name: ScientistReagents2
       rect:
         serializedVersion: 2
         x: 1267
@@ -2034,7 +2034,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: NikitaGrenade2
+      name: ScientistReagents1
       rect:
         serializedVersion: 2
         x: 1177
@@ -2055,28 +2055,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Players_82
-      rect:
-        serializedVersion: 2
-        x: 798
-        y: 772
-        width: 50
-        height: 45
-      alignment: 9
-      pivot: {x: 0.50827634, y: 0.23327637}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f5528f7571093f47ab57b6c76ba3028
-      internalID: -741007330
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: EngineerSprayer
+      name: EnginierSpray
       rect:
         serializedVersion: 2
         x: 640
@@ -2097,7 +2076,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerPlasma1
+      name: EnginierPlasmaCutter
       rect:
         serializedVersion: 2
         x: 703
@@ -2118,7 +2097,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerPlasma2
+      name: EnginierPlasmaCutter1
       rect:
         serializedVersion: 2
         x: 772
@@ -2139,7 +2118,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerPlasma3
+      name: EnginierPlasmaCutter2
       rect:
         serializedVersion: 2
         x: 841
@@ -2160,7 +2139,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerPlasma4
+      name: EnginierPlasmaCutter3
       rect:
         serializedVersion: 2
         x: 910
@@ -2181,7 +2160,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerPickaxe1
+      name: EnginierPick
       rect:
         serializedVersion: 2
         x: 450
@@ -2202,7 +2181,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerPickaxe3
+      name: EnginierPick2
       rect:
         serializedVersion: 2
         x: 613
@@ -2223,7 +2202,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerPlasmaAtack3
+      name: EnginierPlasmaCutterAtack3
       rect:
         serializedVersion: 2
         x: 832
@@ -2244,7 +2223,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerPlasmaAtack
+      name: EnginierPlasmaCutterAtack
       rect:
         serializedVersion: 2
         x: 901
@@ -2265,7 +2244,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerPickaxe2
+      name: EnginierPick1
       rect:
         serializedVersion: 2
         x: 524
@@ -2286,7 +2265,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerPlasmaAtack1
+      name: EnginierPlasmaCutterAtack1
       rect:
         serializedVersion: 2
         x: 694
@@ -2307,7 +2286,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerPlasmaAtack2
+      name: EnginierPlasmaCutterAtack2
       rect:
         serializedVersion: 2
         x: 763
@@ -2328,7 +2307,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerMachinegunFire
+      name: EnginierMachineGunFire
       rect:
         serializedVersion: 2
         x: 449
@@ -2349,7 +2328,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerMachinegun
+      name: EnginierMachineGun
       rect:
         serializedVersion: 2
         x: 510
@@ -2370,7 +2349,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerPistolFire
+      name: EnginierPistolFire
       rect:
         serializedVersion: 2
         x: 572
@@ -2391,7 +2370,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerPistol
+      name: EnginierPistol
       rect:
         serializedVersion: 2
         x: 630
@@ -2412,10 +2391,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerKnife2
+      name: EnginierKnife1
       rect:
         serializedVersion: 2
-        x: 536
+        x: 537
         y: 232
         width: 69
         height: 28
@@ -2433,7 +2412,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerKnife3
+      name: EnginierKnife2
       rect:
         serializedVersion: 2
         x: 630
@@ -2454,7 +2433,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerGrenade1
+      name: EnginierReagents
       rect:
         serializedVersion: 2
         x: 712
@@ -2475,7 +2454,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerGrenade2
+      name: EnginierReagents1
       rect:
         serializedVersion: 2
         x: 791
@@ -2496,7 +2475,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: EngineerGrenade3
+      name: EnginierReagents2
       rect:
         serializedVersion: 2
         x: 888
@@ -2529,166 +2508,166 @@ TextureImporter:
     nameFileIdTable:
       ChervigaBody: -676042
       ChervigaHead: 1019647117
-      EngineerChainsaw: 651766067
-      EngineerGrenade1: -1479455699
-      EngineerGrenade2: -1846723756
-      EngineerGrenade3: -1272053170
-      EngineerKnife: 1013274799
-      EngineerKnife2: -528289750
-      EngineerKnife3: 531896319
-      EngineerMachinegun: 1739282019
-      EngineerMachinegunFire: 1180465030
-      EngineerPickaxe1: -989198644
-      EngineerPickaxe2: -520048486
-      EngineerPickaxe3: 693202065
-      EngineerPistol: -1030777586
-      EngineerPistolFire: 1753050387
-      EngineerPlasma1: -407399017
-      EngineerPlasma2: 740167239
-      EngineerPlasma3: 740167239
-      EngineerPlasma4: -1888205568
-      EngineerPlasmaAtack: -569125356
-      EngineerPlasmaAtack1: 1075003231
-      EngineerPlasmaAtack2: -1105895595
-      EngineerPlasmaAtack3: -1510350951
-      EngineerSprayer: 300964766
-      Frog: -95942781
-      FrogAtack1: 2070547814
-      FrogAtack2: -67999160
-      FrogAtack3: 1168000605
-      FrogAtack4: 102975425
-      FrogAtack5: -187542920
-      FrogJump1: -1875369607
-      FrogJump2: -45054804
-      FrogJump3: 383213503
-      FrogWalk1: 1317271979
-      FrogWalk2: 947791373
-      GuardChainsaw: -1468468812
-      GuardGrenade1: 1902775386
-      GuardGrenade2: -232074284
-      GuardGrenade3: 1325240760
-      GuardKnife1: -921644308
-      GuardKnife2: -1203945269
-      GuardKnife3: -2069521308
-      GuardMachinegun: -1173503544
-      GuardMachinegunFire: -826011317
-      GuardPickaxe1: 1804351551
-      GuardPickaxe2: 2136283611
-      GuardPickaxe3: 1159467325
-      GuardPistol: 360952896
-      GuardPistolFire: -1234083781
-      GuardPlasma1: -1445330949
-      GuardPlasma2: 1311645271
-      GuardPlasma3: 2136482335
-      GuardPlasma4: -749170537
-      GuardPlasmaAtack1: 242240072
-      GuardPlasmaAtack2: -1682891345
-      GuardPlasmaAtack3: -1965491024
-      GuardPlasmaAtack4: 431882825
-      GuardSprayer: 1181448280
-      MinerChainsaw: -113431396
-      MinerGrenade1: 567681298
-      MinerGrenade2: -1048051065
-      MinerGrenade3: -502826973
-      MinerGrenade4: 117355306
-      MinerKnife1: -741618803
-      MinerKnife2: -1397139660
-      MinerKnife3: 668559770
-      MinerMachinegun: -1589263794
-      MinerMachinegunFire: -1096500310
-      MinerPickaxe: -179399832
-      MinerPickaxeAtack1: 257437282
-      MinerPickaxeAtack2: 575305162
-      MinerPickaxeBloody: -366414541
-      MinerPistol: -1621336544
-      MinerPistolFire: 1615144283
-      MinerPlasma1: -1880894044
-      MinerPlasma2: 914975142
-      MinerPlasma3: -1557873195
-      MinerPlasma4: 909017408
-      MinerPlasmaFire1: 130493763
-      MinerPlasmaFire2: 90833152
-      MinerPlasmaFire3: 2074135425
-      MinerPlasmaFire4: 1592490790
-      MinerSpray: 1711798219
-      Mouse: -1024370075
-      Mouse1: -1710828200
-      Mouse2: -1877321654
-      Mouse3: 346362437
-      NikitaGrenad: -54509058
-      NikitaGrenade: -927942723
-      NikitaGrenade2: 1039125170
-      NikitaGrenade3: -1813434827
-      NikitaKnife1: -211045534
-      NikitaKnife2: 684975180
-      NikitaKnife3: -885158025
-      NikitaMachinegun: -438935444
-      NikitaMachinegunFire: -1742176778
-      NikitaPickaxe1: -1526022389
-      NikitaPickaxe2: -1186773326
-      NikitaPickaxe3: 779890886
-      NikitaPistol: 934154533
-      NikitaPistolFire: 1757758869
-      NikitaPlasma1: 230822835
-      NikitaPlasma2: 326192580
-      NikitaPlasma3: 996516838
-      NikitaPlasma4: 795918715
-      NikitaPlasmaAtack1: 1826237144
-      NikitaPlasmaAtack2: 1099380622
-      NikitaPlasmaAtack3: -772744320
-      NikitaPlasmaAtack4: -1800484725
-      NikitaSpray: 801135983
-      NukutaChainsaw: 1470445685
-      Players_0: -250274478
-      Players_10: -242093437
-      Players_101: -2107655837
-      Players_103: -1387111842
-      Players_11: 1191206193
-      Players_16: -910883922
-      Players_17: -317839890
-      Players_18: 411472700
-      Players_19: -203820333
-      Players_2: -1889495055
-      Players_20: 1457157857
-      Players_21: -1358956314
-      Players_22: -2065808903
-      Players_23: 1095575230
-      Players_24: 1328491607
-      Players_28: -1824760985
-      Players_29: -222527055
-      Players_33: 1666237772
-      Players_37: 321906088
-      Players_38: 81266465
-      Players_39: -646654839
-      Players_43: 1067699408
-      Players_44: 1084853852
-      Players_45: 1364203692
-      Players_51: -775684125
-      Players_53: 2078250958
-      Players_55: 1468357675
-      Players_57: -1081519102
-      Players_59: -1054122815
-      Players_60: 2136130946
-      Players_63: -1088870912
-      Players_66: 1320057674
-      Players_67: 358125418
-      Players_71: 1319168416
-      Players_74: 1031120037
-      Players_75: 1370840532
-      Players_76: 1820036510
-      Players_77: 566404482
-      Players_78: -1521252770
-      Players_79: 906190250
-      Players_80: -245341614
-      Players_81: 430167147
-      Players_82: -741007330
-      Players_9: -1510350951
-      Players_91: -569125356
-      Players_96: 1180465030
-      Players_99: 920205061
-      ToxicFlask: -224467605
-      ToxicFog: 1059966260
-      ToxicGrenade: 1191027316
+      EnginierChainsaw: -989198644
+      EnginierKnife: -528289750
+      EnginierKnife1: -528289750
+      EnginierKnife2: 531896319
+      EnginierMachineGun: 1739282019
+      EnginierMachineGunFire: 1180465030
+      EnginierPick: 693202065
+      EnginierPick1: 1191027316
+      EnginierPick2: 300964766
+      EnginierPistol: 1013274799
+      EnginierPistolFire: -1030777586
+      EnginierPlasmaCutter: 740167239
+      EnginierPlasmaCutter1: -1888205568
+      EnginierPlasmaCutter2: 740167239
+      EnginierPlasmaCutter3: -1888205568
+      EnginierPlasmaCutterAtack: -569125356
+      EnginierPlasmaCutterAtack1: 1075003231
+      EnginierPlasmaCutterAtack2: -1105895595
+      EnginierPlasmaCutterAtack3: -1510350951
+      EnginierReagents: -1272053170
+      EnginierReagents1: 2070547814
+      EnginierReagents2: -67999160
+      EnginierSpray: -407399017
+      Frog: 1168000605
+      FrogAtack1: 102975425
+      FrogAtack2: -187542920
+      FrogAtack3: -1875369607
+      FrogAtack4: -45054804
+      FrogAtack5: 383213503
+      FrogJump1: 1317271979
+      FrogJump2: 947791373
+      FrogJump3: -1468468812
+      FrogWalk1: 1902775386
+      FrogWalk2: -232074284
+      GuardChainsaw: 1325240760
+      GuardKnife: -921644308
+      GuardKnife1: -1203945269
+      GuardKnife2: -2069521308
+      GuardMachineGun: -1173503544
+      GuardMachineGunFire: -826011317
+      GuardPick: 1804351551
+      GuardPick1: 2136283611
+      GuardPick2: 1159467325
+      GuardPistol: 1311645271
+      GuardPistolFire: 2136482335
+      GuardPlasmaAtack1: -113431396
+      GuardPlasmaAtack2: 567681298
+      GuardPlasmaAtack3: -1048051065
+      GuardPlasmaAtack4: -502826973
+      GuardPlasmaCutter: -1445330949
+      GuardPlasmaCutter1: 1311645271
+      GuardPlasmaCutter2: 1311645271
+      GuardPlasmaCutter3: 2136482335
+      GuardReagents: 1902775386
+      GuardReagents1: -232074284
+      GuardReagents2: 1325240760
+      GuardSpray: 1181448280
+      MinerChainsaw: -741618803
+      MinerGrenade4: -1397139660
+      MinerKnife: 668559770
+      MinerKnife1: -1589263794
+      MinerKnife2: -1096500310
+      MinerMachineGun: -179399832
+      MinerMachineGunFire: 257437282
+      MinerPick: 575305162
+      MinerPickAtack1: -1880894044
+      MinerPickAtack2: 914975142
+      MinerPickaxeBloody: -1557873195
+      MinerPistol: -1880894044
+      MinerPistolFire: 914975142
+      MinerPlasmaCutter: -1557873195
+      MinerPlasmaCutter1: 909017408
+      MinerPlasmaCutter2: 1592490790
+      MinerPlasmaCutter3: 1711798219
+      MinerPlasmaFire1: -1024370075
+      MinerPlasmaFire2: -1710828200
+      MinerPlasmaFire3: 567681298
+      MinerPlasmaFire4: -1048051065
+      MinerReagents: -502826973
+      MinerReagents1: -1877321654
+      MinerReagents2: 346362437
+      MinerSpray: -54509058
+      Mouse: -250274478
+      Mouse1: -242093437
+      Mouse2: -2107655837
+      Mouse3: -1387111842
+      NikitaGrenad: 1191206193
+      Players_0: -910883922
+      Players_10: -317839890
+      Players_101: 411472700
+      Players_103: -203820333
+      Players_11: -1889495055
+      Players_16: 1457157857
+      Players_17: -1358956314
+      Players_18: -2065808903
+      Players_19: 1095575230
+      Players_2: 1328491607
+      Players_20: -1824760985
+      Players_21: -222527055
+      Players_22: 1666237772
+      Players_23: 321906088
+      Players_24: 81266465
+      Players_28: -646654839
+      Players_29: 1067699408
+      Players_33: 1084853852
+      Players_37: 1364203692
+      Players_38: -775684125
+      Players_39: 2078250958
+      Players_43: 1468357675
+      Players_44: -1081519102
+      Players_45: -1054122815
+      Players_51: 2136130946
+      Players_53: -1088870912
+      Players_55: 1320057674
+      Players_57: 358125418
+      Players_59: 1319168416
+      Players_60: 1031120037
+      Players_63: 1370840532
+      Players_66: 1820036510
+      Players_67: 566404482
+      Players_71: -1521252770
+      Players_74: 906190250
+      Players_75: -245341614
+      Players_76: 430167147
+      Players_77: -741007330
+      Players_78: -1510350951
+      Players_79: -569125356
+      Players_80: 1180465030
+      Players_81: 920205061
+      Players_82: 1470445685
+      Players_9: -927942723
+      Players_91: 1039125170
+      Players_96: -1813434827
+      Players_99: -211045534
+      ScientistChainsaw: 684975180
+      ScientistKnife: -211045534
+      ScientistKnife1: 684975180
+      ScientistKnife2: -885158025
+      ScientistMachineGun: -438935444
+      ScientistMachineGunFire: -1742176778
+      ScientistPick: -1526022389
+      ScientistPick1: -1186773326
+      ScientistPick2: 779890886
+      ScientistPistol: 795918715
+      ScientistPistolFire: 1826237144
+      ScientistPlasmaAtack1: -224467605
+      ScientistPlasmaAtack2: 1059966260
+      ScientistPlasmaAtack3: 1191027316
+      ScientistPlasmaAtack4: 1180465030
+      ScientistPlasmaCutter: 230822835
+      ScientistPlasmaCutter1: 326192580
+      ScientistPlasmaCutter2: 996516838
+      ScientistPlasmaCutter3: 795918715
+      ScientistReagents: -927942723
+      ScientistReagents1: 1039125170
+      ScientistReagents2: -1813434827
+      ScientistSpray: -989198644
+      ToxicFlask: -520048486
+      ToxicFog: -749170537
+      ToxicGrenade: -749170537
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

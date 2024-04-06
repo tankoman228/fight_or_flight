@@ -16,6 +16,7 @@ public class PlayerScript : MonoBehaviour
     FloatingJoystick joystick;
     Rigidbody2D rigidbody;
     Text textHealth;
+    internal Animator animator;
 
     //Из редактора
     public GameObject graphicsMiner, graphicsGuard, graphicsEnginier, graphicsNikita, graphicsCherv, graphicsMouse, graphicsFrog, graphicsGoo;
@@ -239,24 +240,28 @@ public class PlayerScript : MonoBehaviour
         {
             case PlayerStats.PlayerStatsType.scientist:
                 graphicsNikita.SetActive(true);
+                animator = graphicsNikita.GetComponent<Animator>();
                 InventoryToolType = ItemStats.ItemTypes.first_aid_kit;
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.reagents);
 
                 break;
             case PlayerStats.PlayerStatsType.miner:
                 graphicsMiner.SetActive(true);
+                animator = graphicsMiner.GetComponent<Animator>();
                 InventoryToolType = ItemStats.ItemTypes.dynamite;
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.pick);
 
                 break;
             case PlayerStats.PlayerStatsType.guard:
                 graphicsGuard.SetActive(true);
+                animator = graphicsGuard.GetComponent<Animator>();
                 InventoryToolType = ItemStats.ItemTypes.stimulant;
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.pistol);
 
                 break;
             case PlayerStats.PlayerStatsType.enginier:
                 graphicsEnginier.SetActive(true);
+                animator = graphicsEnginier.GetComponent<Animator>();
                 InventoryToolType = ItemStats.ItemTypes.dynamite;
 
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.knife);
@@ -298,12 +303,14 @@ public class PlayerScript : MonoBehaviour
                 {
                     EventsManager.THIS.btnUse.SetActive(false);
                 }
+                animator = graphicsMouse.GetComponent<Animator>();
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.claws);
                 SoundManager.PlaySound(gameObject, "MouseLoud");
 
                 break;
             case PlayerStats.PlayerStatsType.hypnotoad:
                 graphicsFrog.SetActive(true);
+                animator = graphicsFrog.GetComponent<Animator>();
                 InventoryToolType = ItemStats.ItemTypes.jump;
                 weapon.setWeaponOnPlayerInit(ItemStats.ItemTypes.tongue);
                 SoundManager.PlaySound(gameObject, "WOA");
@@ -451,8 +458,9 @@ public class PlayerScript : MonoBehaviour
                 break;
             case ItemStats.ItemTypes.jump:
 
-                if (view.IsMine && Time.time > timeJumpWait)
+                if (/*view.IsMine &&*/ Time.time > timeJumpWait)
                 {
+                    animator.SetBool("isJump", true);
                     timeJumpWait = Time.time + 3;
                     speedMultiplyer = 15;
                     SoundManager.PlaySound(gameObject, "WOA");
