@@ -21,6 +21,23 @@ public class PlayerScript : MonoBehaviour
     public GameObject graphicsMiner, graphicsGuard, graphicsEnginier, graphicsNikita, graphicsCherv, graphicsMouse, graphicsFrog, graphicsGoo;
     public GameObject graphics;
 
+    internal GameObject graphicsCurrent
+    {
+        get {
+            switch (playerStats.rolename) {
+                case "Miner": return graphicsMiner;
+                case "Guard": return graphicsGuard;
+                case "Scientist": return graphicsNikita;
+                case "Enginier": return graphicsEnginier;
+                case "Black goo": return graphicsGoo;
+                case "Slither": return graphicsCherv;
+                case "Megarat": return graphicsMouse;
+                case "Hypnotoad": return graphicsFrog;
+                default: return graphicsEnginier;
+            }
+        }
+    }
+
     #region Поля и свйоства
 
     //Здоровье игрока. Обновляет шкалу здоровья при изменении

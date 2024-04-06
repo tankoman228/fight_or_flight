@@ -61,7 +61,7 @@ namespace Assets.Scripts
 
             }},
             { PlayerStatsType.miner, new PlayerStats {
-                rolename = "miner",
+                rolename = "Miner",
                 max_health = 200,
                 speed = 4.8f,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
@@ -75,7 +75,7 @@ namespace Assets.Scripts
                 "Try to avoid monsters (players from the other team), their task is to kill you"
             }},
             { PlayerStatsType.guard, new PlayerStats {
-                rolename = "guard",
+                rolename = "Guard",
                 max_health = 150,
                 speed = 9,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
@@ -90,7 +90,7 @@ namespace Assets.Scripts
                 "Protect other players from monsters, you can easily damage them, but they are stronger"
             }},
             { PlayerStatsType.scientist, new PlayerStats {
-                rolename = "scientist",
+                rolename = "Scientist",
                 max_health = 70,
                 speed = 12,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
@@ -105,7 +105,7 @@ namespace Assets.Scripts
                 " Run as fast as you can, use some of your chemical things to defend yourself."
             }},
             { PlayerStatsType.enginier, new PlayerStats {
-                rolename = "enginier",
+                rolename = "Enginier",
                 max_health = 100,
                 speed = 8,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
@@ -121,7 +121,7 @@ namespace Assets.Scripts
             }},
             { PlayerStatsType.black_goo, new PlayerStats {
                 IsMonster = true,
-                rolename = "black goo",
+                rolename = "Black goo",
                 max_health = 500,
                 speed = 5,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
@@ -135,7 +135,7 @@ namespace Assets.Scripts
             }},
             { PlayerStatsType.slither, new PlayerStats {
                 IsMonster = true,
-                rolename = "slither",
+                rolename = "Slither",
                 max_health = 1000,
                 speed = 3.8f,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
@@ -151,7 +151,7 @@ namespace Assets.Scripts
             }},
             { PlayerStatsType.megarat, new PlayerStats {
                 IsMonster = true,
-                rolename = "megarat",
+                rolename = "Megarat",
                 max_health = 150,
                 speed = 6,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
@@ -165,7 +165,7 @@ namespace Assets.Scripts
             }},
             { PlayerStatsType.hypnotoad, new PlayerStats {
                 IsMonster = true,
-                rolename = "hypnotoad",
+                rolename = "Hypnotoad",
                 max_health = 200,
                 speed = 3,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()

@@ -5,6 +5,7 @@ using Photon.Realtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
@@ -378,7 +379,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
         else if (photonEvent.Code == EventCodes.GeneratorActivate)
         {
             generator_activated = true; Debug.Log("Generator activated!");
-            generatorSprite.sprite = Resources.Load<SpriteRenderer>("Generator").sprite;
+            generatorSprite.sprite = Resources.LoadAll<Sprite>("Objects").Where(x => x.name == "Generator").First();
             generatorSprite.color = Color.white;
             lightGlobal.color = Color.white;
             SoundManager.PlaySound(generator, "GeneratorOn");

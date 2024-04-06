@@ -40,6 +40,8 @@ namespace Assets.Scripts
         /// </summary>
         public float damage = 10;
 
+        public string spriteWeaponName = null;
+
         #endregion
 
         /// <summary>
@@ -83,20 +85,23 @@ namespace Assets.Scripts
                 start_ammo = int.MaxValue,
                 regarge_seconds = 1.3f,
                 isWeapon = true,
-                damage = 50
+                damage = 50,
+                spriteWeaponName = "Pick"
             }  },
             {ItemTypes.chainsaw,  new ItemStats {
                 start_ammo = int.MaxValue,
                 regarge_seconds = 0.2f,
                 damage = 30,
-                isWeapon = true
+                isWeapon = true,
+                spriteWeaponName = "Chainsaw"
             }  },
             {ItemTypes.pistol, new ItemStats {
                 start_ammo = 20,
                 regarge_seconds = 0.8f,
                 isWeapon = true,
                 damage_type = DamageManager.DamageTypes.firearms,
-                damage = 60
+                damage = 60,
+                spriteWeaponName = "Pistol"
             } },
             {ItemTypes.dynamite,  new ItemStats {
                 start_ammo = 2,
@@ -108,41 +113,47 @@ namespace Assets.Scripts
                 isWeapon = true,
                 damage = 80,
                 damage_type = DamageManager.DamageTypes.chemical,
-                regarge_seconds = 1
+                regarge_seconds = 1,
+                spriteWeaponName = "Reagents"
             } },
             {ItemTypes.machine_gun, new ItemStats {
                 start_ammo = 100,
                 damage = 5,
                 isWeapon = true,
                 damage_type = DamageManager.DamageTypes.firearms,
-                regarge_seconds = 0.2f
+                regarge_seconds = 0.2f,
+                spriteWeaponName = "MachineGun"
             } },
             {ItemTypes.flamethrower, new ItemStats {
                 start_ammo = 25,
                 damage = 5,
                 isWeapon = true,
                 damage_type = DamageManager.DamageTypes.thermal,
-                regarge_seconds = 0.2f
+                regarge_seconds = 0.2f,
+                spriteWeaponName = "Flamethrower"
             } },
             {ItemTypes.sprayer, new ItemStats {
                 start_ammo = 25,
                 damage = 5,
                 isWeapon = true,
                 damage_type = DamageManager.DamageTypes.chemical,
-                regarge_seconds = 0.2f
+                regarge_seconds = 0.2f,
+                spriteWeaponName = "Spray"
             } },
             {ItemTypes.plasma_cutter, new ItemStats {
                 start_ammo = 6,
                 damage = 80,
                 isWeapon = true,
                 damage_type = DamageManager.DamageTypes.thermal,
-                regarge_seconds = 3f
+                regarge_seconds = 3f,
+                spriteWeaponName = "PlasmaCutter"
             } },
             {ItemTypes.knife, new ItemStats {
                 start_ammo = int.MaxValue,
                 damage = 30,
                 isWeapon = true,
-                regarge_seconds = 0.5f
+                regarge_seconds = 0.5f,
+                spriteWeaponName = "Knife"
             } },
             {ItemTypes.first_aid_kit, new ItemStats {
                 health_add_after_used = 40

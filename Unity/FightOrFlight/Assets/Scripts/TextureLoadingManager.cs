@@ -1,6 +1,7 @@
 using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,11 +11,17 @@ using UnityEngine.UI;
 public static class TextureLoadingManager {
 
     public static Sprite[] spritesObjects;
+    public static Dictionary<string, Sprite> spritesForCharacters = new Dictionary<string, Sprite>();
 
     static TextureLoadingManager()
     {
         if (spritesObjects == null)
             spritesObjects = Resources.LoadAll<Sprite>("Objects");
+
+        foreach (var sprite in Resources.LoadAll<Sprite>("Players"))
+        {
+            spritesForCharacters.Add(sprite.name, sprite);
+        }
     }
 
     /// <summary>

@@ -31,6 +31,23 @@ public class Weapon : MonoBehaviour
             //Обработка для изменения спрайта оружия у игрока (инвентарь)
             if (player.view.IsMine)
                 TextureLoadingManager.loadSprite(value.itemType, EventsManager.THIS.imageInv2);
+
+            //Изменение оружия (спрайт)
+            if (inventoryWeapon.spriteWeaponName != null)
+            {
+                try
+                {
+                    Debug.Log("weapon for sprite " + player.graphicsCurrent.name + player.view.ViewID);
+                    player.graphicsCurrent.GetComponent<SpriteRenderer>().sprite =
+                        TextureLoadingManager.spritesForCharacters[player.playerStats.rolename.Replace(" ", "")                    
+                        + inventoryWeapon.spriteWeaponName];
+                }
+                catch
+                {
+                    Debug.LogError("ERROR weapon sprite not found " + player.playerStats.rolename.Replace(" ", "")
+                        + inventoryWeapon.spriteWeaponName);
+                }
+            }
         }
     }
     internal void setWeaponOnPlayerInit(ItemStats.ItemTypes itemType)
