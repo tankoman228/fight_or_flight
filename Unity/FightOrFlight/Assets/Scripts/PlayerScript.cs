@@ -148,6 +148,8 @@ public class PlayerScript : MonoBehaviour
         if (!view.IsMine)
             return;
 
+        updateForCurrentPlayerClass.Invoke(); //Поведение и логика конкретного игрока
+
         var v = new Vector2(joystick.Horizontal, joystick.Vertical);
         rigidbody.velocity = v * playerStats.speed * speedMultiplyer;
 
@@ -160,8 +162,7 @@ public class PlayerScript : MonoBehaviour
         else
         {
             animator.SetBool("isWalk", false);
-        }
-        updateForCurrentPlayerClass.Invoke(); //Поведение и логика конкретного игрока
+        }       
     }
 
     #region Триггеры
