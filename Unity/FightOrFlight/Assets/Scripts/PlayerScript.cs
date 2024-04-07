@@ -155,8 +155,12 @@ public class PlayerScript : MonoBehaviour
         {
             float angle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            animator.SetBool("isWalk", true);
         }
-
+        else
+        {
+            animator.SetBool("isWalk", false);
+        }
         updateForCurrentPlayerClass.Invoke(); //Поведение и логика конкретного игрока
     }
 
@@ -464,6 +468,7 @@ public class PlayerScript : MonoBehaviour
                     timeJumpWait = Time.time + 3;
                     speedMultiplyer = 15;
                     SoundManager.PlaySound(gameObject, "WOA");
+                    StartCoroutine(stopJumping());
                 }
                 break;
 
@@ -472,6 +477,12 @@ public class PlayerScript : MonoBehaviour
         }
     }
     float timeJumpWait = 0;
+
+    IEnumerator stopJumping()
+    {
+        yield return new WaitForSeconds(1.5f);
+        animator.SetBool("isJump", false);
+    }
 
     internal void Escape()
     {

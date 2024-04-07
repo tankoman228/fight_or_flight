@@ -1,4 +1,6 @@
 using Assets.Scripts;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -101,23 +103,47 @@ public class Weapon : MonoBehaviour
         switch(item)
         {
             case ItemStats.ItemTypes.pick:          
-                atackDelegate += pick_use; atackAnimationDelegate += animate_pick_use; break;
+                atackDelegate += pick_use; atackAnimationDelegate += animate_pick_use; 
+                player.animator.SetInteger("Type", 3);
+                player.animator.SetBool("isAtack", false);
+                break;
             case ItemStats.ItemTypes.chainsaw:      
-                atackDelegate += chainsaw_use; atackAnimationDelegate += animate_chainsaw_use; break;
+                player.animator.SetInteger("Type", 6);
+                player.animator.SetBool("isAtack", false);
+                break;
             case ItemStats.ItemTypes.pistol:        
-                atackDelegate += pistol_use; atackAnimationDelegate += animate_pistol_use; break;
+                atackDelegate += pistol_use; atackAnimationDelegate += animate_pistol_use; 
+                player.animator.SetInteger("Type", 4);
+                player.animator.SetBool("isAtack", false);
+                break;
             case ItemStats.ItemTypes.reagents:      
-                atackDelegate += reagents_use; atackAnimationDelegate += animate_reagents_use; break;
+                atackDelegate += reagents_use; atackAnimationDelegate += animate_reagents_use; 
+                player.animator.SetInteger("Type", 2);
+                player.animator.SetBool("isAtack", false);
+                break;
             case ItemStats.ItemTypes.knife:         
-                atackDelegate += knife_use; atackAnimationDelegate += animate_knife_use; break;
+                atackDelegate += knife_use; atackAnimationDelegate += animate_knife_use; 
+                player.animator.SetInteger("Type", 0);
+                player.animator.SetBool("isAtack", false);
+                break;
             case ItemStats.ItemTypes.machine_gun:   
-                atackDelegate += machine_gun_use; atackAnimationDelegate += animate_machine_gun_use; break;
+                atackDelegate += machine_gun_use; atackAnimationDelegate += animate_machine_gun_use; 
+                player.animator.SetInteger("Type", 1);
+                player.animator.SetBool("isAtack", false);
+                break;
             case ItemStats.ItemTypes.flamethrower:  
-                atackDelegate += flamethrower_use; atackAnimationDelegate += animate_flamethrower_use; break;
+                atackDelegate += flamethrower_use; atackAnimationDelegate += animate_flamethrower_use;
+                break;
             case ItemStats.ItemTypes.sprayer:       
-                atackDelegate += sprayer_use; atackAnimationDelegate += animate_sprayer_use; break;
+                atackDelegate += sprayer_use; atackAnimationDelegate += animate_sprayer_use;
+                player.animator.SetInteger("Type", 7);
+                player.animator.SetBool("isAtack", false);
+                break;
             case ItemStats.ItemTypes.plasma_cutter: 
-                atackDelegate += plasma_cutter_use; atackAnimationDelegate += animate_plasma_cutter_use; break;
+                atackDelegate += plasma_cutter_use; atackAnimationDelegate += animate_plasma_cutter_use;
+                player.animator.SetInteger("Type", 5);
+                player.animator.SetBool("isAtack", false);
+                break;
             case ItemStats.ItemTypes.goo_absorber:  
                 atackDelegate += goo_absorber_use; atackAnimationDelegate += animate_goo_absorber_use; break;
             case ItemStats.ItemTypes.bite:          
@@ -428,9 +454,17 @@ public class Weapon : MonoBehaviour
 
     #region Функции, задавать делегату для анимаций при атаке
 
+    IEnumerator animate(string Sound, float WaitTime)
+    {
+        player.animator.SetBool("isAtack", true);
+        SoundManager.PlaySound(gameObject, Sound);
+        yield return new WaitForSeconds(WaitTime);
+        player.animator.SetBool("isAtack", false);
+    }
+
     void animate_pick_use()
     {
-        SoundManager.PlaySound(gameObject, "PickUse");
+        StartCoroutine(animate("PickUse", 1));
     }
 
     void animate_chainsaw_use()
@@ -440,22 +474,22 @@ public class Weapon : MonoBehaviour
 
     void animate_knife_use()
     {
-        SoundManager.PlaySound(gameObject, "PickUse");
+        StartCoroutine(animate("PickUse", 1));
     }
 
     void animate_pistol_use()
     {
-        SoundManager.PlaySound(gameObject, "Shoot");
+        StartCoroutine(animate("Shoot", 0.33f));
     }
 
     void animate_reagents_use()
     {
-        SoundManager.PlaySound(gameObject, "Spray");
+        StartCoroutine(animate("Spray", 1));
     }
 
     void animate_machine_gun_use()
     {
-        SoundManager.PlaySound(gameObject, "ShootAk47");
+        StartCoroutine(animate("ShootAk47", 1));
     }
 
     void animate_flamethrower_use()
@@ -470,7 +504,7 @@ public class Weapon : MonoBehaviour
 
     void animate_plasma_cutter_use()
     {
-        SoundManager.PlaySound(gameObject, "lazer");
+        StartCoroutine(animate("lazer", 0.5f));
     }
 
     void animate_goo_absorber_use()
@@ -489,7 +523,7 @@ public class Weapon : MonoBehaviour
 
     void animate_tongue_use()
     {
-        SoundManager.PlaySound(gameObject, "WOA"); 
+        StartCoroutine(animate("WOA", 2));
     }
 
     #endregion
