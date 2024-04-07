@@ -434,19 +434,22 @@ public class Weapon : MonoBehaviour
     }
 
     void tongue_use() {
+        StartCoroutine(tongueCourutine());
+    }
+    IEnumerator tongueCourutine()
+    {
+        yield return new WaitForSeconds(0.5f);
         var hitbox = Instantiate(
         DamageHitboxPrefub,
         this.transform
         ).GetComponent<DamageHitbox>();
-
-        hitbox.transform.localScale = new Vector3(4f, 0.2f);
+        hitbox.transform.localScale = new Vector3(3f, 0.2f);
         hitbox.init(
             inventoryWeapon.damage_type,
             inventoryWeapon.damage,
             player.gameObject,
             !player.playerStats.IsMonster,
             0.2f);
-        
     }
 
     #endregion

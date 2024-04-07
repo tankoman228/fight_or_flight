@@ -141,11 +141,11 @@ namespace Assets.Scripts
                 spriteWeaponName = "Spray"
             } },
             {ItemTypes.plasma_cutter, new ItemStats {
-                start_ammo = 6,
-                damage = 80,
+                start_ammo = 10,
+                damage = 100,
                 isWeapon = true,
                 damage_type = DamageManager.DamageTypes.thermal,
-                regarge_seconds = 3f,
+                regarge_seconds = 1f,
                 spriteWeaponName = "PlasmaCutter"
             } },
             {ItemTypes.knife, new ItemStats {
