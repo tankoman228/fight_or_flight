@@ -142,7 +142,7 @@ namespace Assets.Scripts
                 {
                     { DamageManager.DamageTypes.firearms, 1},
                     { DamageManager.DamageTypes.steel, 1},
-                    { DamageManager.DamageTypes.thermal, 2},
+                    { DamageManager.DamageTypes.thermal, 2.5f},
                     { DamageManager.DamageTypes.chemical, 1}
                 },
                 guide = "Kill every human, you are heavy and slow, but armored like tank and can\'t be" +
@@ -166,12 +166,12 @@ namespace Assets.Scripts
             { PlayerStatsType.hypnotoad, new PlayerStats {
                 IsMonster = true,
                 rolename = "Hypnotoad",
-                max_health = 200,
+                max_health = 250,
                 speed = 3,
                 damageResistance = new Dictionary<DamageManager.DamageTypes, float>()
                 {
                     { DamageManager.DamageTypes.firearms, 1},
-                    { DamageManager.DamageTypes.steel, 2},
+                    { DamageManager.DamageTypes.steel, 1.2f},
                     { DamageManager.DamageTypes.thermal, 1},
                     { DamageManager.DamageTypes.chemical, 0.6f}
                 },

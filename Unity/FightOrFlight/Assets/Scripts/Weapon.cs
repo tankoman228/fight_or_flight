@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,23 +34,6 @@ public class Weapon : MonoBehaviour
             //Обработка для изменения спрайта оружия у игрока (инвентарь)
             if (player.view.IsMine)
                 TextureLoadingManager.loadSprite(value.itemType, EventsManager.THIS.imageInv2);
-
-            //Изменение оружия (спрайт)
-            if (inventoryWeapon.spriteWeaponName != null)
-            {
-                try
-                {
-                    Debug.Log("weapon for sprite " + player.graphicsCurrent.name + player.view.ViewID);
-                    player.graphicsCurrent.GetComponent<SpriteRenderer>().sprite =
-                        TextureLoadingManager.spritesForCharacters[player.playerStats.rolename.Replace(" ", "")                    
-                        + inventoryWeapon.spriteWeaponName];
-                }
-                catch
-                {
-                    Debug.LogError("ERROR weapon sprite not found " + player.playerStats.rolename.Replace(" ", "")
-                        + inventoryWeapon.spriteWeaponName);
-                }
-            }
         }
     }
     internal void setWeaponOnPlayerInit(ItemStats.ItemTypes itemType)
@@ -107,7 +91,8 @@ public class Weapon : MonoBehaviour
                 player.animator.SetInteger("Type", 3);
                 player.animator.SetBool("isAtack", false);
                 break;
-            case ItemStats.ItemTypes.chainsaw:      
+            case ItemStats.ItemTypes.chainsaw:
+                atackDelegate += chainsaw_use;
                 player.animator.SetInteger("Type", 6);
                 player.animator.SetBool("isAtack", false);
                 break;
@@ -179,10 +164,23 @@ public class Weapon : MonoBehaviour
         
         if (player == EventsManager.currentPlayer)
         {
-            atackDelegate.Invoke();
+            try
+            {
+                atackDelegate.Invoke();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+            }
         }
-        atackAnimationDelegate.Invoke();
-        
+        try
+        {
+            atackAnimationDelegate.Invoke();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
     }
 
     #endregion
@@ -283,7 +281,7 @@ public class Weapon : MonoBehaviour
     void machine_gun_use() {
         for (int i = 0; i < 5 && ammo > 0; i++, Ammo--)
         {
-            float spreadAngle = Random.Range(-25f, 25f); // Генерируем случайный угол разброса
+            float spreadAngle = UnityEngine.Random.Range(-25f, 25f); // Генерируем случайный угол разброса
             Quaternion spreadRotation = Quaternion.Euler(0f, 0f, spreadAngle); // Создаем кватернион поворота для угла разброса
 
             var hitbox = Instantiate(
@@ -312,7 +310,7 @@ public class Weapon : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            float spreadAngle = Random.Range(-13f, 13f); // Генерируем случайный угол разброса от -10 до 10 градусов
+            float spreadAngle = UnityEngine.Random.Range(-13f, 13f); // Генерируем случайный угол разброса от -10 до 10 градусов
             Quaternion spreadRotation = Quaternion.Euler(0f, 0f, spreadAngle); // Создаем кватернион поворота для угла разброса
 
             var hitbox = Instantiate(
@@ -340,7 +338,7 @@ public class Weapon : MonoBehaviour
     void sprayer_use() {
         for (int i = 0; i < 10; i++)
         {
-            float spreadAngle = Random.Range(-13f, 13f); // Генерируем случайный угол разброса от -10 до 10 градусов
+            float spreadAngle = UnityEngine.Random.Range(-13f, 13f); // Генерируем случайный угол разброса от -10 до 10 градусов
             Quaternion spreadRotation = Quaternion.Euler(0f, 0f, spreadAngle); // Создаем кватернион поворота для угла разброса
 
             var hitbox = Instantiate(
@@ -381,7 +379,7 @@ public class Weapon : MonoBehaviour
             player.gameObject,
             !player.playerStats.IsMonster,
             0.7f);
-        hitbox.init_as_bullet(51.3f);
+        hitbox.init_as_bullet(5.3f);
 
         hitbox.transform.up = bulletDirection;
     }

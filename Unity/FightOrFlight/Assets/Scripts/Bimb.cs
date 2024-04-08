@@ -44,11 +44,11 @@ public class Bimb : MonoBehaviour
             Vector3 bulletDirection = spreadRotation * Vector3.up;
             hitbox.init(
                 Assets.Scripts.DamageManager.DamageTypes.thermal,
-                8,
+                6,
                 this.gameObject,
                 true,
                 0.7f);
-            hitbox.init_as_bullet(11.3f);
+            hitbox.init_as_bullet(7.3f);
             hitbox.transform.up = bulletDirection; // Устанавливаем направление снаряда с учетом разброса
 
 
@@ -59,11 +59,11 @@ public class Bimb : MonoBehaviour
             hitbox.transform.localScale = new Vector3(0.5f, 0.6f);
             hitbox.init(
                 Assets.Scripts.DamageManager.DamageTypes.thermal,
-                8,
+                6,
                 this.gameObject,
                 false,
                 0.7f);
-            hitbox.init_as_bullet(11.3f);
+            hitbox.init_as_bullet(7.3f);
             hitbox.transform.up = bulletDirection; // Устанавливаем направление снаряда с учетом разброса
         }
         

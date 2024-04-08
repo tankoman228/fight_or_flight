@@ -191,7 +191,7 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 Destroy(btnLeaveRoom);
                 
                 game_awaiting = false;
-                SendPhotonEvent(EventCodes.GameStarted, new System.Random((int)(Time.time * 1000f * Time.deltaTime)).Next(0, int.MaxValue - 1));
+                SendPhotonEvent(EventCodes.GameStarted, new System.Random((int)(Time.time * 10000f * Time.deltaTime) + Time.frameCount).Next(0, int.MaxValue - 1));
             }          
         }
     }
@@ -356,6 +356,14 @@ public class EventsManager : MonoBehaviourPunCallbacks
         {
             var data = DamageManager.DeserializeDamageMessage((byte[])photonEvent.CustomData);
 
+            foreach (var player in players)
+            {
+                if (player != null && player.view.Owner.ActorNumber == data.atacked_id)
+                {
+                    StartCoroutine(damageFlash(player));
+                }
+            }
+
             if (currentPlayer.view.Owner.ActorNumber != data.atacked_id)
                 return;
 
@@ -485,11 +493,11 @@ public class EventsManager : MonoBehaviourPunCallbacks
                 case 0:
                     roles = new PlayerStats.PlayerStatsType[] {
                     PlayerStats.PlayerStatsType.guard,
-                    PlayerStats.PlayerStatsType.slither,
+                    PlayerStats.PlayerStatsType.megarat,
                     PlayerStats.PlayerStatsType.miner,
                     PlayerStats.PlayerStatsType.hypnotoad,
                     PlayerStats.PlayerStatsType.scientist,
-                    PlayerStats.PlayerStatsType.megarat,
+                    PlayerStats.PlayerStatsType.slither,
                     PlayerStats.PlayerStatsType.enginier,
                     PlayerStats.PlayerStatsType.black_goo   //Черная слизь появится только при полном наборе игроков
                 };
@@ -508,9 +516,9 @@ public class EventsManager : MonoBehaviourPunCallbacks
                     break;
                 case 2:
                     roles = new PlayerStats.PlayerStatsType[] {
-                    PlayerStats.PlayerStatsType.miner,      //Если человек 1, он всегда шахтёр
+                    PlayerStats.PlayerStatsType.guard,    //Если человек 1, он всегда шахтёр
                     PlayerStats.PlayerStatsType.hypnotoad,
-                    PlayerStats.PlayerStatsType.guard,
+                    PlayerStats.PlayerStatsType.miner,
                     PlayerStats.PlayerStatsType.slither,
                     PlayerStats.PlayerStatsType.scientist,
                     PlayerStats.PlayerStatsType.megarat,
@@ -686,6 +694,15 @@ public class EventsManager : MonoBehaviourPunCallbacks
 
         // Выход из комнаты Photon
         PhotonNetwork.LeaveRoom();
+    }
+    private IEnumerator damageFlash(PlayerScript player)
+    {
+        for (int i = 0; i < 15; i++)
+        {
+            yield return new WaitForSeconds(0.075f);
+            player.graphics.SetActive(i % 2 == 1);
+        }
+        player.graphics.SetActive(true);
     }
 
     #endregion

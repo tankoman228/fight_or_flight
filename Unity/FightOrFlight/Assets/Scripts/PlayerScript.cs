@@ -22,22 +22,6 @@ public class PlayerScript : MonoBehaviour
     public GameObject graphicsMiner, graphicsGuard, graphicsEnginier, graphicsNikita, graphicsCherv, graphicsMouse, graphicsFrog, graphicsGoo;
     public GameObject graphics;
 
-    internal GameObject graphicsCurrent
-    {
-        get {
-            switch (playerStats.rolename) {
-                case "Miner": return graphicsMiner;
-                case "Guard": return graphicsGuard;
-                case "Scientist": return graphicsNikita;
-                case "Enginier": return graphicsEnginier;
-                case "Black goo": return graphicsGoo;
-                case "Slither": return graphicsCherv;
-                case "Megarat": return graphicsMouse;
-                case "Hypnotoad": return graphicsFrog;
-                default: return graphicsEnginier;
-            }
-        }
-    }
 
     #region Поля и свйоства
 
@@ -148,21 +132,28 @@ public class PlayerScript : MonoBehaviour
         if (!view.IsMine)
             return;
 
-        updateForCurrentPlayerClass.Invoke(); //Поведение и логика конкретного игрока
-
-        var v = new Vector2(joystick.Horizontal, joystick.Vertical);
-        rigidbody.velocity = v * playerStats.speed * speedMultiplyer;
-
-        if (v != Vector2.zero)
+        try
         {
-            float angle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            animator.SetBool("isWalk", true);
+            updateForCurrentPlayerClass.Invoke(); //Поведение и логика конкретного игрока
+
+            var v = new Vector2(joystick.Horizontal, joystick.Vertical);
+            rigidbody.velocity = v * playerStats.speed * speedMultiplyer;
+
+            if (v != Vector2.zero)
+            {
+                float angle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                animator.SetBool("isWalk", true);
+            }
+            else
+            {
+                animator.SetBool("isWalk", false);
+            }
         }
-        else
+        catch
         {
-            animator.SetBool("isWalk", false);
-        }       
+            Debug.LogError("Update playerscript error");
+        }
     }
 
     #region Триггеры
