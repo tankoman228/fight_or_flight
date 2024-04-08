@@ -1050,10 +1050,10 @@ TextureImporter:
       name: ToxicGrenade
       rect:
         serializedVersion: 2
-        x: 366
-        y: 631
-        width: 5
-        height: 10
+        x: 352
+        y: 612
+        width: 19
+        height: 11
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1828,6 +1828,7 @@ TextureImporter:
       Big_Blood: -985816207
       Bloody_OperationTable: -888080745
       Bomb: -1242194240
+      BoxOfReagents: -782174884
       Cameras: 1147864992
       Chainsaw: -2004407680
       Chair: 2081039352
@@ -1873,7 +1874,6 @@ TextureImporter:
       Medium_Blood: -1713979059
       Mine: 1939065577
       NikitaTable: 880500038
-      Objects_0: -782174884
       Objects_13: -328240035
       Objects_14: -1346784836
       Objects_15: 696842208

@@ -502,7 +502,7 @@ public class Weapon : MonoBehaviour
 
     void animate_sprayer_use()
     {
-        SoundManager.PlaySound(gameObject, "Spray");
+        StartCoroutine(animate("Spray", 0.5f));
     }
 
     void animate_plasma_cutter_use()
@@ -526,7 +526,7 @@ public class Weapon : MonoBehaviour
 
     void animate_tongue_use()
     {
-        StartCoroutine(animate("WOA", 2));
+        StartCoroutine(animate("WOA", 1));
     }
 
     #endregion

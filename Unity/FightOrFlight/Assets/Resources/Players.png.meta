@@ -777,12 +777,12 @@ TextureImporter:
       name: FrogWalk1
       rect:
         serializedVersion: 2
-        x: 651
-        y: 912
-        width: 85
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 1068
+        y: 830
+        width: 66
+        height: 61
+      alignment: 9
+      pivot: {x: 0.49554628, y: 0.6348927}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -840,12 +840,12 @@ TextureImporter:
       name: FrogWalk2
       rect:
         serializedVersion: 2
-        x: 761
-        y: 835
-        width: 89
-        height: 83
+        x: 1254
+        y: 830
+        width: 76
+        height: 68
       alignment: 9
-      pivot: {x: 0.5127776, y: 0.50456697}
+      pivot: {x: 0.42492354, y: 0.67014265}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2495,6 +2495,405 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: FrogWalk3
+      rect:
+        serializedVersion: 2
+        x: 1153
+        y: 813
+        width: 76
+        height: 78
+      alignment: 9
+      pivot: {x: 0.4291189, y: 0.7121214}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8359fd07b0bc4d44ab2c546943c5a2a
+      internalID: -425977508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogWalk4
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 745
+        width: 73
+        height: 65
+      alignment: 9
+      pivot: {x: 0.54004407, y: 0.65389967}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d33212316fe699d459fc228b438dced2
+      internalID: -910883922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FrogWalk5
+      rect:
+        serializedVersion: 2
+        x: 1159
+        y: 697
+        width: 81
+        height: 85
+      alignment: 9
+      pivot: {x: 0.58295655, y: 0.7357501}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04cfa49c978d3a2438a0541c5da1a96d
+      internalID: -589159557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientistSprayAtack1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 765
+        width: 59
+        height: 140
+      alignment: 9
+      pivot: {x: 0.33174598, y: 0.10241061}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02f1987cf4894f64ebb552e0e3bef9da
+      internalID: 1328491607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientistSprayAtack2
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 768
+        width: 60
+        height: 145
+      alignment: 9
+      pivot: {x: 0.35741654, y: 0.103403725}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72f0e0f85eca1714ea840acce5c326f7
+      internalID: -354278186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientistSprayAtack3
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 765
+        width: 57
+        height: 154
+      alignment: 9
+      pivot: {x: 0.3429643, y: 0.101915546}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3198a01d5fcc01147953f915a9217a55
+      internalID: -722168653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScientistSprayAtack4
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 764
+        width: 61
+        height: 152
+      alignment: 9
+      pivot: {x: 0.34303224, y: 0.111553214}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48c93fe5f85bcc246b7f4f110973c2a2
+      internalID: -624117467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GuardSprayAtack1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 977
+        width: 67
+        height: 151
+      alignment: 9
+      pivot: {x: 0.3459325, y: 0.12538077}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e316b5491207c9244b9b63c5f382ff57
+      internalID: 2096387612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GuardSprayAtack2
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 977
+        width: 70
+        height: 154
+      alignment: 9
+      pivot: {x: 0.3299748, y: 0.12150475}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a42a236468e445f4c95b8d6fb2f941ed
+      internalID: -514237725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GuardSprayAtack3
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 977
+        width: 64
+        height: 166
+      alignment: 9
+      pivot: {x: 0.3569498, y: 0.11393609}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19a912a2d2dd0134b86e6c4661de1e97
+      internalID: -409816087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GuardSprayAtack4
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 977
+        width: 69
+        height: 162
+      alignment: 9
+      pivot: {x: 0.33635634, y: 0.11570646}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb087f0e92ba03c41a30846638067e09
+      internalID: -616286087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MinerSprayAtack4
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 1175
+        width: 71
+        height: 173
+      alignment: 9
+      pivot: {x: 0.35454118, y: 0.08433083}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a489253c80878214983ebf654cb7bcff
+      internalID: -1228160757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MinerSprayAtack3
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 1175
+        width: 66
+        height: 174
+      alignment: 9
+      pivot: {x: 0.37249917, y: 0.0889177}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4e5a1a3f2077c24a8bf29bb56e8ac55
+      internalID: -1006440741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MinerSprayAtack2
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 1175
+        width: 71
+        height: 165
+      alignment: 9
+      pivot: {x: 0.35454097, y: 0.09199589}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14c2b20742703e74682ecd2ccc475547
+      internalID: 23880187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MinerSprayAtack1
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 1175
+        width: 70
+        height: 161
+      alignment: 9
+      pivot: {x: 0.3633922, y: 0.091362424}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3468d68387c38a4d91c24d3fcf9d772
+      internalID: 1270212300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnginierSprayAtack1
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 540
+        width: 70
+        height: 141
+      alignment: 9
+      pivot: {x: 0.3787553, y: 0.12322349}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9add87d2ed9e1ce4fb94a9080147623b
+      internalID: 2004139680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnginierSprayAtack2
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 540
+        width: 71
+        height: 149
+      alignment: 9
+      pivot: {x: 0.35815063, y: 0.11663941}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19b0edb76dde3504dbf1955217f8722a
+      internalID: -859818117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnginierSprayAtack3
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 540
+        width: 67
+        height: 157
+      alignment: 9
+      pivot: {x: 0.3800172, y: 0.111333564}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b73c14a60e64fd349b33609f7c48e23c
+      internalID: 508918565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnginierSprayAtack4
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 537
+        width: 74
+        height: 156
+      alignment: 9
+      pivot: {x: 0.38492563, y: 0.10684068}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce0863e67896552429c7b1640fa12a4d
+      internalID: -1056841415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2531,6 +2930,10 @@ TextureImporter:
       EnginierReagents1: 2070547814
       EnginierReagents2: -67999160
       EnginierSpray: -407399017
+      EnginierSprayAtack1: 2004139680
+      EnginierSprayAtack2: -859818117
+      EnginierSprayAtack3: 508918565
+      EnginierSprayAtack4: -1056841415
       Frog: 1168000605
       FrogAtack1: 102975425
       FrogAtack2: -187542920
@@ -2542,6 +2945,9 @@ TextureImporter:
       FrogJump3: -1468468812
       FrogWalk1: 1902775386
       FrogWalk2: -232074284
+      FrogWalk3: -910883922
+      FrogWalk4: -910883922
+      FrogWalk5: -589159557
       GuardChainsaw: 1325240760
       GuardKnife: -921644308
       GuardKnife1: -1203945269
@@ -2565,6 +2971,10 @@ TextureImporter:
       GuardReagents1: -232074284
       GuardReagents2: 1325240760
       GuardSpray: 1181448280
+      GuardSprayAtack1: 2096387612
+      GuardSprayAtack2: -514237725
+      GuardSprayAtack3: -409816087
+      GuardSprayAtack4: -616286087
       MinerChainsaw: -741618803
       MinerGrenade4: -1397139660
       MinerKnife: 668559770
@@ -2590,12 +3000,15 @@ TextureImporter:
       MinerReagents1: -1877321654
       MinerReagents2: 346362437
       MinerSpray: -54509058
+      MinerSprayAtack1: 1270212300
+      MinerSprayAtack2: 23880187
+      MinerSprayAtack3: -1006440741
+      MinerSprayAtack4: -1228160757
       Mouse: -250274478
       Mouse1: -242093437
       Mouse2: -2107655837
       Mouse3: -1387111842
       NikitaGrenad: 1191206193
-      Players_0: -910883922
       Players_10: -317839890
       Players_101: 411472700
       Players_103: -203820333
@@ -2604,7 +3017,6 @@ TextureImporter:
       Players_17: -1358956314
       Players_18: -2065808903
       Players_19: 1095575230
-      Players_2: 1328491607
       Players_20: -1824760985
       Players_21: -222527055
       Players_22: 1666237772
@@ -2665,6 +3077,10 @@ TextureImporter:
       ScientistReagents1: 1039125170
       ScientistReagents2: -1813434827
       ScientistSpray: -989198644
+      ScientistSprayAtack1: 1328491607
+      ScientistSprayAtack2: -354278186
+      ScientistSprayAtack3: -722168653
+      ScientistSprayAtack4: -624117467
       ToxicFlask: -520048486
       ToxicFog: -749170537
       ToxicGrenade: -749170537
